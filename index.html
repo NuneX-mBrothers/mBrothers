@@ -481,11 +481,11 @@
   .dl-2 { top: 12%; right: 5%; text-align: right; }
   .dl-2 .leader { width: 36px; height: 1px; top: 8px; right: -42px; }
 
-  .dl-3 { bottom: 14%; left: 6%; }
+  .dl-3 { bottom: 30%; left: 4%; }
   .dl-3 .leader { width: 28px; height: 1px; top: 8px; left: -34px; }
 
-  .dl-4 { bottom: 8%; right: 6%; text-align: right; }
-  .dl-4 .leader { width: 1px; height: 28px; bottom: 100%; right: 18px; }
+  .dl-4 { bottom: 30%; right: 4%; text-align: right; }
+  .dl-4 .leader { width: 28px; height: 1px; top: 8px; right: -34px; }
 
   /* WORDMARK on top of planet — script italic */
   .wordmark-wrap {
@@ -586,8 +586,94 @@
     pointer-events: none;
   }
   .hud-top    { top: 22px; }
-  .hud-bottom { bottom: 22px; }
+  .hud-bottom { bottom: 130px; }
   .hud-top .red, .hud-bottom .red { color: var(--neon-glow); }
+
+  /* ═════════════ CRT TERMINAL — phosphor green ═════════════
+     Sits at the bottom of the stage, inside the space view */
+  .crt {
+    position: absolute;
+    left: 50%;
+    bottom: 36px;
+    transform: translateX(-50%);
+    width: clamp(320px, 60%, 640px);
+    height: 86px;
+    z-index: 22;
+    pointer-events: none;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+    color: #6affa4;
+    text-shadow:
+      0 0 4px rgba(106,255,164,0.65),
+      0 0 12px rgba(106,255,164,0.35),
+      0 0 22px rgba(70,200,120,0.25);
+    padding: 10px 16px;
+    background:
+      linear-gradient(180deg, rgba(8,22,16,0.35), rgba(4,14,10,0.55));
+    border: 1px solid rgba(106,255,164,0.22);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow:
+      inset 0 0 30px rgba(106,255,164,0.08),
+      0 0 24px rgba(106,255,164,0.10);
+  }
+  /* CRT scanlines on top of terminal */
+  .crt::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(0,0,0,0.25) 2px,
+      rgba(0,0,0,0.25) 3px);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+  /* Subtle vignette + curvature feel */
+  .crt::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center,
+      transparent 60%,
+      rgba(0,0,0,0.45) 100%);
+    pointer-events: none;
+  }
+  .crt-lines {
+    position: relative;
+    z-index: 2;
+    white-space: pre;
+    height: 100%;
+    overflow: hidden;
+  }
+  .crt-line { display: block; min-height: 1.45em; }
+  .crt-line .prompt { color: #46c878; opacity: 0.85; }
+  .crt-line .muted  { color: #46c878; opacity: 0.7; }
+  .crt-cursor {
+    display: inline-block;
+    width: 8px; height: 1em;
+    vertical-align: -2px;
+    background: #6affa4;
+    box-shadow: 0 0 8px rgba(106,255,164,0.8);
+    animation: crt-blink 1s steps(2) infinite;
+    margin-left: 2px;
+  }
+  @keyframes crt-blink { 50% { opacity: 0; } }
+  /* CRT power-on flicker */
+  .crt {
+    animation: crt-flicker 6s ease-in-out infinite;
+  }
+  @keyframes crt-flicker {
+    0%, 100% { opacity: 1; }
+    7%       { opacity: 0.85; }
+    8%       { opacity: 1; }
+    33%      { opacity: 0.96; }
+    47%      { opacity: 1; }
+    48%      { opacity: 0.88; }
+    49%      { opacity: 1; }
+  }
 
   /* ─────────────── LEITMOTIF ─────────────── */
   .leitmotif {
@@ -1028,6 +1114,11 @@
         <span>DIST · 0.000 AU</span>
       </div>
 
+      <!-- CRT phosphor terminal -->
+      <div class="crt" aria-hidden="true">
+        <div class="crt-lines" id="crtLines"></div>
+      </div>
+
       <!-- Data labels around planet -->
       <div class="data-label dl-1">
         <div>SURFACE TEMP</div>
@@ -1099,8 +1190,6 @@
         </div>
       </div>
     </div>
-
-    <p class="leitmotif">Developing practical solutions for small planetary systems</p>
 
     <div class="ornament">
       <span class="line"></span>
@@ -1249,6 +1338,123 @@
   </footer>
 
 </div>
+
+</div>
+
+<script>
+(function () {
+  const el = document.getElementById('crtLines');
+  if (!el) return;
+
+  /* The boot loop sequence. Each "step" is either:
+     - {type: 'type', prompt: true|false, text: 'string', speed: ms}  → types char by char
+     - {type: 'wait', ms: number}                                      → pauses
+     - {type: 'clear'}                                                 → wipes screen
+     - {type: 'line'}                                                  → blank line
+  */
+  const sequence = [
+    { type: 'type', prompt: true,  text: 'deploy mBrothers --mode=orbital',      speed: 55 },
+    { type: 'wait', ms: 420 },
+    { type: 'line' },
+    { type: 'type', prompt: false, text: 'Developing practical solutions for small planetary systems', speed: 42 },
+    { type: 'wait', ms: 1400 },
+    { type: 'line' },
+    { type: 'type', prompt: true,  text: 'ping orbital-relay --signal stable',  speed: 50 },
+    { type: 'wait', ms: 380 },
+    { type: 'line' },
+    { type: 'type', prompt: false, text: 'reply from 38.7°N · 9.1°W : 4ms', speed: 28, muted: true },
+    { type: 'wait', ms: 900 },
+    { type: 'line' },
+    { type: 'type', prompt: true,  text: 'sys.handshake --listen',  speed: 50 },
+    { type: 'wait', ms: 320 },
+    { type: 'line' },
+    { type: 'type', prompt: false, text: 'all systems nominal · standing by.', speed: 30, muted: true },
+    { type: 'wait', ms: 1800 },
+    { type: 'clear' },
+    { type: 'wait', ms: 600 },
+  ];
+
+  /* Capacity: terminal shows the last 3 lines comfortably.
+     We push new line elements and trim the oldest when over 3. */
+  const MAX_LINES = 3;
+  let lines = [];   // array of {el, span}
+  let cursor = null;
+
+  function newLine(promptOn, mutedOn) {
+    const line = document.createElement('div');
+    line.className = 'crt-line';
+    if (promptOn) {
+      const p = document.createElement('span');
+      p.className = 'prompt';
+      p.textContent = '> ';
+      line.appendChild(p);
+    }
+    const text = document.createElement('span');
+    if (mutedOn) text.className = 'muted';
+    line.appendChild(text);
+
+    // move cursor to this line
+    if (cursor && cursor.parentNode) cursor.parentNode.removeChild(cursor);
+    cursor = document.createElement('span');
+    cursor.className = 'crt-cursor';
+    line.appendChild(cursor);
+
+    el.appendChild(line);
+    lines.push({ line, text });
+
+    while (lines.length > MAX_LINES) {
+      const old = lines.shift();
+      old.line.remove();
+    }
+    return text;
+  }
+
+  function clearAll() {
+    lines.forEach(l => l.line.remove());
+    lines = [];
+    if (cursor && cursor.parentNode) cursor.parentNode.removeChild(cursor);
+  }
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function typeText(target, str, speed) {
+    for (let i = 0; i < str.length; i++) {
+      target.textContent += str[i];
+      // ensure cursor stays after target
+      if (cursor && target.nextSibling !== cursor) {
+        target.parentNode.appendChild(cursor);
+      }
+      await sleep(speed + Math.random() * 30);
+    }
+  }
+
+  async function runLoop() {
+    while (true) {
+      for (const step of sequence) {
+        if (step.type === 'type') {
+          const t = newLine(step.prompt, step.muted);
+          await typeText(t, step.text, step.speed);
+        } else if (step.type === 'wait') {
+          await sleep(step.ms);
+        } else if (step.type === 'clear') {
+          clearAll();
+        } else if (step.type === 'line') {
+          /* no-op visual: the next newLine handles separation */
+        }
+      }
+    }
+  }
+
+  // Honour reduced motion: show static fallback instead of animating
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    const t = newLine(false, false);
+    t.textContent = 'Developing practical solutions for small planetary systems';
+  } else {
+    runLoop();
+  }
+})();
+</script>
 
 </body>
 </html>
