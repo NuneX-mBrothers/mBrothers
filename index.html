@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>mBrothers // Developing practical solutions for small planetary systems</title>
+<meta name="description" content="mBrothers builds quiet, practical software for small planetary systems. Home of LogViewer and ExplorerFocus." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Italianno&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:        #f4ecd8;
+    --paper-deep:   #ebe1c6;
+    --ink:          #14130f;
+    --ink-soft:     #2e2b22;
+    --ink-mute:     #6b6757;
+    --rule:         #d4cbb4;
+    --amber:        #a86b2c;
+    --olive:        #5a6a3a;
+
+    --neon:         #ff3d2e;
+    --neon-glow:    #ff6a4d;
+    --cyan:         #1f7f8c;
+    --magenta:      #b8336a;
+    --crt:          #0d1f1c;
+
+    --space-deep:   #0a0d14;
+    --space-mid:    #131826;
+    --space-soft:   #1c2238;
+
+    --serif:   "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --script:  "Italianno", "Snell Roundhand", "Apple Chancery", cursive;
+    --mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 22% 28%, rgba(168,107,44,0.07) 0%, transparent 45%),
+      radial-gradient(circle at 80% 72%, rgba(31,127,140,0.06) 0%, transparent 50%),
+      radial-gradient(circle, rgba(20,19,15,0.09) 1px, transparent 1.4px),
+      radial-gradient(circle, rgba(20,19,15,0.045) 0.8px, transparent 1.2px);
+    background-size: auto, auto, 48px 48px, 48px 48px;
+    background-position: 0 0, 0 0, 0 0, 24px 24px;
+    background-attachment: fixed, fixed, fixed, fixed;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(20,19,15,0.018) 2px,
+      rgba(20,19,15,0.018) 3px
+    );
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(rgba(20,19,15,0.025) 1px, transparent 1px) 0 0/3px 3px,
+      radial-gradient(rgba(20,19,15,0.018) 1px, transparent 1px) 1px 2px/7px 7px,
+      radial-gradient(ellipse at center, transparent 45%, rgba(20,19,15,0.10) 100%);
+    mix-blend-mode: multiply;
+    opacity: 0.7;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  /* ─────────────── NAV ─────────────── */
+  nav.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-mute);
+    position: relative;
+    z-index: 50;
+  }
+  nav.top .mark { display: flex; align-items: center; gap: 12px; }
+  nav.top .mark .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 0 3px rgba(255,61,46,0.18), 0 0 12px rgba(255,61,46,0.55);
+    animation: blink 2.4s infinite;
+  }
+  @keyframes blink { 0%,80%,100%{opacity:1} 85%,95%{opacity:.3} }
+  nav.top .mark .id {
+    display: inline-block;
+    border: 1px solid var(--ink);
+    padding: 4px 10px;
+    background: var(--paper-deep);
+  }
+  nav.top ul { list-style: none; display: flex; gap: 32px; }
+  nav.top a { color: var(--ink-mute); text-decoration: none; transition: color .25s, text-shadow .25s; }
+  nav.top a::before { content: "[ "; color: var(--neon); opacity: 0; transition: opacity .25s; }
+  nav.top a::after  { content: " ]"; color: var(--neon); opacity: 0; transition: opacity .25s; }
+  nav.top a:hover { color: var(--ink); text-shadow: 0 0 8px rgba(255,61,46,0.35); }
+  nav.top a:hover::before, nav.top a:hover::after { opacity: 1; }
+
+  /* ─────────────── HERO ─────────────── */
+  header.hero {
+    padding: 50px 0 60px;
+    position: relative;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 20;
+  }
+  .meta-row .blink-cursor::after {
+    content: "_"; color: var(--neon); margin-left: 4px;
+    animation: cursorblink 1s steps(2) infinite;
+  }
+  @keyframes cursorblink { 50% { opacity: 0; } }
+
+  /* ═════════════════════════════════════════════════
+     THE PLANETARY STAGE
+     ═════════════════════════════════════════════════ */
+  .stage {
+    position: relative;
+    height: clamp(560px, 70vw, 760px);
+    margin: 10px -20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  /* The deep-space background — sits behind the planet inside the stage */
+  .stage .void {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(31,127,140,0.18) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 65%, rgba(184,51,106,0.10) 0%, transparent 50%),
+      linear-gradient(180deg, var(--space-deep) 0%, var(--space-mid) 60%, var(--space-soft) 100%);
+    z-index: 1;
+  }
+
+  /* Starfield: tiny dots with twinkle */
+  .stage .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 13% 14%, #d8e0ee 50%, transparent 100%),
+      radial-gradient(1px 1px at 27% 78%, #c4cce0 50%, transparent 100%),
+      radial-gradient(1px 1px at 42% 22%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 56% 64%, #b8c2d6 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 67% 12%, #fff 50%, transparent 100%),
+      radial-gradient(1px 1px at 73% 88%, #a8b2c4 50%, transparent 100%),
+      radial-gradient(1px 1px at 84% 35%, #d8e0ee 50%, transparent 100%),
+      radial-gradient(1px 1px at 91% 71%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 7% 56%, #c4cce0 50%, transparent 100%),
+      radial-gradient(1px 1px at 18% 42%, #fff 50%, transparent 100%),
+      radial-gradient(1px 1px at 38% 51%, #a8b2c4 50%, transparent 100%),
+      radial-gradient(1px 1px at 49% 91%, #d8e0ee 50%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, #fff 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 81% 19%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 95% 47%, #c4cce0 50%, transparent 100%);
+    z-index: 2;
+    animation: twinkle 6s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.85; }
+    50%     { opacity: 0.55; }
+  }
+
+  /* Distant nebula glow streak */
+  .stage .nebula {
+    position: absolute;
+    top: 10%; left: -10%;
+    width: 70%; height: 50%;
+    background: radial-gradient(ellipse at center,
+      rgba(184,51,106,0.18) 0%,
+      rgba(168,107,44,0.10) 30%,
+      transparent 70%);
+    filter: blur(20px);
+    z-index: 2;
+    transform: rotate(-15deg);
+    pointer-events: none;
+  }
+
+  /* Shooting star — runs occasionally diagonally */
+  .stage .shooting {
+    position: absolute;
+    top: 18%; left: -10%;
+    width: 140px; height: 1px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    z-index: 3;
+    opacity: 0;
+    animation: shoot 11s ease-in infinite;
+    transform: rotate(18deg);
+  }
+  @keyframes shoot {
+    0%        { transform: translate(0,0) rotate(18deg); opacity: 0; }
+    3%        { opacity: 0; }
+    5%, 8%    { opacity: 1; }
+    15%       { transform: translate(110vw, 30vh) rotate(18deg); opacity: 0; }
+    100%      { opacity: 0; }
+  }
+
+  /* THE PLANET — centerpiece */
+  .planet-wrap {
+    position: relative;
+    width: clamp(360px, 50vw, 520px);
+    aspect-ratio: 1;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Outer atmospheric halo (rim glow) */
+  .planet-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -14%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      transparent 53%,
+      rgba(120,180,200,0.22) 55%,
+      rgba(80,140,180,0.10) 60%,
+      transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* The planet sphere itself */
+  .planet {
+    position: relative;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    /* base atmosphere tint */
+    background:
+      radial-gradient(circle at 35% 30%,
+        #c08a4a 0%,
+        #8f5a26 18%,
+        #5a3614 40%,
+        #2a1a08 70%,
+        #110800 100%);
+    box-shadow:
+      inset -30px -30px 80px rgba(0,0,0,0.7),
+      inset 20px 15px 60px rgba(255,200,140,0.18),
+      0 0 60px rgba(168,107,44,0.18);
+    z-index: 3;
+  }
+
+  /* Surface texture — a long horizontal band of "continents" that scrolls,
+     creating the illusion of rotation. */
+  .planet .surface {
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%;
+    height: 100%;
+    background-image:
+      /* primary land/cloud bands using overlapping radial blobs in a strip */
+      radial-gradient(ellipse 80px 50px at 5%  35%, rgba(90,106,58,0.55), transparent 65%),
+      radial-gradient(ellipse 120px 60px at 12% 60%, rgba(70,90,40,0.5), transparent 60%),
+      radial-gradient(ellipse 60px 40px at 19% 25%, rgba(168,107,44,0.5), transparent 70%),
+      radial-gradient(ellipse 100px 50px at 26% 70%, rgba(60,80,35,0.55), transparent 60%),
+      radial-gradient(ellipse 70px 45px at 32% 45%, rgba(90,120,60,0.5), transparent 65%),
+      radial-gradient(ellipse 110px 55px at 39% 30%, rgba(168,107,44,0.45), transparent 65%),
+      radial-gradient(ellipse 90px 50px at 47% 65%, rgba(60,80,35,0.55), transparent 60%),
+      radial-gradient(ellipse 80px 45px at 54% 50%, rgba(90,106,58,0.5), transparent 60%),
+      radial-gradient(ellipse 100px 60px at 61% 28%, rgba(70,90,40,0.55), transparent 65%),
+      radial-gradient(ellipse 70px 40px at 68% 70%, rgba(168,107,44,0.45), transparent 70%),
+      radial-gradient(ellipse 90px 50px at 75% 42%, rgba(60,80,35,0.55), transparent 60%),
+      radial-gradient(ellipse 120px 55px at 82% 65%, rgba(90,120,60,0.5), transparent 60%),
+      radial-gradient(ellipse 60px 40px at 89% 30%, rgba(168,107,44,0.45), transparent 70%),
+      radial-gradient(ellipse 80px 50px at 95% 55%, rgba(70,90,40,0.5), transparent 60%);
+    animation: rotate-surface 80s linear infinite;
+    z-index: 2;
+  }
+  @keyframes rotate-surface {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-66.666%); } /* loop seamlessly across the 300% strip */
+  }
+
+  /* Cloud layer — moves slower, offset */
+  .planet .clouds {
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%;
+    height: 100%;
+    background-image:
+      radial-gradient(ellipse 100px 30px at 8%  20%, rgba(240,232,210,0.55), transparent 65%),
+      radial-gradient(ellipse 140px 35px at 17% 80%, rgba(240,232,210,0.45), transparent 60%),
+      radial-gradient(ellipse 80px 25px at 25% 50%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 120px 30px at 34% 18%, rgba(240,232,210,0.55), transparent 60%),
+      radial-gradient(ellipse 100px 28px at 43% 75%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 130px 32px at 52% 38%, rgba(240,232,210,0.45), transparent 60%),
+      radial-gradient(ellipse 80px 25px at 61% 60%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 110px 30px at 70% 22%, rgba(240,232,210,0.55), transparent 60%),
+      radial-gradient(ellipse 100px 28px at 79% 78%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 90px 25px at 88% 45%, rgba(240,232,210,0.45), transparent 65%),
+      radial-gradient(ellipse 120px 30px at 96% 30%, rgba(240,232,210,0.5), transparent 60%);
+    animation: rotate-clouds 120s linear infinite;
+    z-index: 3;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+  @keyframes rotate-clouds {
+    from { transform: translateX(-10%); }
+    to   { transform: translateX(-76.666%); }
+  }
+
+  /* Terminator — day/night boundary, fixed shadow on the right side */
+  .planet .terminator {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 35%,
+      transparent 0%,
+      transparent 35%,
+      rgba(10,8,4,0.15) 55%,
+      rgba(10,8,4,0.55) 75%,
+      rgba(0,0,0,0.85) 95%);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  /* Specular highlight on day side */
+  .planet .highlight {
+    position: absolute;
+    top: 12%; left: 18%;
+    width: 35%; height: 35%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%,
+      rgba(255,220,170,0.35) 0%,
+      rgba(255,200,140,0.18) 25%,
+      transparent 55%);
+    z-index: 5;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* THE RING — angled around the planet */
+  .ring-container {
+    position: absolute;
+    inset: -25%;
+    z-index: 4;
+    transform: rotateX(72deg) rotateZ(-22deg);
+    pointer-events: none;
+  }
+  .ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(200,170,130,0.55);
+    box-shadow:
+      inset 0 0 0 4px rgba(168,140,100,0.18),
+      inset 0 0 0 10px rgba(140,110,80,0.10),
+      0 0 30px rgba(168,140,100,0.15);
+  }
+  .ring.inner {
+    inset: 8%;
+    border: 1px solid rgba(200,170,130,0.35);
+  }
+  .ring.outer {
+    inset: -8%;
+    border: 0.5px solid rgba(200,170,130,0.25);
+  }
+
+  /* The ring needs to pass BEHIND the planet on one side and in FRONT on the other.
+     We fake this with a half-ring overlay clipped to the lower half. */
+  .ring-front {
+    position: absolute;
+    inset: -25%;
+    z-index: 6;
+    transform: rotateX(72deg) rotateZ(-22deg);
+    pointer-events: none;
+    clip-path: inset(50% 0 0 0);
+  }
+  .ring-front .ring {
+    border-color: rgba(200,170,130,0.65);
+    box-shadow:
+      inset 0 0 0 4px rgba(168,140,100,0.22),
+      inset 0 0 0 10px rgba(140,110,80,0.14);
+  }
+
+  /* MOON — small satellite orbiting the planet */
+  .moon-orbit {
+    position: absolute;
+    inset: -22%;
+    z-index: 7;
+    animation: moon-spin 30s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes moon-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .moon {
+    position: absolute;
+    top: 50%; left: -2%;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #e8dcc2 0%, #a8967a 60%, #4a3f30 100%);
+    box-shadow:
+      inset -4px -3px 6px rgba(0,0,0,0.6),
+      0 0 10px rgba(232,220,194,0.3);
+    transform: translateY(-50%);
+  }
+
+  /* Targeting reticle that crosses the planet */
+  .reticle {
+    position: absolute;
+    inset: -8%;
+    z-index: 8;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* Data labels around the planet */
+  .data-label {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #a8b8c8;
+    z-index: 9;
+    pointer-events: none;
+    line-height: 1.4;
+  }
+  .data-label .accent { color: var(--neon-glow); }
+  .data-label .leader {
+    position: absolute;
+    background: rgba(255,106,77,0.55);
+  }
+
+  .dl-1 { top: 10%; left: 4%; }
+  .dl-1 .leader { width: 1px; height: 32px; top: 100%; left: 14px; }
+
+  .dl-2 { top: 12%; right: 5%; text-align: right; }
+  .dl-2 .leader { width: 36px; height: 1px; top: 8px; right: -42px; }
+
+  .dl-3 { bottom: 14%; left: 6%; }
+  .dl-3 .leader { width: 28px; height: 1px; top: 8px; left: -34px; }
+
+  .dl-4 { bottom: 8%; right: 6%; text-align: right; }
+  .dl-4 .leader { width: 1px; height: 28px; bottom: 100%; right: 18px; }
+
+  /* WORDMARK on top of planet — script italic */
+  .wordmark-wrap {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    isolation: isolate;
+    pointer-events: none;
+  }
+  .wordmark, .wordmark-ghost {
+    font-family: var(--script);
+    font-size: clamp(120px, 22vw, 280px);
+    line-height: 0.85;
+    letter-spacing: -0.01em;
+    text-align: center;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .wordmark {
+    color: #f4ecd8;
+    text-shadow:
+      0 0 30px rgba(255,200,140,0.4),
+      0 0 60px rgba(255,150,100,0.25),
+      0 4px 20px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+    animation: wm-rise 2s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .wordmark .amp { color: var(--neon-glow); }
+  .wordmark-ghost {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+  .wordmark-ghost.r { color: var(--neon); transform: translate(-3px, 1px); z-index: 1; }
+  .wordmark-ghost.c { color: var(--cyan); transform: translate( 3px,-1px); z-index: 1; }
+
+  @keyframes wm-rise {
+    from { opacity: 0; transform: translate(-50%, -45%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+  }
+
+  /* Scanbeam crossing the planet */
+  .stage .scanbeam {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 48%,
+      rgba(255,106,77,0.10) 49.5%,
+      rgba(255,106,77,0.22) 50%,
+      rgba(255,106,77,0.10) 50.5%,
+      transparent 52%,
+      transparent 100%);
+    mix-blend-mode: screen;
+    z-index: 20;
+    pointer-events: none;
+    animation: scan 9s linear infinite;
+  }
+  @keyframes scan {
+    0%   { transform: translateY(-50%); opacity: 0; }
+    8%   { opacity: 0.9; }
+    50%  { transform: translateY(50%); opacity: 0.9; }
+    60%  { opacity: 0; }
+    100% { transform: translateY(50%); opacity: 0; }
+  }
+
+  /* Stage corner frame brackets — sci-fi viewport */
+  .stage .frame {
+    position: absolute;
+    width: 28px; height: 28px;
+    border: 1px solid rgba(255,106,77,0.7);
+    z-index: 25;
+    pointer-events: none;
+  }
+  .stage .frame.tl { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+  .stage .frame.tr { top: 14px; right: 14px; border-left: none; border-bottom: none; }
+  .stage .frame.bl { bottom: 14px; left: 14px; border-right: none; border-top: none; }
+  .stage .frame.br { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+  /* Stage HUD readouts */
+  .hud-top, .hud-bottom {
+    position: absolute;
+    left: 50px; right: 50px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #a8b8c8;
+    z-index: 25;
+    pointer-events: none;
+  }
+  .hud-top    { top: 22px; }
+  .hud-bottom { bottom: 22px; }
+  .hud-top .red, .hud-bottom .red { color: var(--neon-glow); }
+
+  /* ─────────────── LEITMOTIF ─────────────── */
+  .leitmotif {
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: var(--ink-soft);
+    max-width: 740px;
+    margin: 8px auto 0;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 20;
+    animation: fadein 1.4s ease .8s both;
+  }
+  .leitmotif::before, .leitmotif::after {
+    content: "—"; color: var(--rule); margin: 0 14px; font-style: normal;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 38px auto 0;
+    color: var(--rule);
+    animation: fadein 1.4s ease 1.2s both;
+  }
+  .ornament .line { width: 80px; height: 1px; background: var(--rule); }
+  .ornament .diamond {
+    width: 9px; height: 9px;
+    background: var(--neon);
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 4px rgba(255,61,46,0.15), 0 0 14px rgba(255,61,46,0.5);
+  }
+  .ornament .tick {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+
+  /* ─────────────── INTRO ─────────────── */
+  section.intro {
+    padding: 90px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+  }
+  section.intro .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+    padding-top: 12px;
+    border-top: 1px solid var(--ink);
+    width: fit-content;
+  }
+  section.intro .label::before { content: "// "; color: var(--neon); }
+  section.intro .body p {
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  section.intro .body p + p { margin-top: 22px; }
+  section.intro .body .drop {
+    float: left;
+    font-family: var(--serif);
+    font-size: 78px;
+    line-height: 0.85;
+    padding: 8px 12px 0 0;
+    color: var(--amber);
+    font-weight: 500;
+    text-shadow: -1px 0 0 var(--neon), 1px 0 0 var(--cyan);
+  }
+
+  /* ─────────────── PRODUCTS ─────────────── */
+  section.products { padding: 60px 0 100px; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 70px;
+  }
+  .section-head .rule { height: 1px; background: var(--rule); position: relative; }
+  .section-head .rule::after {
+    content: "";
+    position: absolute;
+    top: -2px; right: 0;
+    width: 18px; height: 5px;
+    background: var(--neon);
+    box-shadow: 0 0 8px rgba(255,61,46,0.6);
+  }
+  .section-head .rule:first-child::after { right: auto; left: 0; }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 38px;
+    color: var(--ink);
+  }
+
+  .catalog {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  article.product {
+    padding: 48px 40px 52px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    transition: background .5s ease;
+  }
+  article.product:nth-child(odd) { border-right: 1px solid var(--rule); }
+  article.product:hover { background: rgba(255,61,46,0.04); }
+
+  article.product::before,
+  article.product::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--ink);
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+  }
+  article.product::before { top: 16px; left: 16px; border-right: none; border-bottom: none; }
+  article.product::after  { bottom: 16px; right: 16px; border-left: none; border-top: none; }
+  article.product:hover::before { opacity: 1; transform: translate(-3px,-3px); border-color: var(--neon); }
+  article.product:hover::after  { opacity: 1; transform: translate( 3px, 3px); border-color: var(--neon); }
+
+  .product .index {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+  }
+  .product .index::before { content: "■ "; color: var(--neon); }
+
+  .product .glyph {
+    width: 64px; height: 64px;
+    margin-bottom: 26px;
+    color: var(--ink);
+    filter: drop-shadow(-1px 0 0 rgba(255,61,46,0.5)) drop-shadow(1px 0 0 rgba(31,127,140,0.5));
+  }
+
+  .product h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 34px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .product h3 .it { font-style: italic; color: var(--amber); font-weight: 400; }
+
+  .product .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--ink-mute);
+    margin-bottom: 22px;
+  }
+  .product .tag::before { content: "› "; color: var(--neon); }
+
+  .product p.desc {
+    font-size: 17.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 44ch;
+  }
+
+  .product .status {
+    display: flex;
+    gap: 18px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .product .status .ok { color: var(--olive); }
+  .product .status .ok::before { content: "● "; color: var(--olive); }
+
+  .product .actions {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .product a {
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color .3s;
+  }
+  .product a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 1px;
+    background: var(--ink);
+    transition: background .4s, box-shadow .4s;
+  }
+  .product a:hover { color: var(--neon); }
+  .product a:hover::after { background: var(--neon); box-shadow: 0 0 8px var(--neon); }
+  .product .arrow { display: inline-block; transition: transform .3s; }
+  .product a:hover .arrow { transform: translateX(4px); }
+
+  article.product.placeholder {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 14px,
+      rgba(20,19,15,0.025) 14px,
+      rgba(20,19,15,0.025) 15px
+    );
+  }
+  article.product.placeholder h3 { color: var(--ink-mute); font-style: italic; }
+  article.product.placeholder p.desc { color: var(--ink-mute); }
+  article.product.placeholder .status .pending { color: var(--neon); }
+  article.product.placeholder .status .pending::before { content: "◐ "; color: var(--neon); }
+
+  /* ─────────────── PHILOSOPHY ─────────────── */
+  section.philosophy {
+    padding: 100px 0 110px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+    position: relative;
+  }
+  section.philosophy::before {
+    content: "✦";
+    position: absolute;
+    top: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--paper);
+    color: var(--neon);
+    padding: 0 16px;
+    font-size: 14px;
+    text-shadow: 0 0 12px rgba(255,61,46,0.6);
+  }
+  section.philosophy h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(32px, 4.4vw, 56px);
+    line-height: 1.25;
+    color: var(--ink);
+    max-width: 920px;
+    margin: 0 auto 24px;
+  }
+  section.philosophy h2 .glow {
+    color: var(--neon);
+    font-style: normal;
+    font-family: var(--script);
+    font-size: 1.25em;
+    text-shadow: 0 0 24px rgba(255,61,46,0.4);
+  }
+  section.philosophy .sig {
+    font-family: var(--script);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--amber);
+    margin-top: 24px;
+  }
+
+  /* ─────────────── FOOTER ─────────────── */
+  footer {
+    padding: 70px 0 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  footer h4 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+  }
+  footer h4::before { content: "// "; color: var(--neon); }
+  footer p, footer a {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    text-decoration: none;
+    display: block;
+  }
+  footer a:hover { color: var(--neon); }
+
+  .readout {
+    grid-column: 1 / -1;
+    margin-top: 30px;
+    padding: 14px 18px;
+    background: var(--crt);
+    color: #c9e3df;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.04);
+    overflow: hidden;
+    position: relative;
+  }
+  .readout::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(255,255,255,0.03) 2px,
+      rgba(255,255,255,0.03) 3px);
+    pointer-events: none;
+  }
+  .readout .neon-text { color: var(--neon-glow); text-shadow: 0 0 8px rgba(255,106,77,0.6); }
+  .readout .live { display: inline-flex; align-items: center; gap: 8px; }
+  .readout .live .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 10px var(--neon);
+    animation: blink 1.8s infinite;
+  }
+
+  .colophon {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  .meta-row { animation: fadein 1s ease .1s both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .wrap { padding: 0 24px; }
+    nav.top ul { display: none; }
+    section.intro { grid-template-columns: 1fr; gap: 28px; padding: 60px 0; }
+    .catalog { grid-template-columns: 1fr; }
+    article.product:nth-child(odd) { border-right: none; }
+    footer { grid-template-columns: 1fr; gap: 36px; }
+    .section-head { grid-template-columns: 1fr; gap: 14px; text-align: center; }
+    .section-head .rule { display: none; }
+    .leitmotif::before, .leitmotif::after { display: block; margin: 6px auto; }
+    .meta-row { font-size: 9px; gap: 8px; }
+    .readout { flex-direction: column; gap: 8px; text-align: center; }
+    .colophon { flex-direction: column; gap: 8px; text-align: center; }
+    .hud-top, .hud-bottom { left: 16px; right: 16px; font-size: 8px; }
+    .data-label { font-size: 8px; }
+    .stage { margin: 10px -10px 30px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="top">
+    <div class="mark">
+      <span class="dot"></span>
+      <span class="id">mBROTHERS // STUDIO</span>
+    </div>
+    <ul>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#contact">Transmission</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="meta-row">
+      <span>VOL. I · MMXXVI</span>
+      <span class="blink-cursor">SIGNAL ACQUIRED</span>
+      <span>LISBON · 38.7°N 9.1°W</span>
+    </div>
+
+    <!-- ════════ PLANETARY STAGE ════════ -->
+    <div class="stage">
+      <div class="void"></div>
+      <div class="nebula"></div>
+      <div class="stars"></div>
+      <div class="shooting"></div>
+
+      <!-- Stage frame brackets -->
+      <span class="frame tl"></span>
+      <span class="frame tr"></span>
+      <span class="frame bl"></span>
+      <span class="frame br"></span>
+
+      <!-- HUD readouts -->
+      <div class="hud-top">
+        <span>LIVE FEED · ORBIT CAM 04</span>
+        <span style="color:var(--neon-glow)">● REC</span>
+        <span>38.7223°N · 9.1393°W</span>
+      </div>
+      <div class="hud-bottom">
+        <span>OBJ-001 / PLANET · CLASS M</span>
+        <span class="red">SIGNAL : STABLE</span>
+        <span>DIST · 0.000 AU</span>
+      </div>
+
+      <!-- Data labels around planet -->
+      <div class="data-label dl-1">
+        <div>SURFACE TEMP</div>
+        <div class="accent">+286 K</div>
+        <span class="leader"></span>
+      </div>
+      <div class="data-label dl-2">
+        <div>ATMOSPHERE</div>
+        <div class="accent">N₂ · O₂ · TRACE</div>
+        <span class="leader"></span>
+      </div>
+      <div class="data-label dl-3">
+        <div>ROTATION</div>
+        <div class="accent">0.041 RAD/S</div>
+        <span class="leader"></span>
+      </div>
+      <div class="data-label dl-4">
+        <div>MOON · 1</div>
+        <div class="accent">PERIOD 30s</div>
+        <span class="leader"></span>
+      </div>
+
+      <!-- Scan beam -->
+      <div class="scanbeam"></div>
+
+      <!-- The planet itself -->
+      <div class="planet-wrap">
+        <!-- Back portion of ring (behind planet) -->
+        <div class="ring-container">
+          <div class="ring outer"></div>
+          <div class="ring"></div>
+          <div class="ring inner"></div>
+        </div>
+
+        <!-- Planet sphere -->
+        <div class="planet">
+          <div class="surface"></div>
+          <div class="clouds"></div>
+          <div class="highlight"></div>
+          <div class="terminator"></div>
+        </div>
+
+        <!-- Front portion of ring (covers planet bottom) -->
+        <div class="ring-front">
+          <div class="ring outer"></div>
+          <div class="ring"></div>
+          <div class="ring inner"></div>
+        </div>
+
+        <!-- Orbiting moon -->
+        <div class="moon-orbit">
+          <div class="moon"></div>
+        </div>
+
+        <!-- Reticle SVG -->
+        <svg class="reticle" viewBox="0 0 100 100" fill="none" stroke="rgba(255,106,77,0.6)" stroke-width="0.25">
+          <circle cx="50" cy="50" r="48" stroke-dasharray="0.6 2"/>
+          <line x1="50" y1="0"  x2="50" y2="6"/>
+          <line x1="50" y1="94" x2="50" y2="100"/>
+          <line x1="0"  y1="50" x2="6"  y2="50"/>
+          <line x1="94" y1="50" x2="100" y2="50"/>
+        </svg>
+
+        <!-- WORDMARK floating over planet -->
+        <div class="wordmark-wrap">
+          <div class="wordmark-ghost r" aria-hidden="true">mBrothers</div>
+          <div class="wordmark-ghost c" aria-hidden="true">mBrothers</div>
+          <h1 class="wordmark"><span class="amp">m</span>Brothers</h1>
+        </div>
+      </div>
+    </div>
+
+    <p class="leitmotif">Developing practical solutions for small planetary systems</p>
+
+    <div class="ornament">
+      <span class="line"></span>
+      <span class="tick">EST. 2026</span>
+      <span class="diamond"></span>
+      <span class="tick">v0.1</span>
+      <span class="line"></span>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="label">On the studio</div>
+    <div class="body">
+      <p><span class="drop">W</span>e are a small workshop of software craftspeople orbiting a quiet sun. Our concern is the everyday — the windows you keep open, the logs you stare at, the focus you keep losing. We build tools that earn their place on your desktop by being quiet, fast, and considerate.</p>
+      <p>No subscriptions to forget. No telemetry to dread. Just instruments that do one thing carefully, transmit nothing home, and then get out of the way.</p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <div class="section-head">
+      <div class="rule"></div>
+      <h2>The Catalogue</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="catalog">
+
+      <article class="product">
+        <span class="index">№ 01 / SIG-01</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <rect x="10" y="8" width="44" height="48" rx="2"/>
+          <line x1="18" y1="20" x2="46" y2="20"/>
+          <line x1="18" y1="28" x2="40" y2="28"/>
+          <line x1="18" y1="36" x2="44" y2="36"/>
+          <line x1="18" y1="44" x2="36" y2="44"/>
+          <circle cx="50" cy="50" r="6" stroke="#a86b2c"/>
+          <line x1="54.5" y1="54.5" x2="58" y2="58" stroke="#a86b2c"/>
+        </svg>
+        <h3>The Absolute Log<span class="it">Viewer</span></h3>
+        <div class="tag">Observation · Forensics · Calm</div>
+        <p class="desc">A serene reader for log files of any size. Stream, filter, and follow without the editor stuttering. For when the system speaks and you actually need to listen.</p>
+        <div class="status">
+          <span class="ok">Status · operational</span>
+          <span>Build · 1.0</span>
+          <span>WIN · MAC</span>
+        </div>
+        <div class="actions">
+          <a href="https://nunex-mbrothers.github.io/TheAbsoluteLogViewer" target="_blank" rel="noopener">Read more <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="product">
+        <span class="index">№ 02 / SIG-02</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <rect x="8" y="14" width="48" height="38" rx="2"/>
+          <path d="M8 22 L24 22 L28 14"/>
+          <circle cx="32" cy="34" r="9" fill="#f4ecd8" stroke="#a86b2c"/>
+          <circle cx="32" cy="34" r="2.5" fill="#a86b2c" stroke="none"/>
+          <line x1="32" y1="20" x2="32" y2="24" stroke="#a86b2c"/>
+          <line x1="32" y1="44" x2="32" y2="48" stroke="#a86b2c"/>
+          <line x1="18" y1="34" x2="22" y2="34" stroke="#a86b2c"/>
+          <line x1="42" y1="34" x2="46" y2="34" stroke="#a86b2c"/>
+        </svg>
+        <h3>Explorer<span class="it">Focus</span></h3>
+        <div class="tag">Attention · File systems · Quiet</div>
+        <p class="desc">Bring Windows Explorer forward without losing your place. A small, deliberate utility for people who navigate by keyboard and want their hands to stay where they are.</p>
+        <div class="status">
+          <span class="ok">Status · operational</span>
+          <span>Build · 1.0</span>
+          <span>WIN</span>
+        </div>
+        <div class="actions">
+          <a href="https://nunex-mbrothers.github.io/ExplorerFocus" target="_blank" rel="noopener">Read more <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="product placeholder">
+        <span class="index">№ 03 / SIG-03</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.55">
+          <circle cx="32" cy="32" r="20" stroke-dasharray="3 4"/>
+          <circle cx="32" cy="32" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3>In transmission</h3>
+        <div class="tag">Forthcoming · 2026</div>
+        <p class="desc">Another small instrument is taking shape on the workbench. Built with the same patience and the same refusal to add what isn't needed.</p>
+        <div class="status">
+          <span class="pending">Status · incoming</span>
+          <span>ETA · ████</span>
+        </div>
+        <div class="actions">
+          <a href="#contact">Be notified <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="product placeholder">
+        <span class="index">№ 04 / SIG-??</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.4">
+          <path d="M14 50 L32 14 L50 50 Z"/>
+        </svg>
+        <h3>Reserved</h3>
+        <div class="tag">An idea, still quiet</div>
+        <p class="desc">Space held open for the next solution worth building. The catalogue grows slowly — on purpose.</p>
+        <div class="status">
+          <span class="pending">Status · dormant</span>
+          <span>Signal · faint</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy" id="philosophy">
+    <h2>"We make software the way an old workshop makes <span class="glow">instruments</span> —<br/>small in number, considered in detail, built to outlast the trend."</h2>
+    <p class="sig">— the mBrothers</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div>
+      <h4>The Studio</h4>
+      <p>mBrothers is an independent software studio. Two minds, a few good tools, and a long view of small worlds.</p>
+    </div>
+    <div>
+      <h4>Transmission</h4>
+      <a href="mailto:NuneXmBrothers@gmail.com">NuneXmBrothers@gmail.com</a>
+      <a href="https://github.com/nunex-mbrothers" target="_blank" rel="noopener">GitHub · @nunex-mbrothers</a>
+    </div>
+    <div>
+      <h4>Provenance</h4>
+      <p>Hand-built in Lisbon.<br/>Hosted at nunex-mbrothers.github.io</p>
+    </div>
+
+    <div class="readout">
+      <span class="live"><span class="dot"></span>SYSTEM <span class="neon-text">ONLINE</span> · LISTENING ON ALL FREQUENCIES</span>
+      <span>UPLINK · 38.7223°N · 9.1393°W · ALT 0.011km</span>
+    </div>
+
+    <div class="colophon">
+      <span>© mBrothers · MMXXVI</span>
+      <span>Set in Cormorant · Italianno · JetBrains Mono</span>
+      <span>practical solutions // small planetary systems</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
