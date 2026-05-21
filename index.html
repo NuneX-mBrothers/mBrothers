@@ -159,89 +159,121 @@
   @keyframes cursorblink { 50% { opacity: 0; } }
 
   /* ═════════════════════════════════════════════════
-     THE PLANETARY STAGE
+     THE PLANETARY STAGE — astronomical plate
      ═════════════════════════════════════════════════ */
   .stage {
     position: relative;
     height: clamp(560px, 70vw, 760px);
-    margin: 10px -20px 30px;
+    margin: 10px 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    border-radius: 4px;
+    overflow: visible;
+    isolation: isolate;
   }
 
-  /* The deep-space background — sits behind the planet inside the stage */
+  /* The plate itself — dissolves into paper at the edges */
   .stage .void {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at 30% 40%, rgba(31,127,140,0.18) 0%, transparent 45%),
-      radial-gradient(ellipse at 75% 65%, rgba(184,51,106,0.10) 0%, transparent 50%),
-      linear-gradient(180deg, var(--space-deep) 0%, var(--space-mid) 60%, var(--space-soft) 100%);
+      radial-gradient(ellipse at 30% 40%, rgba(120,140,150,0.20) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 65%, rgba(168,107,44,0.15) 0%, transparent 55%),
+      linear-gradient(180deg, #2a2e3a 0%, #232735 50%, #1f2330 100%);
     z-index: 1;
+    /* Soft vignette that fades into the paper on all sides */
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%,
+        #000 22%,
+        rgba(0,0,0,0.95) 50%,
+        rgba(0,0,0,0.78) 68%,
+        rgba(0,0,0,0.48) 82%,
+        rgba(0,0,0,0.2) 92%,
+        transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%,
+        #000 22%,
+        rgba(0,0,0,0.95) 50%,
+        rgba(0,0,0,0.78) 68%,
+        rgba(0,0,0,0.48) 82%,
+        rgba(0,0,0,0.2) 92%,
+        transparent 100%);
   }
 
-  /* Starfield: tiny dots with twinkle */
+  /* Subtle outer frame — like an old astronomical plate caption border */
+  .stage .plate-frame {
+    position: absolute;
+    inset: 11% 13%;
+    border: 0.5px solid rgba(168,107,44,0.22);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 30;
+    -webkit-mask-image: radial-gradient(ellipse 75% 88% at center 50%, #000 35%, rgba(0,0,0,0.55) 75%, transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 88% at center 50%, #000 35%, rgba(0,0,0,0.55) 75%, transparent 100%);
+  }
+  .stage .plate-frame::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border: 0.5px solid rgba(168,107,44,0.12);
+    border-radius: 3px;
+  }
+
+  /* Starfield: now masked to the plate area too, slightly warmer */
   .stage .stars {
     position: absolute; inset: 0;
     background-image:
-      radial-gradient(1px 1px at 13% 14%, #d8e0ee 50%, transparent 100%),
-      radial-gradient(1px 1px at 27% 78%, #c4cce0 50%, transparent 100%),
-      radial-gradient(1px 1px at 42% 22%, #ffffff 50%, transparent 100%),
-      radial-gradient(1px 1px at 56% 64%, #b8c2d6 50%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 67% 12%, #fff 50%, transparent 100%),
-      radial-gradient(1px 1px at 73% 88%, #a8b2c4 50%, transparent 100%),
-      radial-gradient(1px 1px at 84% 35%, #d8e0ee 50%, transparent 100%),
-      radial-gradient(1px 1px at 91% 71%, #ffffff 50%, transparent 100%),
-      radial-gradient(1px 1px at 7% 56%, #c4cce0 50%, transparent 100%),
-      radial-gradient(1px 1px at 18% 42%, #fff 50%, transparent 100%),
-      radial-gradient(1px 1px at 38% 51%, #a8b2c4 50%, transparent 100%),
-      radial-gradient(1px 1px at 49% 91%, #d8e0ee 50%, transparent 100%),
-      radial-gradient(1px 1px at 62% 33%, #fff 50%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 81% 19%, #ffffff 50%, transparent 100%),
-      radial-gradient(1px 1px at 95% 47%, #c4cce0 50%, transparent 100%);
+      radial-gradient(1px 1px at 13% 14%, #e8dcc2 50%, transparent 100%),
+      radial-gradient(1px 1px at 27% 78%, #d4cbb4 50%, transparent 100%),
+      radial-gradient(1px 1px at 42% 22%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 56% 64%, #c4bca0 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 67% 12%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 73% 88%, #a8a088 50%, transparent 100%),
+      radial-gradient(1px 1px at 84% 35%, #d4cbb4 50%, transparent 100%),
+      radial-gradient(1px 1px at 91% 71%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 7% 56%, #c4bca0 50%, transparent 100%),
+      radial-gradient(1px 1px at 18% 42%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 38% 51%, #a8a088 50%, transparent 100%),
+      radial-gradient(1px 1px at 49% 91%, #d4cbb4 50%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 81% 19%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 95% 47%, #c4bca0 50%, transparent 100%);
     z-index: 2;
     animation: twinkle 6s ease-in-out infinite;
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
   }
-  @keyframes twinkle {
-    0%,100% { opacity: 0.85; }
-    50%     { opacity: 0.55; }
-  }
+  @keyframes twinkle { 0%,100% { opacity: 0.7; } 50% { opacity: 0.45; } }
 
-  /* Distant nebula glow streak */
+  /* Distant nebula — warm sepia tones now */
   .stage .nebula {
     position: absolute;
-    top: 10%; left: -10%;
-    width: 70%; height: 50%;
+    top: 12%; left: -5%;
+    width: 60%; height: 45%;
     background: radial-gradient(ellipse at center,
-      rgba(184,51,106,0.18) 0%,
-      rgba(168,107,44,0.10) 30%,
+      rgba(168,107,44,0.18) 0%,
+      rgba(120,80,40,0.10) 35%,
       transparent 70%);
-    filter: blur(20px);
+    filter: blur(24px);
     z-index: 2;
     transform: rotate(-15deg);
     pointer-events: none;
   }
 
-  /* Shooting star — runs occasionally diagonally */
+  /* Shooting star — softer */
   .stage .shooting {
     position: absolute;
     top: 18%; left: -10%;
     width: 140px; height: 1px;
-    background: linear-gradient(90deg, transparent, #fff, transparent);
+    background: linear-gradient(90deg, transparent, rgba(244,236,216,0.85), transparent);
     z-index: 3;
     opacity: 0;
-    animation: shoot 11s ease-in infinite;
+    animation: shoot 13s ease-in infinite;
     transform: rotate(18deg);
   }
   @keyframes shoot {
-    0%        { transform: translate(0,0) rotate(18deg); opacity: 0; }
-    3%        { opacity: 0; }
-    5%, 8%    { opacity: 1; }
-    15%       { transform: translate(110vw, 30vh) rotate(18deg); opacity: 0; }
-    100%      { opacity: 0; }
+    0%      { transform: translate(0,0) rotate(18deg); opacity: 0; }
+    3%, 5%  { opacity: 1; }
+    14%     { transform: translate(110vw, 30vh) rotate(18deg); opacity: 0; }
+    100%    { opacity: 0; }
   }
 
   /* THE PLANET — centerpiece */
@@ -464,27 +496,27 @@
     font-size: 9.5px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #a8b8c8;
+    color: rgba(212,203,180,0.75);
     z-index: 9;
     pointer-events: none;
     line-height: 1.4;
   }
-  .data-label .accent { color: var(--neon-glow); }
+  .data-label .accent { color: rgba(232,180,120,0.95); }
   .data-label .leader {
     position: absolute;
-    background: rgba(255,106,77,0.55);
+    background: rgba(232,180,120,0.5);
   }
 
-  .dl-1 { top: 10%; left: 4%; }
+  .dl-1 { top: 13%; left: 9%; }
   .dl-1 .leader { width: 1px; height: 32px; top: 100%; left: 14px; }
 
-  .dl-2 { top: 12%; right: 5%; text-align: right; }
+  .dl-2 { top: 15%; right: 10%; text-align: right; }
   .dl-2 .leader { width: 36px; height: 1px; top: 8px; right: -42px; }
 
-  .dl-3 { bottom: 30%; left: 4%; }
+  .dl-3 { bottom: 30%; left: 9%; }
   .dl-3 .leader { width: 28px; height: 1px; top: 8px; left: -34px; }
 
-  .dl-4 { bottom: 30%; right: 4%; text-align: right; }
+  .dl-4 { bottom: 30%; right: 9%; text-align: right; }
   .dl-4 .leader { width: 28px; height: 1px; top: 8px; right: -34px; }
 
   /* WORDMARK on top of planet — script italic */
@@ -540,15 +572,17 @@
       to bottom,
       transparent 0%,
       transparent 48%,
-      rgba(255,106,77,0.10) 49.5%,
-      rgba(255,106,77,0.22) 50%,
-      rgba(255,106,77,0.10) 50.5%,
+      rgba(232,180,120,0.08) 49.5%,
+      rgba(232,180,120,0.16) 50%,
+      rgba(232,180,120,0.08) 50.5%,
       transparent 52%,
       transparent 100%);
     mix-blend-mode: screen;
     z-index: 20;
     pointer-events: none;
     animation: scan 9s linear infinite;
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 28%, transparent 95%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 28%, transparent 95%);
   }
   @keyframes scan {
     0%   { transform: translateY(-50%); opacity: 0; }
@@ -558,66 +592,67 @@
     100% { transform: translateY(50%); opacity: 0; }
   }
 
-  /* Stage corner frame brackets — sci-fi viewport */
+  /* Stage corner frame brackets — softened, amber */
   .stage .frame {
     position: absolute;
-    width: 28px; height: 28px;
-    border: 1px solid rgba(255,106,77,0.7);
+    width: 22px; height: 22px;
+    border: 0.5px solid rgba(168,107,44,0.55);
     z-index: 25;
     pointer-events: none;
   }
-  .stage .frame.tl { top: 14px; left: 14px; border-right: none; border-bottom: none; }
-  .stage .frame.tr { top: 14px; right: 14px; border-left: none; border-bottom: none; }
-  .stage .frame.bl { bottom: 14px; left: 14px; border-right: none; border-top: none; }
-  .stage .frame.br { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+  .stage .frame.tl { top: 7%; left: 6%; border-right: none; border-bottom: none; }
+  .stage .frame.tr { top: 7%; right: 6%; border-left: none; border-bottom: none; }
+  .stage .frame.bl { bottom: 7%; left: 6%; border-right: none; border-top: none; }
+  .stage .frame.br { bottom: 7%; right: 6%; border-left: none; border-top: none; }
 
-  /* Stage HUD readouts */
+  /* Stage HUD readouts — paper-tone, integrated */
   .hud-top, .hud-bottom {
     position: absolute;
-    left: 50px; right: 50px;
+    left: 9%; right: 9%;
     display: flex;
     justify-content: space-between;
     font-family: var(--mono);
     font-size: 9.5px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: #a8b8c8;
+    color: rgba(212,203,180,0.7);
     z-index: 25;
     pointer-events: none;
   }
-  .hud-top    { top: 22px; }
-  .hud-bottom { bottom: 130px; }
-  .hud-top .red, .hud-bottom .red { color: var(--neon-glow); }
+  .hud-top    { top: 8%; }
+  .hud-bottom { bottom: 22%; }
+  .hud-top .red, .hud-bottom .red { color: rgba(232,180,120,0.85); }
 
   /* ═════════════ CRT TERMINAL — phosphor green ═════════════
      Sits at the bottom of the stage, inside the space view */
   .crt {
     position: absolute;
     left: 50%;
-    bottom: 36px;
+    bottom: 5%;
     transform: translateX(-50%);
-    width: clamp(320px, 60%, 640px);
-    height: 86px;
+    width: clamp(360px, 56%, 580px);
+    max-width: calc(100% - 120px);
+    min-height: 96px;
     z-index: 22;
     pointer-events: none;
     font-family: var(--mono);
-    font-size: 13px;
-    line-height: 1.45;
-    letter-spacing: 0.04em;
+    font-size: 12.5px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
     color: #6affa4;
     text-shadow:
-      0 0 4px rgba(106,255,164,0.65),
-      0 0 12px rgba(106,255,164,0.35),
-      0 0 22px rgba(70,200,120,0.25);
-    padding: 10px 16px;
+      0 0 3px rgba(106,255,164,0.55),
+      0 0 8px rgba(106,255,164,0.25);
+    padding: 12px 18px;
     background:
-      linear-gradient(180deg, rgba(8,22,16,0.35), rgba(4,14,10,0.55));
-    border: 1px solid rgba(106,255,164,0.22);
+      linear-gradient(180deg, rgba(8,18,14,0.85), rgba(4,12,8,0.92));
+    border: 0.5px solid rgba(168,107,44,0.38);
     border-radius: 2px;
     overflow: hidden;
+    box-sizing: border-box;
     box-shadow:
-      inset 0 0 30px rgba(106,255,164,0.08),
-      0 0 24px rgba(106,255,164,0.10);
+      inset 0 0 24px rgba(106,255,164,0.08),
+      0 6px 50px rgba(10,18,14,0.5);
   }
   /* CRT scanlines on top of terminal */
   .crt::before {
@@ -644,7 +679,9 @@
   .crt-lines {
     position: relative;
     z-index: 2;
-    white-space: pre;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
     height: 100%;
     overflow: hidden;
   }
@@ -699,7 +736,7 @@
     align-items: center;
     justify-content: center;
     gap: 18px;
-    margin: 38px auto 0;
+    margin: 10px auto 0;
     color: var(--rule);
     animation: fadein 1.4s ease 1.2s both;
   }
@@ -1095,6 +1132,7 @@
       <div class="nebula"></div>
       <div class="stars"></div>
       <div class="shooting"></div>
+      <div class="plate-frame"></div>
 
       <!-- Stage frame brackets -->
       <span class="frame tl"></span>
@@ -1174,7 +1212,7 @@
         </div>
 
         <!-- Reticle SVG -->
-        <svg class="reticle" viewBox="0 0 100 100" fill="none" stroke="rgba(255,106,77,0.6)" stroke-width="0.25">
+        <svg class="reticle" viewBox="0 0 100 100" fill="none" stroke="rgba(232,180,120,0.45)" stroke-width="0.25">
           <circle cx="50" cy="50" r="48" stroke-dasharray="0.6 2"/>
           <line x1="50" y1="0"  x2="50" y2="6"/>
           <line x1="50" y1="94" x2="50" y2="100"/>
