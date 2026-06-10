@@ -140,24 +140,20 @@
     var SENS     = 0.0014;        // turns per pixel of drag
     var TILT     = 9;             // max parallax tilt (deg)
 
-    /* ── reduced motion: paint one static, honest frame, then stop ── */
-    if (reduce) {
-      surface.style.transform = 'translateX(0%)';
-      clouds.style.transform  = 'translateX(-10%)';
-      if (moonOrbit) moonOrbit.style.transform = 'rotate(0deg)';
-      var d0 = new Date();
-      setText(elClock, pad2(d0.getUTCHours()) + ':' + pad2(d0.getUTCMinutes()) + ':' + pad2(d0.getUTCSeconds()) + ' UTC');
-      setText(elRec, '00:00'); setText(elUptime, '00:00'); setText(elFps, '—');
-      setText(elDist, '0.0021'); setText(elRot, '0.079'); setText(elTemp, '+286');
-      return;
-    }
+    /* ── reduced motion: stay alive, just calmer ──
+       Keep a gentle ambient rotation (a slow, distant planet spin is
+       non-vestibular) and the live clock, but drop the parallax tilt and the
+       entrance zoom. The jarring CSS effects (scanbeam, shooting star,
+       twinkle, CRT flicker, blinking dots) are already off via the global
+       reduced-motion rule. Drag stays — it is user-initiated motion. */
+    if (reduce) TILT = 0;
 
     /* ── state ── */
     var phase = 0, cloudPhase = -0.15, moonPhase = 0;  // cloudPhase offset ≈ original -10%
     var vel = BASE;                 // current spin (turns/s)
     var dragging = false, lastX = 0, lastT = 0, instVel = BASE;
     var targetMX = 0, targetMY = 0, mx = 0, my = 0;     // pointer, normalised + smoothed
-    var intro = 0;                  // 0→1 entrance ease
+    var intro = reduce ? 1 : 0;     // 0→1 entrance ease (no zoom under reduced motion)
     var touched = false;
     function markTouched() {
       if (touched) return;
@@ -165,15 +161,17 @@
       stage.classList.add('touched');
     }
 
-    /* ── pointer parallax over the hero ── */
-    hero.addEventListener('pointermove', function (e) {
-      var r = stage.getBoundingClientRect();
-      targetMX = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
-      targetMY = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
-    });
-    hero.addEventListener('pointerleave', function () {
-      targetMX = 0; targetMY = 0; hovering = false;
-    });
+    /* ── pointer parallax over the hero (skipped under reduced motion) ── */
+    if (!reduce) {
+      hero.addEventListener('pointermove', function (e) {
+        var r = stage.getBoundingClientRect();
+        targetMX = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+        targetMY = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+      });
+      hero.addEventListener('pointerleave', function () {
+        targetMX = 0; targetMY = 0;
+      });
+    }
 
     /* ── drag-to-rotate the planet ── */
     planetWrap.addEventListener('pointerdown', function (e) {
@@ -279,7 +277,16 @@
   }
 
   /* ── boot ── */
-  function boot() { initTerminal(); initStage(); }
+  function boot() {
+    // Liveness + version marker: confirms JS actually executed, and which build.
+    var b = $('buildTag');
+    if (b) {
+      b.textContent = b.getAttribute('data-build') + (reduce ? ' · JS ✓ (calm)' : ' · JS ✓');
+      b.classList.add('ok');
+    }
+    initTerminal();
+    initStage();
+  }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
   } else {
