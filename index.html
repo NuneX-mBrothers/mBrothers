@@ -69,8 +69,9 @@ try{
 
 <style>
   :root {
-    --paper:        #f4ecd8;
-    --paper-deep:   #ebe1c6;
+    --paper:        #e9dfc4;   /* softened a touch so the bright page contrasts
+                                  less with the grey stage (was #f4ecd8) */
+    --paper-deep:   #ddd1b2;
     --ink:          #14130f;
     --ink-soft:     #2e2b22;
     --ink-mute:     #6b6757;
@@ -227,7 +228,18 @@ try{
   /* ═════════════ NIGHT THEME (Frente C — day/night) ═════════════
      The paper editorial flips to deep space; accents stay. The stage's
      radial mask now dissolves into a dark page, so space "invades". */
-  html { transition: background-color .5s ease; }
+  /* Dusk / dawn: while toggling, every themed surface crossfades slowly.
+     The class is added only for the duration of the switch, so normal hover
+     transitions stay snappy the rest of the time. */
+  html.theming, html.theming *,
+  html.theming *::before, html.theming *::after {
+    transition: background-color 1.8s ease-in-out,
+                color 1.8s ease-in-out,
+                border-color 1.8s ease-in-out,
+                fill 1.8s ease-in-out,
+                stroke 1.8s ease-in-out,
+                box-shadow 1.8s ease-in-out !important;
+  }
   html.night {
     --paper:      #0c0f17;
     --paper-deep: #141a28;
@@ -1407,7 +1419,7 @@ try{
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
-      <span class="build" id="buildTag" data-build="BUILD 10.8">BUILD 10.8</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.9">BUILD 10.9</span>
       <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle day / night" title="Toggle day / night">☾</button>
     </div>
