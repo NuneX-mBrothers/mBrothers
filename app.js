@@ -11,8 +11,17 @@
 (function () {
   'use strict';
 
-  var reduce = window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Motion preference resolution:
+       OS prefers-reduced-motion is the default, but an in-page toggle lets the
+       visitor force 'full' (override the OS) or 'calm'. Choice persists. */
+  var prefersReduce = !!(window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var motionPref = null;
+  try { motionPref = localStorage.getItem('mb-motion'); } catch (e) {}   // 'full' | 'calm' | null
+  if (motionPref === 'full') document.documentElement.classList.add('motion-full');
+  var reduce = motionPref === 'full' ? false
+             : motionPref === 'calm' ? true
+             : prefersReduce;
 
   /* ── tiny helpers ───────────────────────────────────────────── */
   var $ = function (id) { return document.getElementById(id); };
@@ -273,6 +282,30 @@
     requestAnimationFrame(frame);
   }
 
+  /* ── motion toggle ── */
+  function initMotionToggle() {
+    var btn = $('motionToggle');
+    if (!btn) return;
+    // Only surface the toggle when it's meaningful: the OS asks for reduced
+    // motion, or the visitor previously set an explicit preference.
+    if (!prefersReduce && !motionPref) return;
+
+    btn.hidden = false;
+    btn.textContent = reduce ? '▸ full motion' : 'motion · full';
+    btn.setAttribute('aria-pressed', reduce ? 'false' : 'true');
+    btn.title = reduce
+      ? 'Enable the full animated experience (overrides the system setting)'
+      : 'Full motion on — click to follow the system setting again';
+
+    btn.addEventListener('click', function () {
+      try {
+        if (reduce) localStorage.setItem('mb-motion', 'full');  // force full
+        else localStorage.removeItem('mb-motion');              // back to system default
+      } catch (e) {}
+      location.reload();
+    });
+  }
+
   /* ── boot ── */
   function boot() {
     // Liveness + version marker: confirms JS actually executed, and which build.
@@ -281,6 +314,7 @@
       b.textContent = b.getAttribute('data-build') + (reduce ? ' · JS ✓ (calm)' : ' · JS ✓');
       b.classList.add('ok');
     }
+    initMotionToggle();
     initTerminal();
     initStage();
   }
