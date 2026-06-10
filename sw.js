@@ -3,7 +3,7 @@
    - HTML & same-origin JS  → network-first (always fresh when online; cache is
      only a fallback). This keeps the BUILD version honest.
    - Everything else (fonts, images) → cache-first (immutable enough). */
-const CACHE = 'mbrothers-v10.5';
+const CACHE = 'mbrothers-v10.7';
 const CORE = [
   './', './index.html', './app.js', './favicon.svg',
   './icon-192.png', './icon-512.png', './og.png'

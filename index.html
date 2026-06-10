@@ -9,6 +9,17 @@
 <meta name="theme-color" content="#0e1118" />
 <meta name="color-scheme" content="light dark" />
 <script>/* set theme before first paint to avoid a flash */try{if(localStorage.getItem('mb-theme')==='night')document.documentElement.classList.add('night');}catch(e){}</script>
+<script>/* boot overlay decision (before paint). Skip if calm, already booted this
+  session, or no JS. A failsafe timeout always clears it so it can never stick. */
+try{
+  var _mq=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var _mp=localStorage.getItem('mb-motion');
+  var _calm=_mp==='full'?false:(_mp==='calm'?true:_mq);
+  if(!_calm&&!sessionStorage.getItem('mb-booted')){
+    document.documentElement.classList.add('booting');
+    setTimeout(function(){document.documentElement.classList.remove('booting');},6000);
+  }
+}catch(e){}</script>
 
 <!-- Icons & PWA -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -254,6 +265,63 @@
   /* Konami easter egg flash */
   .stage { transition: filter .35s ease; }
   html.warp .stage { filter: brightness(1.18) saturate(1.25) contrast(1.05); }
+
+  /* ═════════════ BOOT SEQUENCE (Frente B) ═════════════ */
+  #boot {
+    position: fixed; inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 38%, #10151f 0%, #06080d 100%);
+  }
+  html.booting #boot { display: flex; }
+  html.booting body { overflow: hidden; }
+  #boot::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0,0,0,0.28) 2px, rgba(0,0,0,0.28) 3px);
+  }
+  #boot .boot-inner {
+    position: relative; z-index: 2;
+    width: min(560px, 86vw);
+    font-family: var(--mono);
+    color: #6affa4;
+    text-shadow: 0 0 6px rgba(106,255,164,0.4);
+  }
+  #boot .boot-title { font-size: 12px; letter-spacing: 0.3em; color: #46c878; margin-bottom: 18px; }
+  #boot .boot-log { margin: 0; font-size: 13px; line-height: 1.7; white-space: pre-wrap; min-height: 168px; }
+  #boot .boot-hint { margin-top: 22px; font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(106,255,164,0.4); }
+  #boot.done { animation: boot-out .55s ease forwards; }
+  @keyframes boot-out { to { opacity: 0; visibility: hidden; } }
+
+  /* ═════════════ SCROLL-DRIVEN REVEALS (Frente B) ═════════════
+     Progressive enhancement: only where supported, and only when the visitor
+     is OK with motion. Without support, everything is simply visible. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      section.intro, section.philosophy, footer,
+      .section-head, article.product {
+        animation: reveal-up linear both;
+        animation-timeline: view();
+        animation-range: entry 2% cover 22%;
+      }
+    }
+  }
+  @keyframes reveal-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ═════════════ CANVAS STARFIELD (Frente B) ═════════════ */
+  .stage .starfield-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;   /* canvas is a replaced element — inset:0 won't stretch it */
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.85;
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
+  }
   nav.top ul { list-style: none; display: flex; gap: 32px; }
   nav.top a { color: var(--ink-mute); text-decoration: none; transition: color .25s, text-shadow .25s; }
   nav.top a::before { content: "[ "; color: var(--neon); opacity: 0; transition: opacity .25s; }
@@ -1318,6 +1386,15 @@
 </head>
 <body>
 
+<!-- BOOT SEQUENCE overlay (Frente B) — shown once per session -->
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner">
+    <div class="boot-title">mBROTHERS · ORBITAL SYSTEM</div>
+    <pre class="boot-log" id="bootLog"></pre>
+    <div class="boot-hint">click or press any key to skip</div>
+  </div>
+</div>
+
 <a class="skip-link" href="#products">Skip to content</a>
 
 <div class="wrap">
@@ -1327,7 +1404,7 @@
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
-      <span class="build" id="buildTag" data-build="BUILD 10.6">BUILD 10.6</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.7">BUILD 10.7</span>
       <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle day / night" title="Toggle day / night">☾</button>
     </div>
@@ -1350,6 +1427,7 @@
     <div class="stage">
       <div class="void"></div>
       <div class="nebula"></div>
+      <canvas class="starfield-canvas" id="starfield" aria-hidden="true"></canvas>
       <div class="stars"></div>
       <div class="shooting"></div>
       <div class="plate-frame"></div>
