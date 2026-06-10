@@ -325,6 +325,99 @@
     });
   }
 
+  /* ── boot sequence overlay ── */
+  function initBoot() {
+    var root = document.documentElement;
+    if (!root.classList.contains('booting')) return;
+    var boot = $('boot'), log = $('bootLog');
+    if (!boot || !log) { root.classList.remove('booting'); return; }
+
+    var lines = [
+      ['> initializing subsystems', 'ok'],
+      ['> establishing orbital relay', 'ok'],
+      ['> calibrating telemetry array', 'ok'],
+      ['> rendering planetary stage', 'ok'],
+      ['> sys.handshake --listen', 'signal acquired']
+    ];
+    var done = false;
+    function sleepB(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    function finish() {
+      if (done) return;
+      done = true;
+      try { sessionStorage.setItem('mb-booted', '1'); } catch (e) {}
+      boot.classList.add('done');
+      var gone = function () { if (boot && boot.parentNode) boot.remove(); root.classList.remove('booting'); };
+      boot.addEventListener('animationend', gone);
+      setTimeout(gone, 650);
+    }
+    boot.addEventListener('click', finish);
+    window.addEventListener('keydown', function once() { window.removeEventListener('keydown', once); finish(); });
+
+    (async function () {
+      for (var i = 0; i < lines.length && !done; i++) {
+        log.textContent += lines[i][0];
+        for (var d = 0; d < 6 && !done; d++) { await sleepB(85); log.textContent += '.'; }
+        await sleepB(150);
+        log.textContent += ' ' + lines[i][1] + '\n';
+        await sleepB(260);
+      }
+      await sleepB(520);
+      finish();
+    })();
+  }
+
+  /* ── canvas starfield (depth + drift behind the planet) ── */
+  function initStarfield() {
+    if (reduce) return;
+    var cv = $('starfield');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var DPR = Math.min(2, window.devicePixelRatio || 1);
+    var stars = [], cw = 0, ch = 0;
+
+    function seed() {
+      var r = cv.getBoundingClientRect();
+      cw = r.width; ch = r.height;
+      cv.width = Math.max(1, Math.round(cw * DPR));
+      cv.height = Math.max(1, Math.round(ch * DPR));
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      var n = Math.max(40, Math.min(160, Math.round(cw * ch / 7000)));
+      stars = [];
+      for (var i = 0; i < n; i++) {
+        stars.push({
+          x: Math.random() * cw, y: Math.random() * ch,
+          z: Math.random() * 0.8 + 0.2,            // depth 0.2..1
+          ph: Math.random() * 6.283                 // twinkle phase
+        });
+      }
+    }
+
+    var last = 0, t = 0;
+    function frame(nowMs) {
+      var now = nowMs / 1000;
+      var dt = Math.min(0.05, now - last || 0); last = now; t += dt;
+      ctx.clearRect(0, 0, cw, ch);
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        s.x += s.z * 3.2 * dt;                      // nearer stars drift faster
+        if (s.x > cw + 2) { s.x = -2; s.y = Math.random() * ch; }
+        var tw = 0.55 + 0.45 * Math.sin(t * 1.4 + s.ph);
+        var a = (0.25 + s.z * 0.6) * tw;
+        var rad = s.z * 1.4;
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(244,236,216,' + a.toFixed(3) + ')';
+        ctx.arc(s.x, s.y, rad, 0, 6.283);
+        ctx.fill();
+      }
+      requestAnimationFrame(frame);
+    }
+
+    seed();
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(seed, 200); });
+    requestAnimationFrame(frame);
+  }
+
   /* ── day / night theme ── */
   function initTheme() {
     var btn = $('themeToggle');
@@ -381,9 +474,11 @@
       b.textContent = b.getAttribute('data-build') + (reduce ? ' · JS ✓ (calm)' : ' · JS ✓');
       b.classList.add('ok');
     }
+    initBoot();
     initTheme();
     initMotionToggle();
     initCards();
+    initStarfield();
     initTerminal();
     initStage();
   }
