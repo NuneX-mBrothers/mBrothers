@@ -306,6 +306,13 @@
     });
   }
 
+  /* ── service worker (offline support; network-first keeps versions honest) ── */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+
   /* ── boot ── */
   function boot() {
     // Liveness + version marker: confirms JS actually executed, and which build.
