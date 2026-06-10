@@ -303,7 +303,10 @@ try{
       .section-head, article.product {
         animation: reveal-up linear both;
         animation-timeline: view();
-        animation-range: entry 2% cover 22%;
+        /* finish within the ENTRY phase so elements at the very bottom of the
+           page (e.g. the footer) can still complete — a 'cover'/'exit' end
+           point is unreachable for the last element on the page. */
+        animation-range: entry 5% entry 65%;
       }
     }
   }
@@ -1404,7 +1407,7 @@ try{
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
-      <span class="build" id="buildTag" data-build="BUILD 10.7">BUILD 10.7</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.8">BUILD 10.8</span>
       <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle day / night" title="Toggle day / night">☾</button>
     </div>
