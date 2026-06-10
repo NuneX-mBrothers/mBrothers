@@ -133,6 +133,25 @@
     white-space: nowrap;
   }
   nav.top .mark .build.ok { color: var(--olive); opacity: 0.95; }
+  nav.top .mark .motion-toggle {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: color .25s, border-color .25s, box-shadow .25s;
+  }
+  nav.top .mark .motion-toggle:hover {
+    color: var(--neon);
+    border-color: var(--neon);
+    box-shadow: 0 0 8px rgba(255,61,46,0.35);
+  }
+  nav.top .mark .motion-toggle[aria-pressed="true"] { color: var(--olive); border-color: var(--olive); }
   nav.top ul { list-style: none; display: flex; gap: 32px; }
   nav.top a { color: var(--ink-mute); text-decoration: none; transition: color .25s, text-shadow .25s; }
   nav.top a::before { content: "[ "; color: var(--neon); opacity: 0; transition: opacity .25s; }
@@ -1108,8 +1127,12 @@
     .stage { margin: 10px -10px 30px; }
   }
 
+  /* Reduced-motion kill-switch — but NOT when the visitor has explicitly opted
+     into full motion via the in-page toggle (html.motion-full). */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html:not(.motion-full) *,
+    html:not(.motion-full) *::before,
+    html:not(.motion-full) *::after { animation: none !important; transition: none !important; }
   }
 
   /* ═════════════ INTERACTION LAYER (Frente A — living hero) ═════════════ */
@@ -1162,8 +1185,8 @@
   @keyframes hint-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .planet-wrap { cursor: default; }
-    .stage .grab-hint { display: none; }
+    html:not(.motion-full) .planet-wrap { cursor: default; }
+    html:not(.motion-full) .stage .grab-hint { display: none; }
   }
 </style>
 </head>
@@ -1176,7 +1199,8 @@
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
-      <span class="build" id="buildTag" data-build="BUILD 10.3">BUILD 10.3</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.4">BUILD 10.4</span>
+      <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
     </div>
     <ul>
       <li><a href="#products">Products</a></li>
