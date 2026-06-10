@@ -271,6 +271,10 @@
 
       requestAnimationFrame(frame);
     }
+
+    /* Hand control from the CSS fallback animations to this engine — done as
+       the very last step so any earlier failure leaves the fallback running. */
+    document.documentElement.classList.add('js-driving');
     requestAnimationFrame(frame);
   }
 
