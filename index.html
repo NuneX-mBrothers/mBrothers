@@ -346,10 +346,15 @@
       radial-gradient(ellipse 120px 55px at 82% 65%, rgba(90,120,60,0.5), transparent 60%),
       radial-gradient(ellipse 60px 40px at 89% 30%, rgba(168,107,44,0.45), transparent 70%),
       radial-gradient(ellipse 80px 50px at 95% 55%, rgba(70,90,40,0.5), transparent 60%);
-    /* rotation now driven by app.js (drag-aware); see interaction engine */
+    /* CSS animation is the no-JS fallback; app.js disables it (.js-driving) and
+       takes over with a drag-aware engine. Planet never freezes if JS is blocked. */
+    animation: rotate-surface 80s linear infinite;
     z-index: 2;
   }
-  /* rotate-surface keyframes removed in v10 — surface is driven by app.js */
+  @keyframes rotate-surface {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-66.666%); } /* loop seamlessly across the 300% strip */
+  }
 
   /* Cloud layer — moves slower, offset */
   .planet .clouds {
@@ -369,12 +374,16 @@
       radial-gradient(ellipse 100px 28px at 79% 78%, rgba(240,232,210,0.5), transparent 65%),
       radial-gradient(ellipse 90px 25px at 88% 45%, rgba(240,232,210,0.45), transparent 65%),
       radial-gradient(ellipse 120px 30px at 96% 30%, rgba(240,232,210,0.5), transparent 60%);
-    /* movement driven by app.js, coupled to the planet at 2/3 speed */
+    /* no-JS fallback; app.js disables it (.js-driving) and drives at 2/3 speed */
+    animation: rotate-clouds 120s linear infinite;
     z-index: 3;
     mix-blend-mode: screen;
     opacity: 0.7;
   }
-  /* rotate-clouds keyframes removed in v10 — clouds are driven by app.js */
+  @keyframes rotate-clouds {
+    from { transform: translateX(-10%); }
+    to   { transform: translateX(-76.666%); }
+  }
 
   /* Terminator — day/night boundary, fixed shadow on the right side */
   .planet .terminator {
@@ -455,10 +464,14 @@
     position: absolute;
     inset: -22%;
     z-index: 7;
-    /* orbit driven by app.js */
+    /* no-JS fallback; app.js disables it (.js-driving) and drives the orbit */
+    animation: moon-spin 30s linear infinite;
     transform-origin: center;
   }
-  /* moon-spin keyframes removed in v10 — orbit is driven by app.js */
+  @keyframes moon-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
   .moon {
     position: absolute;
     top: 50%; left: -2%;
@@ -1092,6 +1105,14 @@
   }
 
   /* ═════════════ INTERACTION LAYER (Frente A — living hero) ═════════════ */
+  /* When app.js is alive it adds .js-driving to <html> and takes over the
+     planet via requestAnimationFrame. If the script is blocked or disabled,
+     this class is never added and the CSS fallback animations keep the planet
+     spinning — the page never looks frozen. */
+  .js-driving .planet .surface,
+  .js-driving .planet .clouds,
+  .js-driving .moon-orbit { animation: none !important; }
+
   .stage { perspective: 1300px; }
 
   .planet-wrap {
