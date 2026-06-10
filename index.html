@@ -9,15 +9,15 @@
 <meta name="theme-color" content="#0e1118" />
 <meta name="color-scheme" content="light dark" />
 <script>/* set theme before first paint to avoid a flash */try{if(localStorage.getItem('mb-theme')==='night')document.documentElement.classList.add('night');}catch(e){}</script>
-<script>/* boot overlay decision (before paint). Skip if calm, already booted this
-  session, or no JS. A failsafe timeout always clears it so it can never stick. */
+<script>/* boot overlay decision (before paint). Shown on every load; skipped only in
+  calm mode. A failsafe timeout always clears it so it can never stick. */
 try{
   var _mq=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var _mp=localStorage.getItem('mb-motion');
   var _calm=_mp==='full'?false:(_mp==='calm'?true:_mq);
-  if(!_calm&&!sessionStorage.getItem('mb-booted')){
+  if(!_calm){
     document.documentElement.classList.add('booting');
-    setTimeout(function(){document.documentElement.classList.remove('booting');},6000);
+    setTimeout(function(){document.documentElement.classList.remove('booting');},5000);
   }
 }catch(e){}</script>
 
@@ -1419,7 +1419,7 @@ try{
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
-      <span class="build" id="buildTag" data-build="BUILD 10.9">BUILD 10.9</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.10">BUILD 10.10</span>
       <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle day / night" title="Toggle day / night">☾</button>
     </div>

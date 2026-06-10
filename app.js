@@ -344,7 +344,6 @@
     function finish() {
       if (done) return;
       done = true;
-      try { sessionStorage.setItem('mb-booted', '1'); } catch (e) {}
       boot.classList.add('done');
       var gone = function () { if (boot && boot.parentNode) boot.remove(); root.classList.remove('booting'); };
       boot.addEventListener('animationend', gone);
@@ -356,12 +355,12 @@
     (async function () {
       for (var i = 0; i < lines.length && !done; i++) {
         log.textContent += lines[i][0];
-        for (var d = 0; d < 6 && !done; d++) { await sleepB(85); log.textContent += '.'; }
-        await sleepB(150);
+        for (var d = 0; d < 4 && !done; d++) { await sleepB(55); log.textContent += '.'; }
+        await sleepB(90);
         log.textContent += ' ' + lines[i][1] + '\n';
-        await sleepB(260);
+        await sleepB(150);
       }
-      await sleepB(520);
+      await sleepB(360);
       finish();
     })();
   }
