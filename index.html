@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://nunex-mbrothers.github.io/mBrothers/" />
 <meta name="theme-color" content="#0e1118" />
 <meta name="color-scheme" content="light dark" />
+<script>/* set theme before first paint to avoid a flash */try{if(localStorage.getItem('mb-theme')==='night')document.documentElement.classList.add('night');}catch(e){}</script>
 
 <!-- Icons & PWA -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -197,6 +198,62 @@
     box-shadow: 0 0 8px rgba(255,61,46,0.35);
   }
   nav.top .mark .motion-toggle[aria-pressed="true"] { color: var(--olive); border-color: var(--olive); }
+  nav.top .mark .theme-toggle {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1;
+    color: var(--ink-mute);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: color .25s, border-color .25s, transform .4s;
+  }
+  nav.top .mark .theme-toggle:hover { color: var(--amber); border-color: var(--amber); transform: rotate(40deg); }
+
+  /* ═════════════ NIGHT THEME (Frente C — day/night) ═════════════
+     The paper editorial flips to deep space; accents stay. The stage's
+     radial mask now dissolves into a dark page, so space "invades". */
+  html { transition: background-color .5s ease; }
+  html.night {
+    --paper:      #0c0f17;
+    --paper-deep: #141a28;
+    --ink:        #ece6d6;
+    --ink-soft:   #c9c3b1;
+    --ink-mute:   #8f8a76;
+    --rule:       #29303f;
+  }
+  html.night body {
+    background-image:
+      radial-gradient(circle at 22% 28%, rgba(168,107,44,0.12) 0%, transparent 45%),
+      radial-gradient(circle at 80% 72%, rgba(31,127,140,0.10) 0%, transparent 50%),
+      radial-gradient(circle, rgba(244,236,216,0.05) 1px, transparent 1.4px),
+      radial-gradient(circle, rgba(244,236,216,0.03) 0.8px, transparent 1.2px);
+  }
+  html.night body::after { opacity: 0.5; }
+  html.night nav.top .mark .id { color: var(--ink); }
+  html.night section.philosophy::before { background: var(--paper); }
+  html.night .product .glyph { color: var(--ink); }
+
+  /* ═════════════ PRODUCT CARD SPOTLIGHT + TILT (Frente C) ═════════════ */
+  .catalog { perspective: 1200px; }
+  article.product {
+    --gx: 50%; --gy: 50%; --glow: 0;
+    background-image: radial-gradient(240px circle at var(--gx) var(--gy),
+      rgba(168,107,44, var(--glow)), transparent 58%);
+    transition: background-color .5s ease, transform .3s cubic-bezier(.2,.7,.2,1);
+    transform-style: flat;
+  }
+  article.product:hover { background-color: rgba(168,107,44,0.05); }
+  article.product::before, article.product::after { z-index: 2; }
+  .product > * { position: relative; z-index: 1; }
+  html.night article.product:hover { background-color: rgba(168,107,44,0.07); }
+
+  /* Konami easter egg flash */
+  .stage { transition: filter .35s ease; }
+  html.warp .stage { filter: brightness(1.18) saturate(1.25) contrast(1.05); }
   nav.top ul { list-style: none; display: flex; gap: 32px; }
   nav.top a { color: var(--ink-mute); text-decoration: none; transition: color .25s, text-shadow .25s; }
   nav.top a::before { content: "[ "; color: var(--neon); opacity: 0; transition: opacity .25s; }
@@ -911,7 +968,8 @@
     transition: background .5s ease;
   }
   article.product:nth-child(odd) { border-right: 1px solid var(--rule); }
-  article.product:hover { background: rgba(255,61,46,0.04); }
+  /* hover tint is set as background-COLOR so it never wipes the spotlight
+     background-image (see Frente C card spotlight) */
 
   article.product::before,
   article.product::after {
@@ -1269,8 +1327,9 @@
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
-      <span class="build" id="buildTag" data-build="BUILD 10.5">BUILD 10.5</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.6">BUILD 10.6</span>
       <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle day / night" title="Toggle day / night">☾</button>
     </div>
     <ul>
       <li><a href="#products">Products</a></li>

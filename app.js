@@ -101,8 +101,13 @@
         })();
       });
     }
+    // Easter egg: rotate the deploy flag each loop (orbital → quiet → …).
+    var MODES = ['orbital', 'quiet', 'patient', 'lighthouse', 'slow'];
+    var modeIdx = 0;
+
     async function runLoop() {
       while (true) {
+        sequence[0].text = 'deploy mBrothers --mode=' + MODES[modeIdx++ % MODES.length];
         for (var k = 0; k < sequence.length; k++) {
           var step = sequence[k];
           if (step.type === 'type') {
@@ -210,6 +215,20 @@
     planetWrap.addEventListener('pointerup', endDrag);
     planetWrap.addEventListener('pointercancel', endDrag);
 
+    /* ── Easter egg: Konami code → "engage the engines" (spin impulse) ── */
+    var konami = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+    var kpos = 0;
+    window.addEventListener('keydown', function (e) {
+      var k = (e.key || '').toLowerCase();
+      kpos = (k === konami[kpos]) ? kpos + 1 : (k === konami[0] ? 1 : 0);
+      if (kpos === konami.length) {
+        kpos = 0;
+        vel = 3.2;                         // big spin; friction eases it back to base
+        document.documentElement.classList.add('warp');
+        setTimeout(function () { document.documentElement.classList.remove('warp'); }, 1400);
+      }
+    });
+
     /* ── telemetry throttle + fps ── */
     var t0 = performance.now() / 1000;
     var telAcc = 0, fpsAcc = 0, fpsFrames = 0, fps = 60;
@@ -306,6 +325,47 @@
     });
   }
 
+  /* ── day / night theme ── */
+  function initTheme() {
+    var btn = $('themeToggle');
+    if (!btn) return;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    function paint() {
+      var night = document.documentElement.classList.contains('night');
+      btn.textContent = night ? '☀' : '☾';
+      btn.setAttribute('aria-pressed', night ? 'true' : 'false');
+      if (meta) meta.setAttribute('content', night ? '#0c0f17' : '#f4ecd8');
+    }
+    paint();
+    btn.addEventListener('click', function () {
+      var night = document.documentElement.classList.toggle('night');
+      try { localStorage.setItem('mb-theme', night ? 'night' : 'day'); } catch (e) {}
+      paint();
+    });
+  }
+
+  /* ── product cards: cursor spotlight + subtle 3D tilt ── */
+  function initCards() {
+    if (reduce) return;                      // tilt is motion; calm mode skips it
+    var cards = document.querySelectorAll('article.product:not(.placeholder)');
+    Array.prototype.forEach.call(cards, function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+        card.style.setProperty('--glow', '0.13');
+        card.style.transform =
+          'rotateX(' + ((0.5 - py) * 5).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 5).toFixed(2) + 'deg)';
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--glow', '0');
+        card.style.transform = '';
+      });
+    });
+  }
+
   /* ── service worker (offline support; network-first keeps versions honest) ── */
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
@@ -321,7 +381,9 @@
       b.textContent = b.getAttribute('data-build') + (reduce ? ' · JS ✓ (calm)' : ' · JS ✓');
       b.classList.add('ok');
     }
+    initTheme();
     initMotionToggle();
+    initCards();
     initTerminal();
     initStage();
   }
