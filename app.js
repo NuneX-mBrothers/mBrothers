@@ -107,12 +107,9 @@
       }
     }
 
-    if (reduce) {
-      newLine(false, false).textContent =
-        'Developing practical solutions for small planetary systems';
-    } else {
-      runLoop();
-    }
+    // The phosphor terminal is the heart of the page — keep it typing even in
+    // calm/reduced mode (letter-by-letter text is mild, non-vestibular motion).
+    runLoop();
   }
 
   /* ════════════════ STAGE: parallax + drag + telemetry ════════════════ */
