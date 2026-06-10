@@ -125,6 +125,14 @@
     padding: 4px 10px;
     background: var(--paper-deep);
   }
+  nav.top .mark .build {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+  nav.top .mark .build.ok { color: var(--olive); opacity: 0.95; }
   nav.top ul { list-style: none; display: flex; gap: 32px; }
   nav.top a { color: var(--ink-mute); text-decoration: none; transition: color .25s, text-shadow .25s; }
   nav.top a::before { content: "[ "; color: var(--neon); opacity: 0; transition: opacity .25s; }
@@ -1168,6 +1176,7 @@
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.2">BUILD 10.2</span>
     </div>
     <ul>
       <li><a href="#products">Products</a></li>
