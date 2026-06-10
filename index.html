@@ -346,13 +346,10 @@
       radial-gradient(ellipse 120px 55px at 82% 65%, rgba(90,120,60,0.5), transparent 60%),
       radial-gradient(ellipse 60px 40px at 89% 30%, rgba(168,107,44,0.45), transparent 70%),
       radial-gradient(ellipse 80px 50px at 95% 55%, rgba(70,90,40,0.5), transparent 60%);
-    animation: rotate-surface 80s linear infinite;
+    /* rotation now driven by app.js (drag-aware); see interaction engine */
     z-index: 2;
   }
-  @keyframes rotate-surface {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-66.666%); } /* loop seamlessly across the 300% strip */
-  }
+  /* rotate-surface keyframes removed in v10 — surface is driven by app.js */
 
   /* Cloud layer — moves slower, offset */
   .planet .clouds {
@@ -372,15 +369,12 @@
       radial-gradient(ellipse 100px 28px at 79% 78%, rgba(240,232,210,0.5), transparent 65%),
       radial-gradient(ellipse 90px 25px at 88% 45%, rgba(240,232,210,0.45), transparent 65%),
       radial-gradient(ellipse 120px 30px at 96% 30%, rgba(240,232,210,0.5), transparent 60%);
-    animation: rotate-clouds 120s linear infinite;
+    /* movement driven by app.js, coupled to the planet at 2/3 speed */
     z-index: 3;
     mix-blend-mode: screen;
     opacity: 0.7;
   }
-  @keyframes rotate-clouds {
-    from { transform: translateX(-10%); }
-    to   { transform: translateX(-76.666%); }
-  }
+  /* rotate-clouds keyframes removed in v10 — clouds are driven by app.js */
 
   /* Terminator — day/night boundary, fixed shadow on the right side */
   .planet .terminator {
@@ -461,13 +455,10 @@
     position: absolute;
     inset: -22%;
     z-index: 7;
-    animation: moon-spin 30s linear infinite;
+    /* orbit driven by app.js */
     transform-origin: center;
   }
-  @keyframes moon-spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
+  /* moon-spin keyframes removed in v10 — orbit is driven by app.js */
   .moon {
     position: absolute;
     top: 50%; left: -2%;
@@ -527,6 +518,7 @@
     z-index: 15;
     isolation: isolate;
     pointer-events: none;
+    animation: wm-rise 2s cubic-bezier(.2,.7,.2,1) both;
   }
   .wordmark, .wordmark-ghost {
     font-family: var(--script);
@@ -545,7 +537,6 @@
       0 4px 20px rgba(0,0,0,0.5);
     position: relative;
     z-index: 2;
-    animation: wm-rise 2s cubic-bezier(.2,.7,.2,1) both;
   }
   .wordmark .amp { color: var(--neon-glow); }
   .wordmark-ghost {
@@ -1099,6 +1090,52 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
+
+  /* ═════════════ INTERACTION LAYER (Frente A — living hero) ═════════════ */
+  .stage { perspective: 1300px; }
+
+  .planet-wrap {
+    will-change: transform;        /* tilts as one flat plate — no preserve-3d */
+    cursor: grab;
+    touch-action: none;            /* let the planet capture touch-drag */
+  }
+  .planet-wrap.dragging { cursor: grabbing; }
+
+  /* hint the compositor about the JS-driven layers */
+  .planet .surface,
+  .planet .clouds,
+  .moon-orbit,
+  .stage .stars,
+  .stage .nebula { will-change: transform; }
+
+  /* reticle wakes up when the cursor is on the stage */
+  .reticle { transition: opacity .5s ease; }
+  .stage:hover .reticle { opacity: 0.85; }
+
+  /* "drag me" affordance — fades after the first interaction */
+  .stage .grab-hint {
+    position: absolute;
+    left: 50%; bottom: 13%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(232,180,120,0.65);
+    z-index: 24;
+    pointer-events: none;
+    opacity: 0;
+    animation: hint-in 1s ease 2.4s forwards, hint-pulse 3s ease 3.4s infinite;
+  }
+  .stage.touched .grab-hint { animation: hint-out .5s ease forwards; }
+  @keyframes hint-in   { to { opacity: 1; } }
+  @keyframes hint-out  { to { opacity: 0; } }
+  @keyframes hint-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .planet-wrap { cursor: default; }
+    .stage .grab-hint { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -1122,7 +1159,7 @@
   <header class="hero">
     <div class="meta-row">
       <span>VOL. I · MMXXVI</span>
-      <span class="blink-cursor">SIGNAL ACQUIRED</span>
+      <span class="blink-cursor" id="utcClock">SIGNAL ACQUIRED</span>
       <span>LISBON · 38.7°N 9.1°W</span>
     </div>
 
@@ -1143,13 +1180,13 @@
       <!-- HUD readouts -->
       <div class="hud-top">
         <span>LIVE FEED · ORBIT CAM 04</span>
-        <span style="color:var(--neon-glow)">● REC</span>
+        <span style="color:var(--neon-glow)">● REC <span id="recTimer">00:00</span></span>
         <span>38.7223°N · 9.1393°W</span>
       </div>
       <div class="hud-bottom">
         <span>OBJ-001 / PLANET · CLASS M</span>
         <span class="red">SIGNAL : STABLE</span>
-        <span>DIST · 0.000 AU</span>
+        <span>DIST · <span id="distAU">0.0021</span> AU</span>
       </div>
 
       <!-- CRT phosphor terminal -->
@@ -1160,7 +1197,7 @@
       <!-- Data labels around planet -->
       <div class="data-label dl-1">
         <div>SURFACE TEMP</div>
-        <div class="accent">+286 K</div>
+        <div class="accent"><span id="temp">+286</span> K</div>
         <span class="leader"></span>
       </div>
       <div class="data-label dl-2">
@@ -1170,7 +1207,7 @@
       </div>
       <div class="data-label dl-3">
         <div>ROTATION</div>
-        <div class="accent">0.041 RAD/S</div>
+        <div class="accent"><span id="rot">0.079</span> RAD/S</div>
         <span class="leader"></span>
       </div>
       <div class="data-label dl-4">
@@ -1181,6 +1218,9 @@
 
       <!-- Scan beam -->
       <div class="scanbeam"></div>
+
+      <!-- Interaction affordance -->
+      <div class="grab-hint">⟲ drag to rotate · move to look</div>
 
       <!-- The planet itself -->
       <div class="planet-wrap">
@@ -1364,7 +1404,7 @@
     </div>
 
     <div class="readout">
-      <span class="live"><span class="dot"></span>SYSTEM <span class="neon-text">ONLINE</span> · LISTENING ON ALL FREQUENCIES</span>
+      <span class="live"><span class="dot"></span>SYSTEM <span class="neon-text">ONLINE</span> · UPTIME <span id="uptime">00:00</span> · <span id="fps">60</span> FPS</span>
       <span>UPLINK · 38.7223°N · 9.1393°W · ALT 0.011km</span>
     </div>
 
@@ -1379,120 +1419,7 @@
 
 </div>
 
-<script>
-(function () {
-  const el = document.getElementById('crtLines');
-  if (!el) return;
-
-  /* The boot loop sequence. Each "step" is either:
-     - {type: 'type', prompt: true|false, text: 'string', speed: ms}  → types char by char
-     - {type: 'wait', ms: number}                                      → pauses
-     - {type: 'clear'}                                                 → wipes screen
-     - {type: 'line'}                                                  → blank line
-  */
-  const sequence = [
-    { type: 'type', prompt: true,  text: 'deploy mBrothers --mode=orbital',      speed: 55 },
-    { type: 'wait', ms: 420 },
-    { type: 'line' },
-    { type: 'type', prompt: false, text: 'Developing practical solutions for small planetary systems', speed: 42 },
-    { type: 'wait', ms: 1400 },
-    { type: 'line' },
-    { type: 'type', prompt: true,  text: 'ping orbital-relay --signal stable',  speed: 50 },
-    { type: 'wait', ms: 380 },
-    { type: 'line' },
-    { type: 'type', prompt: false, text: 'reply from 38.7°N · 9.1°W : 4ms', speed: 28, muted: true },
-    { type: 'wait', ms: 900 },
-    { type: 'line' },
-    { type: 'type', prompt: true,  text: 'sys.handshake --listen',  speed: 50 },
-    { type: 'wait', ms: 320 },
-    { type: 'line' },
-    { type: 'type', prompt: false, text: 'all systems nominal · standing by.', speed: 30, muted: true },
-    { type: 'wait', ms: 1800 },
-    { type: 'clear' },
-    { type: 'wait', ms: 600 },
-  ];
-
-  /* Capacity: terminal shows the last 3 lines comfortably.
-     We push new line elements and trim the oldest when over 3. */
-  const MAX_LINES = 3;
-  let lines = [];   // array of {el, span}
-  let cursor = null;
-
-  function newLine(promptOn, mutedOn) {
-    const line = document.createElement('div');
-    line.className = 'crt-line';
-    if (promptOn) {
-      const p = document.createElement('span');
-      p.className = 'prompt';
-      p.textContent = '> ';
-      line.appendChild(p);
-    }
-    const text = document.createElement('span');
-    if (mutedOn) text.className = 'muted';
-    line.appendChild(text);
-
-    // move cursor to this line
-    if (cursor && cursor.parentNode) cursor.parentNode.removeChild(cursor);
-    cursor = document.createElement('span');
-    cursor.className = 'crt-cursor';
-    line.appendChild(cursor);
-
-    el.appendChild(line);
-    lines.push({ line, text });
-
-    while (lines.length > MAX_LINES) {
-      const old = lines.shift();
-      old.line.remove();
-    }
-    return text;
-  }
-
-  function clearAll() {
-    lines.forEach(l => l.line.remove());
-    lines = [];
-    if (cursor && cursor.parentNode) cursor.parentNode.removeChild(cursor);
-  }
-
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  async function typeText(target, str, speed) {
-    for (let i = 0; i < str.length; i++) {
-      target.textContent += str[i];
-      // ensure cursor stays after target
-      if (cursor && target.nextSibling !== cursor) {
-        target.parentNode.appendChild(cursor);
-      }
-      await sleep(speed + Math.random() * 30);
-    }
-  }
-
-  async function runLoop() {
-    while (true) {
-      for (const step of sequence) {
-        if (step.type === 'type') {
-          const t = newLine(step.prompt, step.muted);
-          await typeText(t, step.text, step.speed);
-        } else if (step.type === 'wait') {
-          await sleep(step.ms);
-        } else if (step.type === 'clear') {
-          clearAll();
-        } else if (step.type === 'line') {
-          /* no-op visual: the next newLine handles separation */
-        }
-      }
-    }
-  }
-
-  // Honour reduced motion: show static fallback instead of animating
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) {
-    const t = newLine(false, false);
-    t.textContent = 'Developing practical solutions for small planetary systems';
-  } else {
-    runLoop();
-  }
-})();
-</script>
+<script src="app.js" defer></script>
 
 </body>
 </html>
