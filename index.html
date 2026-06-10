@@ -4,7 +4,52 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>mBrothers // Developing practical solutions for small planetary systems</title>
-<meta name="description" content="mBrothers builds quiet, practical software for small planetary systems. Home of LogViewer and ExplorerFocus." />
+<meta name="description" content="mBrothers builds quiet, practical software for small planetary systems. Home of The Absolute LogViewer and ExplorerFocus." />
+<link rel="canonical" href="https://nunex-mbrothers.github.io/mBrothers/" />
+<meta name="theme-color" content="#0e1118" />
+<meta name="color-scheme" content="light dark" />
+
+<!-- Icons & PWA -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="mBrothers" />
+<meta property="og:title" content="mBrothers — Developing practical solutions for small planetary systems" />
+<meta property="og:description" content="A small software studio building quiet, practical instruments. No subscriptions, no telemetry — tools that do one thing carefully and get out of the way." />
+<meta property="og:url" content="https://nunex-mbrothers.github.io/mBrothers/" />
+<meta property="og:image" content="https://nunex-mbrothers.github.io/mBrothers/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="mBrothers — a ringed planet beside the studio wordmark." />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="mBrothers — small planetary systems" />
+<meta name="twitter:description" content="Quiet, practical software. Home of The Absolute LogViewer and ExplorerFocus." />
+<meta name="twitter:image" content="https://nunex-mbrothers.github.io/mBrothers/og.png" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "mBrothers",
+  "alternateName": "the mBrothers",
+  "url": "https://nunex-mbrothers.github.io/mBrothers/",
+  "logo": "https://nunex-mbrothers.github.io/mBrothers/icon-512.png",
+  "image": "https://nunex-mbrothers.github.io/mBrothers/og.png",
+  "description": "An independent software studio building quiet, practical instruments for small planetary systems.",
+  "slogan": "Developing practical solutions for small planetary systems",
+  "email": "NuneXmBrothers@gmail.com",
+  "foundingDate": "2026",
+  "location": { "@type": "Place", "name": "Lisbon, Portugal" },
+  "sameAs": [ "https://github.com/nunex-mbrothers" ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1135,6 +1180,29 @@
     html:not(.motion-full) *::after { animation: none !important; transition: none !important; }
   }
 
+  /* ── Accessibility: skip link + visible focus ── */
+  .skip-link {
+    position: absolute;
+    left: 12px; top: -60px;
+    z-index: 100;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 2px;
+    transition: top .2s ease;
+  }
+  .skip-link:focus { top: 12px; }
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
   /* ═════════════ INTERACTION LAYER (Frente A — living hero) ═════════════ */
   /* When app.js is alive it adds .js-driving to <html> and takes over the
      planet via requestAnimationFrame. If the script is blocked or disabled,
@@ -1192,6 +1260,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#products">Skip to content</a>
+
 <div class="wrap">
 
   <!-- NAV -->
@@ -1199,7 +1269,7 @@
     <div class="mark">
       <span class="dot"></span>
       <span class="id">mBROTHERS // STUDIO</span>
-      <span class="build" id="buildTag" data-build="BUILD 10.4">BUILD 10.4</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.5">BUILD 10.5</span>
       <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
     </div>
     <ul>
