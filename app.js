@@ -430,10 +430,17 @@
       if (meta) meta.setAttribute('content', night ? '#0c0f17' : '#f4ecd8');
     }
     paint();
+    var root = document.documentElement;
+    var themingTimer;
     btn.addEventListener('click', function () {
-      var night = document.documentElement.classList.toggle('night');
+      // engage the slow crossfade (dusk/dawn), then flip the theme
+      root.classList.add('theming');
+      void root.offsetWidth;                       // force a reflow so the swap animates
+      var night = root.classList.toggle('night');
       try { localStorage.setItem('mb-theme', night ? 'night' : 'day'); } catch (e) {}
       paint();
+      clearTimeout(themingTimer);
+      themingTimer = setTimeout(function () { root.classList.remove('theming'); }, 1900);
     });
   }
 
