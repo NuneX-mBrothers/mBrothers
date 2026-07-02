@@ -3,7 +3,7 @@
    - HTML & same-origin JS  → network-first (always fresh when online; cache is
      only a fallback). This keeps the BUILD version honest.
    - Everything else (fonts, images) → cache-first (immutable enough). */
-const CACHE = 'mbrothers-v10.7';
+const CACHE = 'mbrothers-v10.11';
 const CORE = [
   './', './index.html', './app.js', './favicon.svg',
   './icon-192.png', './icon-512.png', './og.png'
@@ -27,6 +27,8 @@ self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  // Never touch analytics — let the visit beacon and live count go to network.
+  if (url.hostname.endsWith('goatcounter.com') || url.hostname.endsWith('zgo.at')) return;
   const freshFirst = url.origin === location.origin &&
     (req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('.js'));
 
