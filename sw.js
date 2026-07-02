@@ -3,7 +3,7 @@
    - HTML & same-origin JS  → network-first (always fresh when online; cache is
      only a fallback). This keeps the BUILD version honest.
    - Everything else (fonts, images) → cache-first (immutable enough). */
-const CACHE = 'mbrothers-v10.11';
+const CACHE = 'mbrothers-v10.12';
 const CORE = [
   './', './index.html', './app.js', './favicon.svg',
   './icon-192.png', './icon-512.png', './og.png'
@@ -34,7 +34,9 @@ self.addEventListener('fetch', (e) => {
 
   if (freshFirst) {
     e.respondWith(
-      fetch(req)
+      // {cache:'reload'} bypasses the browser HTTP cache so a new deploy is
+      // never masked by a stale app.js/index.html within its max-age window.
+      fetch(req, { cache: 'reload' })
         .then((res) => {
           const copy = res.clone();
           caches.open(CACHE).then((c) => c.put(req, copy));
