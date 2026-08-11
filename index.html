@@ -1279,6 +1279,8 @@ try{
     animation: blink 1.8s infinite;
   }
 
+  /* A marca escreve-se SEMPRE "mBrothers" — nunca em maiúsculas */
+  .brand-mb { text-transform: none; }
   .colophon {
     grid-column: 1 / -1;
     margin-top: 20px;
@@ -1687,7 +1689,7 @@ try{
     </div>
 
     <div class="colophon">
-      <span>© mBrothers · MMXXVI</span>
+      <span>© <span class="brand-mb">mBrothers</span> · MMXXVI</span>
       <span>Set in Cormorant · Italianno · JetBrains Mono</span>
       <span>practical solutions // small planetary systems</span>
       <span id="viewCounter" hidden title="Visitas à página"></span>
