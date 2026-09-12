@@ -23,6 +23,33 @@
              : motionPref === 'calm' ? true
              : prefersReduce;
 
+  /* ── language ───────────────────────────────────────────────────
+     The page copy is baked into the HTML by tools/gerar-linguas.py, so this
+     file only needs the handful of strings it writes itself. It reads the
+     page's own <html lang> — never navigator.language: the visitor asked for
+     THIS page by its address, and the page has one language.
+     ⚠ Deliberately NOT translated: the boot log and the CRT terminal. Those
+       are shell commands and machine output; a boot log in Portuguese would be
+       stranger, not clearer. Same call as the LogViewer's log mock-up, which
+       stays left-to-right in every language. The studio slogan also stays in
+       English everywhere, as it does in all 15 LogViewer dictionaries. */
+  var LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+  var STR = {
+    en: {
+      'motion.full': '▸ full motion',
+      'motion.calm': 'motion · full',
+      'motion.t.on': 'Enable the full animated experience (overrides the system setting)',
+      'motion.t.off': 'Full motion on — click to follow the system setting again'
+    },
+    pt: {
+      'motion.full': '▸ movimento completo',
+      'motion.calm': 'movimento · completo',
+      'motion.t.on': 'Ligar a experiência animada completa (ignora a definição do sistema)',
+      'motion.t.off': 'Movimento completo ligado — clica para voltar a seguir a definição do sistema'
+    }
+  };
+  function T(k) { return (STR[LANG] || STR.en)[k] || STR.en[k]; }
+
   /* ── tiny helpers ───────────────────────────────────────────── */
   var $ = function (id) { return document.getElementById(id); };
   function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
@@ -310,11 +337,9 @@
     if (!prefersReduce && !motionPref) return;
 
     btn.hidden = false;
-    btn.textContent = reduce ? '▸ full motion' : 'motion · full';
+    btn.textContent = reduce ? T('motion.full') : T('motion.calm');
     btn.setAttribute('aria-pressed', reduce ? 'false' : 'true');
-    btn.title = reduce
-      ? 'Enable the full animated experience (overrides the system setting)'
-      : 'Full motion on — click to follow the system setting again';
+    btn.title = reduce ? T('motion.t.on') : T('motion.t.off');
 
     btn.addEventListener('click', function () {
       try {
@@ -480,9 +505,22 @@
   }
 
   /* ── service worker (offline support; network-first keeps versions honest) ── */
+  /* ⛔ O caminho do sw.js NAO pode ser relativo a PAGINA. Um `register('sw.js')`
+     resolve contra o endereco do documento, e na pagina /pt/ isso da
+     /mBrothers/pt/sw.js -- que nao existe. O `.catch()` engolia o 404 e a
+     pagina portuguesa ficava simplesmente SEM service worker, sem um unico
+     sinal de que algo faltava.
+     Resolve-se contra o endereco do PROPRIO app.js, que e o mesmo nas duas
+     paginas (a /pt/ carrega-o de ../app.js). Assim o worker fica sempre em
+     /mBrothers/sw.js, e o ambito dele -- /mBrothers/ -- cobre as duas. */
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js').catch(function () {});
+      var alvo = 'sw.js';
+      try {
+        var tag = document.querySelector('script[src$="app.js"]');
+        if (tag) alvo = new URL('sw.js', tag.src).href;
+      } catch (e) {}
+      navigator.serviceWorker.register(alvo).catch(function () {});
     });
   }
 

@@ -27,7 +27,7 @@ echo.
 cd /d "%SITE_DIR%"
 
 rem -- 1. Confirmar que estamos no repo certo --------------------------
-echo [1/4] A validar o repositorio...
+echo [1/5] A validar o repositorio...
 git rev-parse --is-inside-work-tree >nul 2>&1
 if errorlevel 1 (
     echo [ERRO] Esta pasta nao e um repositorio git.
@@ -45,9 +45,33 @@ if errorlevel 1 (
 )
 echo       OK
 
-rem -- 2. Mostrar o que vai ser publicado ------------------------------
+rem -- 2. Gerar a pagina por idioma --------------------------------
+rem   O site tem uma porta por lingua: a raiz em ingles e /pt/ com o texto
+rem   ja traduzido DENTRO do HTML (nao por JavaScript, que nao da exposicao
+rem   nenhuma nos motores de busca). A pasta /pt/ e o sitemap.xml sao
+rem   GERADOS -- nunca se editam a mao.
+rem
+rem   Corre ANTES do `git status` de proposito: assim o que aparece na lista
+rem   do que vai ser publicado ja inclui a pagina gerada. Se falhar, ABORTA:
+rem   mais vale nao publicar do que publicar a pagina portuguesa a dizer o
+rem   texto antigo.
+rem
+rem   Acrescentar uma lingua e escrever i18n\<codigo>.js e uma linha no
+rem   LINGUAS do gerador. Este ficheiro nao precisa de mudar.
 echo.
-echo [2/4] Alteracoes por publicar:
+echo [2/5] A gerar a pagina por idioma...
+python "%SITE_DIR%tools\gerar-linguas.py"
+if errorlevel 1 (
+    echo [ERRO] O gerador das paginas por idioma falhou.
+    echo        Sem ele, a pagina /pt/ fica desactualizada. Abortado.
+    pause
+    exit /b 1
+)
+echo       OK
+
+rem -- 3. Mostrar o que vai ser publicado ------------------------------
+echo.
+echo [3/5] Alteracoes por publicar:
 git status --short
 echo.
 
@@ -59,9 +83,9 @@ set "MSG="
 set /p "MSG=      Mensagem do commit (Enter = Site: atualizacao): "
 if not defined MSG set "MSG=Site: atualizacao"
 
-rem -- 3. Adicionar e commitar ----------------------------------------
+rem -- 4. Adicionar e commitar ----------------------------------------
 echo.
-echo [3/4] git add + commit...
+echo [4/5] git add + commit...
 git add -A
 if errorlevel 1 (
     echo [ERRO] git add falhou.
@@ -81,12 +105,12 @@ goto :push
 echo       Nada para publicar - o site ja esta sincronizado.
 echo       A tentar push na mesma, caso haja commits por enviar.
 echo.
-echo [3/4] ^(sem commit^)
+echo [4/5] ^(sem commit^)
 
-rem -- 4. Push --------------------------------------------------------
+rem -- 5. Push --------------------------------------------------------
 :push
 echo.
-echo [4/4] git push...
+echo [5/5] git push...
 git push origin main
 if errorlevel 1 (
     echo [ERRO] git push falhou. Verifica 'git status' e 'gh auth status'.
@@ -102,7 +126,8 @@ echo.
 echo   Landing:  %URL%
 echo   (GitHub Pages pode demorar cerca de 1 min)
 echo.
-echo   Sem build, sem Release, sem injeccao de versao.
+echo   Sem build e sem Release. A versao continua escrita a mao;
+echo   a pagina /pt/ e o sitemap.xml foram gerados no passo [2/5].
 echo ==========================================
 echo.
 pause
