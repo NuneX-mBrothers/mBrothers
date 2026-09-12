@@ -33,7 +33,10 @@
        stranger, not clearer. Same call as the LogViewer's log mock-up, which
        stays left-to-right in every language. The studio slogan also stays in
        English everywhere, as it does in all 15 LogViewer dictionaries. */
-  var LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+  /* ⛔ NAO se corta a etiqueta nos dois primeiros caracteres. O <html lang> da
+     pagina chinesa e `zh-Hant`, e um `slice(0,2)` dava 'zh' -- que nao existe
+     nesta tabela, e o botao voltava ao ingles sem um unico sinal. Procura-se
+     pela etiqueta INTEIRA e so depois pelo prefixo. */
   var STR = {
     en: {
       'motion.full': '▸ full motion',
@@ -46,9 +49,23 @@
       'motion.calm': 'movimento · completo',
       'motion.t.on': 'Ligar a experiência animada completa (ignora a definição do sistema)',
       'motion.t.off': 'Movimento completo ligado — clica para voltar a seguir a definição do sistema'
+    },
+    'zh-hant': {
+      'motion.full': '▸ 完整動態',
+      'motion.calm': '動態 · 完整',
+      'motion.t.on': '開啟完整動畫效果（覆寫系統設定）',
+      'motion.t.off': '完整動態已開啟 — 點擊即可改回跟隨系統設定'
+    },
+    ja: {
+      'motion.full': '▸ フルモーション',
+      'motion.calm': 'モーション · フル',
+      'motion.t.on': 'アニメーションを完全に有効にする（システム設定を上書きします）',
+      'motion.t.off': 'フルモーション有効 — クリックでシステム設定に戻します'
     }
   };
-  function T(k) { return (STR[LANG] || STR.en)[k] || STR.en[k]; }
+  var _tag = (document.documentElement.lang || 'en').toLowerCase();
+  var LANG = STR[_tag] ? _tag : (STR[_tag.split('-')[0]] ? _tag.split('-')[0] : 'en');
+  function T(k) { return STR[LANG][k] || STR.en[k]; }
 
   /* ── tiny helpers ───────────────────────────────────────────── */
   var $ = function (id) { return document.getElementById(id); };

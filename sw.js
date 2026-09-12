@@ -6,9 +6,9 @@
 /* ⚠ O nome muda quando a LISTA muda, nao so quando muda a versao do site: sem
    isso o `install` nao volta a correr em quem ja tem o worker instalado, e a
    pagina nova nunca entrava na cache. */
-const CACHE = 'mbrothers-v10.12-pt';
+const CACHE = 'mbrothers-v10.12-i18n4';
 const CORE = [
-  './', './index.html', './pt/', './app.js', './favicon.svg',
+  './', './index.html', './pt/', './zh-tw/', './ja/', './app.js', './favicon.svg',
   './icon-192.png', './icon-512.png', './og.png'
 ];
 
