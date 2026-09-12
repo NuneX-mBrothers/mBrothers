@@ -43,8 +43,10 @@ BASE = "https://nunex-mbrothers.github.io/mBrothers/"
 #   versão 2 do ExplorerFocus espelham as línguas de DENTRO DAS APPS. O
 #   mBrothers é o estúdio, não uma app — mostra as línguas que o site tem.
 LINGUAS = [
-    ("pt", "pt", "Português", "pt", "pt_PT", "pt"),
-    ("en", "",   "English",   "en", "en_GB", "gb"),
+    ("pt",    "pt",    "Português",  "pt",      "pt_PT", "pt"),
+    ("en",    "",      "English",    "en",      "en_GB", "gb"),
+    ("zh-TW", "zh-tw", "中文 (繁體)", "zh-Hant", "zh_TW", "tw"),
+    ("ja",    "ja",    "日本語",      "ja",      "ja_JP", "jp"),
 ]
 
 # as chaves que vão para o <head> em vez de para o corpo
