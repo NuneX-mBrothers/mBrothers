@@ -3,9 +3,12 @@
    - HTML & same-origin JS  → network-first (always fresh when online; cache is
      only a fallback). This keeps the BUILD version honest.
    - Everything else (fonts, images) → cache-first (immutable enough). */
-const CACHE = 'mbrothers-v10.12';
+/* ⚠ O nome muda quando a LISTA muda, nao so quando muda a versao do site: sem
+   isso o `install` nao volta a correr em quem ja tem o worker instalado, e a
+   pagina nova nunca entrava na cache. */
+const CACHE = 'mbrothers-v10.12-pt';
 const CORE = [
-  './', './index.html', './app.js', './favicon.svg',
+  './', './index.html', './pt/', './app.js', './favicon.svg',
   './icon-192.png', './icon-512.png', './og.png'
 ];
 
@@ -42,7 +45,12 @@ self.addEventListener('fetch', (e) => {
           caches.open(CACHE).then((c) => c.put(req, copy));
           return res;
         })
-        .catch(() => caches.match(req).then((m) => m || caches.match('./index.html')))
+        /* Offline: a propria pagina primeiro; so depois a raiz da PASTA dela,
+           para que um visitante em /pt/ sem rede veja a pagina portuguesa e
+           nao a inglesa. A raiz do site e o ultimo recurso. */
+        .catch(() => caches.match(req)
+          .then((m) => m || caches.match(url.pathname.replace(/[^/]*$/, '')))
+          .then((m) => m || caches.match('./index.html')))
     );
     return;
   }
