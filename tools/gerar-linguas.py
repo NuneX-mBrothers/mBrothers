@@ -36,18 +36,61 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://nunex-mbrothers.github.io/mBrothers/"
 
 # código do dicionário → pasta, rótulo, hreflang (BCP-47), og:locale, bandeira.
-# ⚠ A ORDEM é a da barra de línguas das apps — português antes do inglês — e a
-#   bandeira é o mesmo desenho SVG dos outros dois sites. A coerência entre os
-#   três é deliberada.
-# ⚠ Aqui são DUAS e não dezasseis: as dezasseis do LogViewer e da página da
-#   versão 2 do ExplorerFocus espelham as línguas de DENTRO DAS APPS. O
-#   mBrothers é o estúdio, não uma app — mostra as línguas que o site tem.
+# 🥇 Decisão do João a 2026-09-12: **as MESMAS 16 línguas do LogViewer**, e não
+#    uma escolha pela medição — *«não faz sentido limitar a pesquisa»*. A minha
+#    proposta anterior era duas (tradicional e japonês) e foi revogada: com o
+#    gerador feito, cada porta nova custa um dicionário, e uma porta a menos é
+#    exposição que não existe.
+# ⚠ São QUINZE pastas para DEZASSEIS bandeiras: o inglês é a raiz e não tem
+#   pasta, por isso o GB e o US levam os dois ao mesmo sítio.
+# ⛔ O `pt` fica em `pt` GENÉRICO e o Brasil em `pt-BR`: assim o Brasil vai ao
+#   /br/ e Angola, Moçambique e Portugal vão ao /pt/. Com `pt-PT` os outros
+#   países lusófonos caíam no x-default, que é inglês.
+# ⛔ E o `lang` do <html> leva a etiqueta BCP-47, NUNCA o código do dicionário:
+#   `br` em BCP-47 é o BRETÃO.
 LINGUAS = [
     ("pt",    "pt",    "Português",  "pt",      "pt_PT", "pt"),
-    ("en",    "",      "English",    "en",      "en_GB", "gb"),
-    ("zh-TW", "zh-tw", "中文 (繁體)", "zh-Hant", "zh_TW", "tw"),
+    ("br",    "br",    "Português (BR)", "pt-BR", "pt_BR", "br"),
+    ("en",    "",      "English (GB)", "en",    "en_GB", "gb"),
+    ("es",    "es",    "Español",    "es",      "es_ES", "es"),
+    ("fr",    "fr",    "Français",   "fr",      "fr_FR", "fr"),
+    ("it",    "it",    "Italiano",   "it",      "it_IT", "it"),
+    ("de",    "de",    "Deutsch",    "de",      "de_DE", "de"),
+    ("pl",    "pl",    "Polski",     "pl",      "pl_PL", "pl"),
+    ("ru",    "ru",    "Русский",    "ru",      "ru_RU", "ru"),
+    ("ar",    "ar",    "العربية",     "ar",      "ar_AR", "sa"),
+    ("hi",    "hi",    "हिन्दी",       "hi",      "hi_IN", "in"),
+    ("zh",    "zh",    "中文 (简体)",  "zh-Hans", "zh_CN", "cn"),
+    ("zh-TW", "zh-tw", "中文 (繁體)",  "zh-Hant", "zh_TW", "tw"),
     ("ja",    "ja",    "日本語",      "ja",      "ja_JP", "jp"),
+    ("ko",    "ko",    "한국어",       "ko",      "ko_KR", "kr"),
 ]
+
+# A BARRA DA APP, espelhada: dezasseis bandeiras pela ordem da barra do
+# programa, mesmo que o GB e o US levem à mesma página. É o mesmo desenho e a
+# mesma ordem dos outros dois sites — a coerência é ordem do João.
+#   (bandeira, rótulo, código do dicionário)
+BARRA_DA_APP = [
+    ("pt", "Português",      "pt"),
+    ("br", "Português (BR)", "br"),
+    ("gb", "English (GB)",   "en"),
+    ("us", "English (US)",   "en"),   # a única que leva à mesma página
+    ("es", "Español",        "es"),
+    ("fr", "Français",       "fr"),
+    ("it", "Italiano",       "it"),
+    ("de", "Deutsch",        "de"),
+    ("pl", "Polski",         "pl"),
+    ("ru", "Русский",        "ru"),
+    ("sa", "العربية",         "ar"),
+    ("in", "हिन्दी",           "hi"),
+    ("cn", "中文 (简体)",      "zh"),
+    ("tw", "中文 (繁體)",      "zh-TW"),
+    ("jp", "日本語",          "ja"),
+    ("kr", "한국어",           "ko"),
+]
+
+# A única língua que se lê da direita para a esquerda.
+RTL = {"ar"}
 
 # as chaves que vão para o <head> em vez de para o corpo
 CABECA = [
@@ -157,19 +200,29 @@ def selector(activas, pasta_actual, rotulo):
     — que é o que os motores de busca leem. A língua actual marca-se com
     `aria-current` (são ligações, não botões).
     ⚠ Sem `hreflang` nas ligações: quem fala aos motores é o bloco
-      <link rel="alternate"> do cabeçalho."""
+      <link rel="alternate"> do cabeçalho. Aqui há duas entradas que levam à
+      mesma página (GB e US) e um hreflang errado seria um sinal errado.
+    ⛔ Os itens saem do BARRA_DA_APP e o rótulo do botão fechado sai da MESMA
+       lista: no site do LogViewer saíam de listas diferentes, e a página /br/
+       abria a dizer «Português» com «Português (BR)» logo por baixo."""
+    pasta_de = {c: p for c, p, *_ in activas}
+    etiqueta_de = {c: h for c, _p, _r, h, _l, _f in activas}
     para = lambda p: (("../" + p + "/") if p else "../") if pasta_actual else ((p + "/") if p else "./")
-    actual = next(l for l in activas if l[1] == pasta_actual)
+    cod_actual = next(c for c, p, *_ in activas if p == pasta_actual)
+    fl_actual, rot_actual = next(((fl, r) for fl, r, c in BARRA_DA_APP if c == cod_actual),
+                                 ("gb", "English (GB)"))
     itens = []
-    for cod, pasta, rot, hl, _loc, fl in activas:
-        marca = ' aria-current="true"' if pasta == pasta_actual else ""
+    for fl, rot, cod in BARRA_DA_APP:
+        if cod not in pasta_de:          # língua sem dicionário → o inglês
+            cod = "en"
+        marca = ' aria-current="true"' if cod == cod_actual and fl == fl_actual else ""
         itens.append('          <a class="lang-btn" href="%s" lang="%s"%s>%s<span>%s</span></a>'
-                     % (para(pasta), hl, marca, bandeira(fl), rot))
+                     % (para(pasta_de[cod]), etiqueta_de[cod], marca, bandeira(fl), rot))
     return ('      <details class="lang-picker">\n'
             '        <summary class="lang-cur" title="%s">%s<span>%s</span></summary>\n'
             '        <div class="lang-list">\n%s\n        </div>\n'
-            '      </details>\n' % (H.escape(rotulo, quote=True), bandeira(actual[5]),
-                                    actual[2], "\n".join(itens)))
+            '      </details>\n' % (H.escape(rotulo, quote=True), bandeira(fl_actual),
+                                    rot_actual, "\n".join(itens)))
 
 
 def uma_vez(pagina, velho, novo, rot):
@@ -224,8 +277,9 @@ for cod, pasta, rot, hl, loc, fl in activas:
 
     if pasta:
         # ⛔ o `lang` leva a etiqueta BCP-47, nunca o código do dicionário
+        direccao = ' dir="rtl"' if cod in RTL else ""
         pag = uma_vez(pag, '<html lang="en">',
-                      '<html lang="%s" data-lang-fixa="%s">' % (hl, cod), cod)
+                      '<html lang="%s"%s data-lang-fixa="%s">' % (hl, direccao, cod), cod)
     pag = uma_vez(pag, HL_ANTIGO, COMENTARIO + bloco_hreflang(activas) + "\n", cod)
     pag = uma_vez(pag, '<link rel="canonical" href="%s" />' % BASE,
                   '<link rel="canonical" href="%s" />' % url, cod)

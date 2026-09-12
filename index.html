@@ -13,9 +13,20 @@
      faz antes de commitar. -->
 <link rel="alternate" hreflang="x-default" href="https://nunex-mbrothers.github.io/mBrothers/" />
 <link rel="alternate" hreflang="pt" href="https://nunex-mbrothers.github.io/mBrothers/pt/" />
+<link rel="alternate" hreflang="pt-BR" href="https://nunex-mbrothers.github.io/mBrothers/br/" />
 <link rel="alternate" hreflang="en" href="https://nunex-mbrothers.github.io/mBrothers/" />
+<link rel="alternate" hreflang="es" href="https://nunex-mbrothers.github.io/mBrothers/es/" />
+<link rel="alternate" hreflang="fr" href="https://nunex-mbrothers.github.io/mBrothers/fr/" />
+<link rel="alternate" hreflang="it" href="https://nunex-mbrothers.github.io/mBrothers/it/" />
+<link rel="alternate" hreflang="de" href="https://nunex-mbrothers.github.io/mBrothers/de/" />
+<link rel="alternate" hreflang="pl" href="https://nunex-mbrothers.github.io/mBrothers/pl/" />
+<link rel="alternate" hreflang="ru" href="https://nunex-mbrothers.github.io/mBrothers/ru/" />
+<link rel="alternate" hreflang="ar" href="https://nunex-mbrothers.github.io/mBrothers/ar/" />
+<link rel="alternate" hreflang="hi" href="https://nunex-mbrothers.github.io/mBrothers/hi/" />
+<link rel="alternate" hreflang="zh-Hans" href="https://nunex-mbrothers.github.io/mBrothers/zh/" />
 <link rel="alternate" hreflang="zh-Hant" href="https://nunex-mbrothers.github.io/mBrothers/zh-tw/" />
 <link rel="alternate" hreflang="ja" href="https://nunex-mbrothers.github.io/mBrothers/ja/" />
+<link rel="alternate" hreflang="ko" href="https://nunex-mbrothers.github.io/mBrothers/ko/" />
 <meta name="theme-color" content="#0e1118" />
 <meta name="color-scheme" content="light dark" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -1452,6 +1463,38 @@ try{
   nav.top .mark .lang-btn:hover { color: var(--ink); background: rgba(0,0,0,.06); }
   html.night nav.top .mark .lang-btn:hover { background: rgba(255,255,255,.07); }
   nav.top .mark .lang-btn[aria-current="true"] { color: var(--amber); }
+  /* Dezasseis linguas nao cabem numa coluna: o painel passa a duas, com a
+     mesma largura minima do site do LogViewer. */
+  nav.top .mark .lang-list {
+    grid-template-columns: 1fr 1fr; min-width: 268px;
+  }
+  @media (max-width: 560px) {
+    nav.top .mark .lang-list { grid-template-columns: 1fr; min-width: 176px; }
+  }
+
+  /* ═════════════ DA DIREITA PARA A ESQUERDA (arabe) ═════════════
+     O `dir="rtl"` do <html> vira o texto, o flex e a grelha sozinho. O que NAO
+     vira sao as propriedades fisicas, e fora do palco sao estas.
+     ⛔ O PALCO fica em LTR: e uma imagem de instrumento, e espelha-la punha a
+        luz do planeta do lado errado e os rotulos do HUD nos cantos trocados.
+        O texto arabe la dentro volta a rtl nos elementos que o levam. */
+  [dir="rtl"] .stage { direction: ltr; }
+  [dir="rtl"] .stage .hud-top span,
+  [dir="rtl"] .stage .hud-bottom span,
+  [dir="rtl"] .stage .data-label > div,
+  [dir="rtl"] .stage .grab-hint { direction: rtl; }
+  /* ⛔ O .skip-link esconde-se para CIMA (top: -60px) e nao para o lado: o
+     `left: 12px` e so a ancoragem horizontal. A primeira versao desta regra
+     mandava-o para `right: -9999px`, e como o :focus desta pagina so mexe no
+     `top`, o atalho de acessibilidade NUNCA MAIS aparecia em arabe. Aqui
+     troca-se apenas o lado a que esta encostado. */
+  [dir="rtl"] .skip-link { left: auto; right: 12px; }
+  [dir="rtl"] nav.top .mark .lang-list { left: auto; right: 0; }
+  /* ⚠ A capitular tem de vencer `section.intro .body .drop`, que leva um
+     ELEMENTO na conta da especificidade -- a primeira versao desta regra era
+     `[dir="rtl"] .intro .drop` e perdia em silencio: a letra ficava a flutuar
+     do lado esquerdo numa pagina que se le da direita para a esquerda. */
+  [dir="rtl"] section.intro .body .drop { float: right; padding: 8px 0 0 12px; }
 </style>
 </head>
 <body>
@@ -1462,9 +1505,21 @@ try{
      O sprite nao ocupa espaco nenhum (.fl-sprite). -->
 <svg class="fl-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs>
 <symbol id="fl-pt" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FF0000"/><rect width="8" height="14" fill="#006600"/><circle cx="8" cy="7" r="2.9" fill="#FFCC00"/><circle cx="8" cy="7" r="1.9" fill="#FFFFFF"/><rect x="7.1" y="5.9" width="1.8" height="2.2" fill="#003399"/></symbol>
+<symbol id="fl-br" viewBox="0 0 20 14"><rect width="20" height="14" fill="#009C3B"/><polygon points="10,1.4 18.6,7 10,12.6 1.4,7" fill="#FFDF00"/><circle cx="10" cy="7" r="2.9" fill="#002776"/><path d="M7.2 6.1a3.4 3.4 0 0 1 5.7 1.1l-.9.3a2.5 2.5 0 0 0-4.2-.8z" fill="#FFFFFF"/></symbol>
 <symbol id="fl-gb" viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l20 14M20 0L0 14" stroke="#FFFFFF" stroke-width="2.8"/><path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" stroke-width="1.4"/><path d="M10 0v14M0 7h20" stroke="#FFFFFF" stroke-width="4.6"/><path d="M10 0v14M0 7h20" stroke="#C8102E" stroke-width="2.8"/></symbol>
+<symbol id="fl-us" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/><g fill="#FFFFFF"><circle cx="1.6" cy="1.5" r=".36"/><circle cx="4" cy="1.5" r=".36"/><circle cx="6.4" cy="1.5" r=".36"/><circle cx="2.8" cy="3" r=".36"/><circle cx="5.2" cy="3" r=".36"/><circle cx="1.6" cy="4.5" r=".36"/><circle cx="4" cy="4.5" r=".36"/><circle cx="6.4" cy="4.5" r=".36"/><circle cx="2.8" cy="6" r=".36"/><circle cx="5.2" cy="6" r=".36"/></g></symbol>
+<symbol id="fl-es" viewBox="0 0 20 14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></symbol>
+<symbol id="fl-fr" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></symbol>
+<symbol id="fl-it" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><rect width="6.67" height="14" fill="#009246"/><rect x="13.33" width="6.67" height="14" fill="#CE2B37"/></symbol>
+<symbol id="fl-de" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#000000"/><rect y="4.67" width="20" height="4.66" fill="#DD0000"/><rect y="9.33" width="20" height="4.67" fill="#FFCE00"/></symbol>
+<symbol id="fl-pl" viewBox="0 0 20 14"><rect width="20" height="7" fill="#FFFFFF"/><rect y="7" width="20" height="7" fill="#DC143C"/></symbol>
+<symbol id="fl-ru" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#FFFFFF"/><rect y="4.67" width="20" height="4.66" fill="#0039A6"/><rect y="9.33" width="20" height="4.67" fill="#D52B1E"/></symbol>
+<symbol id="fl-sa" viewBox="0 0 20 14"><rect width="20" height="14" fill="#006C35"/><path d="M4.2 6.2q1.45-1.4 2.9 0t2.9 0t2.9 0t2.9 0" fill="none" stroke="#FFFFFF" stroke-width=".9" stroke-linecap="round"/><rect x="4.6" y="8.7" width="11" height=".8" rx=".4" fill="#FFFFFF"/><path d="M4.6 9.1l1.7-1.2v2.4z" fill="#FFFFFF"/></symbol>
+<symbol id="fl-in" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#FF9933"/><rect y="4.67" width="20" height="4.66" fill="#FFFFFF"/><rect y="9.33" width="20" height="4.67" fill="#138808"/><circle cx="10" cy="7" r="1.8" fill="none" stroke="#000080" stroke-width=".45"/><circle cx="10" cy="7" r=".45" fill="#000080"/></symbol>
+<symbol id="fl-cn" viewBox="0 0 20 14"><rect width="20" height="14" fill="#DE2910"/><g fill="#FFDE00"><polygon points="3.33,1.33 3.73,2.55 5,2.55 3.97,3.30 4.36,4.51 3.33,3.76 2.30,4.51 2.70,3.30 1.67,2.55 2.94,2.55"/><polygon points="6.67,0.83 6.82,1.32 7.33,1.32 6.92,1.61 7.08,2.10 6.67,1.80 6.26,2.10 6.41,1.61 6.00,1.32 6.51,1.32"/><polygon points="8.00,2.00 8.16,2.48 8.66,2.48 8.25,2.78 8.41,3.26 8.00,2.97 7.59,3.26 7.75,2.78 7.34,2.48 7.84,2.48"/><polygon points="8.00,3.67 8.16,4.15 8.66,4.15 8.25,4.45 8.41,4.93 8.00,4.63 7.59,4.93 7.75,4.45 7.34,4.15 7.84,4.15"/><polygon points="6.67,4.83 6.82,5.32 7.33,5.32 6.92,5.61 7.08,6.10 6.67,5.80 6.26,6.10 6.41,5.61 6.00,5.32 6.51,5.32"/></g></symbol>
 <symbol id="fl-tw" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FE0000"/><rect width="10" height="7" fill="#000095"/><circle cx="5" cy="3.5" r="2.1" fill="#FFFFFF"/><circle cx="5" cy="3.5" r="1.4" fill="#000095"/><circle cx="5" cy="3.5" r="1" fill="#FFFFFF"/></symbol>
 <symbol id="fl-jp" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><circle cx="10" cy="7" r="4.2" fill="#BC002D"/></symbol>
+<symbol id="fl-kr" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><circle cx="10" cy="7" r="3" fill="#CD2E3A"/><path d="M7 7a1.5 1.5 0 0 1 3 0 1.5 1.5 0 0 0 3 0 3 3 0 0 1-6 0z" fill="#0047A0"/></symbol>
 </defs></svg>
 
 <!-- BOOT SEQUENCE overlay (Frente B) — shown once per session -->
@@ -1489,12 +1544,24 @@ try{
       <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle day / night" title="Toggle day / night" data-i18n-attr="aria-label:theme.toggle;title:theme.toggle">☾</button>
       <details class="lang-picker">
-        <summary class="lang-cur" title="Language"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-gb"/></svg><span>English</span></summary>
+        <summary class="lang-cur" title="Language"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-gb"/></svg><span>English (GB)</span></summary>
         <div class="lang-list">
           <a class="lang-btn" href="pt/" lang="pt"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-pt"/></svg><span>Português</span></a>
-          <a class="lang-btn" href="./" lang="en" aria-current="true"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-gb"/></svg><span>English</span></a>
+          <a class="lang-btn" href="br/" lang="pt-BR"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-br"/></svg><span>Português (BR)</span></a>
+          <a class="lang-btn" href="./" lang="en" aria-current="true"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-gb"/></svg><span>English (GB)</span></a>
+          <a class="lang-btn" href="./" lang="en"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-us"/></svg><span>English (US)</span></a>
+          <a class="lang-btn" href="es/" lang="es"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-es"/></svg><span>Español</span></a>
+          <a class="lang-btn" href="fr/" lang="fr"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-fr"/></svg><span>Français</span></a>
+          <a class="lang-btn" href="it/" lang="it"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-it"/></svg><span>Italiano</span></a>
+          <a class="lang-btn" href="de/" lang="de"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-de"/></svg><span>Deutsch</span></a>
+          <a class="lang-btn" href="pl/" lang="pl"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-pl"/></svg><span>Polski</span></a>
+          <a class="lang-btn" href="ru/" lang="ru"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-ru"/></svg><span>Русский</span></a>
+          <a class="lang-btn" href="ar/" lang="ar"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-sa"/></svg><span>العربية</span></a>
+          <a class="lang-btn" href="hi/" lang="hi"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-in"/></svg><span>हिन्दी</span></a>
+          <a class="lang-btn" href="zh/" lang="zh-Hans"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-cn"/></svg><span>中文 (简体)</span></a>
           <a class="lang-btn" href="zh-tw/" lang="zh-Hant"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-tw"/></svg><span>中文 (繁體)</span></a>
           <a class="lang-btn" href="ja/" lang="ja"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-jp"/></svg><span>日本語</span></a>
+          <a class="lang-btn" href="ko/" lang="ko"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-kr"/></svg><span>한국어</span></a>
         </div>
       </details>
     </div>

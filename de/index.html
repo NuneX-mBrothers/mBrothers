@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="de" data-lang-fixa="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>mBrothers // Praktische Lösungen für kleine Planetensysteme</title>
+<meta name="description" content="mBrothers baut leise, praktische Software für kleine Planetensysteme. Die Heimat von The Absolute LogViewer und ExplorerFocus." />
+<link rel="canonical" href="https://nunex-mbrothers.github.io/mBrothers/de/" />
+<!-- Uma porta por lingua. Cada pagina tem canonical propria e hreflang
+     reciproco; o texto vai JA TRADUZIDO no HTML, sem JavaScript.
+     A pasta /pt/ e GERADA por tools/gerar-linguas.py -- mexer no texto do
+     site obriga a correr o gerador outra vez, e o .cmd de publicar ja o
+     faz antes de commitar. -->
+<link rel="alternate" hreflang="x-default" href="https://nunex-mbrothers.github.io/mBrothers/" />
+<link rel="alternate" hreflang="pt" href="https://nunex-mbrothers.github.io/mBrothers/pt/" />
+<link rel="alternate" hreflang="pt-BR" href="https://nunex-mbrothers.github.io/mBrothers/br/" />
+<link rel="alternate" hreflang="en" href="https://nunex-mbrothers.github.io/mBrothers/" />
+<link rel="alternate" hreflang="es" href="https://nunex-mbrothers.github.io/mBrothers/es/" />
+<link rel="alternate" hreflang="fr" href="https://nunex-mbrothers.github.io/mBrothers/fr/" />
+<link rel="alternate" hreflang="it" href="https://nunex-mbrothers.github.io/mBrothers/it/" />
+<link rel="alternate" hreflang="de" href="https://nunex-mbrothers.github.io/mBrothers/de/" />
+<link rel="alternate" hreflang="pl" href="https://nunex-mbrothers.github.io/mBrothers/pl/" />
+<link rel="alternate" hreflang="ru" href="https://nunex-mbrothers.github.io/mBrothers/ru/" />
+<link rel="alternate" hreflang="ar" href="https://nunex-mbrothers.github.io/mBrothers/ar/" />
+<link rel="alternate" hreflang="hi" href="https://nunex-mbrothers.github.io/mBrothers/hi/" />
+<link rel="alternate" hreflang="zh-Hans" href="https://nunex-mbrothers.github.io/mBrothers/zh/" />
+<link rel="alternate" hreflang="zh-Hant" href="https://nunex-mbrothers.github.io/mBrothers/zh-tw/" />
+<link rel="alternate" hreflang="ja" href="https://nunex-mbrothers.github.io/mBrothers/ja/" />
+<link rel="alternate" hreflang="ko" href="https://nunex-mbrothers.github.io/mBrothers/ko/" />
+<meta name="theme-color" content="#0e1118" />
+<meta name="color-scheme" content="light dark" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+<meta name="author" content="mBrothers" />
+<script>/* set theme before first paint to avoid a flash */try{if(localStorage.getItem('mb-theme')==='night')document.documentElement.classList.add('night');}catch(e){}</script>
+<script>/* boot overlay decision (before paint). Shown on every load; skipped only in
+  calm mode. A failsafe timeout always clears it so it can never stick. */
+try{
+  var _mq=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var _mp=localStorage.getItem('mb-motion');
+  var _calm=_mp==='full'?false:(_mp==='calm'?true:_mq);
+  if(!_calm){
+    document.documentElement.classList.add('booting');
+    setTimeout(function(){document.documentElement.classList.remove('booting');},5000);
+  }
+}catch(e){}</script>
+
+<!-- Icons & PWA -->
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="manifest" href="../manifest.webmanifest" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="mBrothers" />
+<meta property="og:title" content="mBrothers — Praktische Lösungen für kleine Planetensysteme" />
+<meta property="og:description" content="Ein kleines Software-Studio, das leise, praktische Instrumente baut. Keine Abos, keine Telemetrie — Werkzeuge, die eine Sache sorgfältig tun und dann aus dem Weg gehen." />
+<meta property="og:url" content="https://nunex-mbrothers.github.io/mBrothers/de/" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:image" content="https://nunex-mbrothers.github.io/mBrothers/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="mBrothers — ein Planet mit Ringen neben dem Schriftzug des Studios." />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="mBrothers — kleine Planetensysteme" />
+<meta name="twitter:description" content="Leise, praktische Software. Die Heimat von The Absolute LogViewer und ExplorerFocus." />
+<meta name="twitter:image" content="https://nunex-mbrothers.github.io/mBrothers/og.png" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "mBrothers",
+  "alternateName": "the mBrothers",
+  "url": "https://nunex-mbrothers.github.io/mBrothers/de/",
+  "logo": "https://nunex-mbrothers.github.io/mBrothers/icon-512.png",
+  "image": "https://nunex-mbrothers.github.io/mBrothers/og.png",
+  "description": "Ein unabhängiges Software-Studio, das leise, praktische Instrumente für kleine Planetensysteme baut.",
+  "slogan": "Developing practical solutions for small planetary systems",
+  "email": "NuneXmBrothers@gmail.com",
+  "foundingDate": "2026",
+  "location": { "@type": "Place", "name": "Lisbon, Portugal" },
+  "sameAs": [ "https://github.com/nunex-mbrothers" ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Italianno&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:        #e9dfc4;   /* softened a touch so the bright page contrasts
+                                  less with the grey stage (was #f4ecd8) */
+    --paper-deep:   #ddd1b2;
+    --ink:          #14130f;
+    --ink-soft:     #2e2b22;
+    --ink-mute:     #6b6757;
+    --rule:         #d4cbb4;
+    --amber:        #a86b2c;
+    --olive:        #5a6a3a;
+
+    --neon:         #ff3d2e;
+    --neon-glow:    #ff6a4d;
+    --cyan:         #1f7f8c;
+    --magenta:      #b8336a;
+    --crt:          #0d1f1c;
+
+    --space-deep:   #0a0d14;
+    --space-mid:    #131826;
+    --space-soft:   #1c2238;
+
+    --serif:   "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --script:  "Italianno", "Snell Roundhand", "Apple Chancery", cursive;
+    --mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 22% 28%, rgba(168,107,44,0.07) 0%, transparent 45%),
+      radial-gradient(circle at 80% 72%, rgba(31,127,140,0.06) 0%, transparent 50%),
+      radial-gradient(circle, rgba(20,19,15,0.09) 1px, transparent 1.4px),
+      radial-gradient(circle, rgba(20,19,15,0.045) 0.8px, transparent 1.2px);
+    background-size: auto, auto, 48px 48px, 48px 48px;
+    background-position: 0 0, 0 0, 0 0, 24px 24px;
+    background-attachment: fixed, fixed, fixed, fixed;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(20,19,15,0.018) 2px,
+      rgba(20,19,15,0.018) 3px
+    );
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(rgba(20,19,15,0.025) 1px, transparent 1px) 0 0/3px 3px,
+      radial-gradient(rgba(20,19,15,0.018) 1px, transparent 1px) 1px 2px/7px 7px,
+      radial-gradient(ellipse at center, transparent 45%, rgba(20,19,15,0.10) 100%);
+    mix-blend-mode: multiply;
+    opacity: 0.7;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  /* ─────────────── NAV ─────────────── */
+  nav.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-mute);
+    position: relative;
+    z-index: 50;
+  }
+  nav.top .mark { display: flex; align-items: center; gap: 12px; }
+  nav.top .mark .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 0 3px rgba(255,61,46,0.18), 0 0 12px rgba(255,61,46,0.55);
+    animation: blink 2.4s infinite;
+  }
+  @keyframes blink { 0%,80%,100%{opacity:1} 85%,95%{opacity:.3} }
+  nav.top .mark .id {
+    display: inline-block;
+    border: 1px solid var(--ink);
+    padding: 4px 10px;
+    background: var(--paper-deep);
+  }
+  nav.top .mark .build {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+  nav.top .mark .build.ok { color: var(--olive); opacity: 0.95; }
+  nav.top .mark .motion-toggle {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: color .25s, border-color .25s, box-shadow .25s;
+  }
+  nav.top .mark .motion-toggle:hover {
+    color: var(--neon);
+    border-color: var(--neon);
+    box-shadow: 0 0 8px rgba(255,61,46,0.35);
+  }
+  nav.top .mark .motion-toggle[aria-pressed="true"] { color: var(--olive); border-color: var(--olive); }
+  nav.top .mark .theme-toggle {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1;
+    color: var(--ink-mute);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: color .25s, border-color .25s, transform .4s;
+  }
+  nav.top .mark .theme-toggle:hover { color: var(--amber); border-color: var(--amber); transform: rotate(40deg); }
+
+  /* ═════════════ NIGHT THEME (Frente C — day/night) ═════════════
+     The paper editorial flips to deep space; accents stay. The stage's
+     radial mask now dissolves into a dark page, so space "invades". */
+  /* Dusk / dawn: while toggling, every themed surface crossfades slowly.
+     The class is added only for the duration of the switch, so normal hover
+     transitions stay snappy the rest of the time. */
+  html.theming, html.theming *,
+  html.theming *::before, html.theming *::after {
+    transition: background-color 1.8s ease-in-out,
+                color 1.8s ease-in-out,
+                border-color 1.8s ease-in-out,
+                fill 1.8s ease-in-out,
+                stroke 1.8s ease-in-out,
+                box-shadow 1.8s ease-in-out !important;
+  }
+  html.night {
+    --paper:      #0c0f17;
+    --paper-deep: #141a28;
+    --ink:        #ece6d6;
+    --ink-soft:   #c9c3b1;
+    --ink-mute:   #8f8a76;
+    --rule:       #29303f;
+  }
+  html.night body {
+    background-image:
+      radial-gradient(circle at 22% 28%, rgba(168,107,44,0.12) 0%, transparent 45%),
+      radial-gradient(circle at 80% 72%, rgba(31,127,140,0.10) 0%, transparent 50%),
+      radial-gradient(circle, rgba(244,236,216,0.05) 1px, transparent 1.4px),
+      radial-gradient(circle, rgba(244,236,216,0.03) 0.8px, transparent 1.2px);
+  }
+  html.night body::after { opacity: 0.5; }
+  html.night nav.top .mark .id { color: var(--ink); }
+  html.night section.philosophy::before { background: var(--paper); }
+  html.night .product .glyph { color: var(--ink); }
+
+  /* ═════════════ PRODUCT CARD SPOTLIGHT + TILT (Frente C) ═════════════ */
+  .catalog { perspective: 1200px; }
+  article.product {
+    --gx: 50%; --gy: 50%; --glow: 0;
+    background-image: radial-gradient(240px circle at var(--gx) var(--gy),
+      rgba(168,107,44, var(--glow)), transparent 58%);
+    transition: background-color .5s ease, transform .3s cubic-bezier(.2,.7,.2,1);
+    transform-style: flat;
+  }
+  article.product:hover { background-color: rgba(168,107,44,0.05); }
+  article.product::before, article.product::after { z-index: 2; }
+  .product > * { position: relative; z-index: 1; }
+  html.night article.product:hover { background-color: rgba(168,107,44,0.07); }
+
+  /* Konami easter egg flash */
+  .stage { transition: filter .35s ease; }
+  html.warp .stage { filter: brightness(1.18) saturate(1.25) contrast(1.05); }
+
+  /* ═════════════ BOOT SEQUENCE (Frente B) ═════════════ */
+  #boot {
+    position: fixed; inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 38%, #10151f 0%, #06080d 100%);
+  }
+  html.booting #boot { display: flex; }
+  html.booting body { overflow: hidden; }
+  #boot::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0,0,0,0.28) 2px, rgba(0,0,0,0.28) 3px);
+  }
+  #boot .boot-inner {
+    position: relative; z-index: 2;
+    width: min(560px, 86vw);
+    font-family: var(--mono);
+    color: #6affa4;
+    text-shadow: 0 0 6px rgba(106,255,164,0.4);
+  }
+  #boot .boot-title { font-size: 12px; letter-spacing: 0.3em; color: #46c878; margin-bottom: 18px; }
+  #boot .boot-log { margin: 0; font-size: 13px; line-height: 1.7; white-space: pre-wrap; min-height: 168px; }
+  #boot .boot-hint { margin-top: 22px; font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(106,255,164,0.4); }
+  #boot.done { animation: boot-out .55s ease forwards; }
+  @keyframes boot-out { to { opacity: 0; visibility: hidden; } }
+
+  /* ═════════════ SCROLL-DRIVEN REVEALS (Frente B) ═════════════
+     Progressive enhancement: only where supported, and only when the visitor
+     is OK with motion. Without support, everything is simply visible. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      section.intro, section.philosophy, footer,
+      .section-head, article.product {
+        animation: reveal-up linear both;
+        animation-timeline: view();
+        /* finish within the ENTRY phase so elements at the very bottom of the
+           page (e.g. the footer) can still complete — a 'cover'/'exit' end
+           point is unreachable for the last element on the page. */
+        animation-range: entry 5% entry 65%;
+      }
+    }
+  }
+  @keyframes reveal-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ═════════════ CANVAS STARFIELD (Frente B) ═════════════ */
+  .stage .starfield-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;   /* canvas is a replaced element — inset:0 won't stretch it */
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.85;
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
+  }
+  nav.top ul { list-style: none; display: flex; gap: 32px; }
+  nav.top a { color: var(--ink-mute); text-decoration: none; transition: color .25s, text-shadow .25s; }
+  nav.top a::before { content: "[ "; color: var(--neon); opacity: 0; transition: opacity .25s; }
+  nav.top a::after  { content: " ]"; color: var(--neon); opacity: 0; transition: opacity .25s; }
+  nav.top a:hover { color: var(--ink); text-shadow: 0 0 8px rgba(255,61,46,0.35); }
+  nav.top a:hover::before, nav.top a:hover::after { opacity: 1; }
+
+  /* ─────────────── HERO ─────────────── */
+  header.hero {
+    padding: 50px 0 60px;
+    position: relative;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 20;
+  }
+  .meta-row .blink-cursor::after {
+    content: "_"; color: var(--neon); margin-left: 4px;
+    animation: cursorblink 1s steps(2) infinite;
+  }
+  @keyframes cursorblink { 50% { opacity: 0; } }
+
+  /* ═════════════════════════════════════════════════
+     THE PLANETARY STAGE — astronomical plate
+     ═════════════════════════════════════════════════ */
+  .stage {
+    position: relative;
+    height: clamp(560px, 70vw, 760px);
+    margin: 10px 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    isolation: isolate;
+  }
+
+  /* The plate itself — dissolves into paper at the edges */
+  .stage .void {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(120,140,150,0.20) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 65%, rgba(168,107,44,0.15) 0%, transparent 55%),
+      linear-gradient(180deg, #2a2e3a 0%, #232735 50%, #1f2330 100%);
+    z-index: 1;
+    /* Soft vignette that fades into the paper on all sides */
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%,
+        #000 22%,
+        rgba(0,0,0,0.95) 50%,
+        rgba(0,0,0,0.78) 68%,
+        rgba(0,0,0,0.48) 82%,
+        rgba(0,0,0,0.2) 92%,
+        transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%,
+        #000 22%,
+        rgba(0,0,0,0.95) 50%,
+        rgba(0,0,0,0.78) 68%,
+        rgba(0,0,0,0.48) 82%,
+        rgba(0,0,0,0.2) 92%,
+        transparent 100%);
+  }
+
+  /* Subtle outer frame — like an old astronomical plate caption border */
+  .stage .plate-frame {
+    position: absolute;
+    inset: 11% 13%;
+    border: 0.5px solid rgba(168,107,44,0.22);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 30;
+    -webkit-mask-image: radial-gradient(ellipse 75% 88% at center 50%, #000 35%, rgba(0,0,0,0.55) 75%, transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 88% at center 50%, #000 35%, rgba(0,0,0,0.55) 75%, transparent 100%);
+  }
+  .stage .plate-frame::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border: 0.5px solid rgba(168,107,44,0.12);
+    border-radius: 3px;
+  }
+
+  /* Starfield: now masked to the plate area too, slightly warmer */
+  .stage .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 13% 14%, #e8dcc2 50%, transparent 100%),
+      radial-gradient(1px 1px at 27% 78%, #d4cbb4 50%, transparent 100%),
+      radial-gradient(1px 1px at 42% 22%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 56% 64%, #c4bca0 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 67% 12%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 73% 88%, #a8a088 50%, transparent 100%),
+      radial-gradient(1px 1px at 84% 35%, #d4cbb4 50%, transparent 100%),
+      radial-gradient(1px 1px at 91% 71%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 7% 56%, #c4bca0 50%, transparent 100%),
+      radial-gradient(1px 1px at 18% 42%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 38% 51%, #a8a088 50%, transparent 100%),
+      radial-gradient(1px 1px at 49% 91%, #d4cbb4 50%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 81% 19%, #f4ecd8 50%, transparent 100%),
+      radial-gradient(1px 1px at 95% 47%, #c4bca0 50%, transparent 100%);
+    z-index: 2;
+    animation: twinkle 6s ease-in-out infinite;
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 26%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 88%, transparent 100%);
+  }
+  @keyframes twinkle { 0%,100% { opacity: 0.7; } 50% { opacity: 0.45; } }
+
+  /* Distant nebula — warm sepia tones now */
+  .stage .nebula {
+    position: absolute;
+    top: 12%; left: -5%;
+    width: 60%; height: 45%;
+    background: radial-gradient(ellipse at center,
+      rgba(168,107,44,0.18) 0%,
+      rgba(120,80,40,0.10) 35%,
+      transparent 70%);
+    filter: blur(24px);
+    z-index: 2;
+    transform: rotate(-15deg);
+    pointer-events: none;
+  }
+
+  /* Shooting star — softer */
+  .stage .shooting {
+    position: absolute;
+    top: 18%; left: -10%;
+    width: 140px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(244,236,216,0.85), transparent);
+    z-index: 3;
+    opacity: 0;
+    animation: shoot 13s ease-in infinite;
+    transform: rotate(18deg);
+  }
+  @keyframes shoot {
+    0%      { transform: translate(0,0) rotate(18deg); opacity: 0; }
+    3%, 5%  { opacity: 1; }
+    14%     { transform: translate(110vw, 30vh) rotate(18deg); opacity: 0; }
+    100%    { opacity: 0; }
+  }
+
+  /* THE PLANET — centerpiece */
+  .planet-wrap {
+    position: relative;
+    width: clamp(360px, 50vw, 520px);
+    aspect-ratio: 1;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Outer atmospheric halo (rim glow) */
+  .planet-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -14%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      transparent 53%,
+      rgba(120,180,200,0.22) 55%,
+      rgba(80,140,180,0.10) 60%,
+      transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* The planet sphere itself */
+  .planet {
+    position: relative;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    /* base atmosphere tint */
+    background:
+      radial-gradient(circle at 35% 30%,
+        #c08a4a 0%,
+        #8f5a26 18%,
+        #5a3614 40%,
+        #2a1a08 70%,
+        #110800 100%);
+    box-shadow:
+      inset -30px -30px 80px rgba(0,0,0,0.7),
+      inset 20px 15px 60px rgba(255,200,140,0.18),
+      0 0 60px rgba(168,107,44,0.18);
+    z-index: 3;
+  }
+
+  /* Surface texture — a long horizontal band of "continents" that scrolls,
+     creating the illusion of rotation. */
+  .planet .surface {
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%;
+    height: 100%;
+    background-image:
+      /* primary land/cloud bands using overlapping radial blobs in a strip */
+      radial-gradient(ellipse 80px 50px at 5%  35%, rgba(90,106,58,0.55), transparent 65%),
+      radial-gradient(ellipse 120px 60px at 12% 60%, rgba(70,90,40,0.5), transparent 60%),
+      radial-gradient(ellipse 60px 40px at 19% 25%, rgba(168,107,44,0.5), transparent 70%),
+      radial-gradient(ellipse 100px 50px at 26% 70%, rgba(60,80,35,0.55), transparent 60%),
+      radial-gradient(ellipse 70px 45px at 32% 45%, rgba(90,120,60,0.5), transparent 65%),
+      radial-gradient(ellipse 110px 55px at 39% 30%, rgba(168,107,44,0.45), transparent 65%),
+      radial-gradient(ellipse 90px 50px at 47% 65%, rgba(60,80,35,0.55), transparent 60%),
+      radial-gradient(ellipse 80px 45px at 54% 50%, rgba(90,106,58,0.5), transparent 60%),
+      radial-gradient(ellipse 100px 60px at 61% 28%, rgba(70,90,40,0.55), transparent 65%),
+      radial-gradient(ellipse 70px 40px at 68% 70%, rgba(168,107,44,0.45), transparent 70%),
+      radial-gradient(ellipse 90px 50px at 75% 42%, rgba(60,80,35,0.55), transparent 60%),
+      radial-gradient(ellipse 120px 55px at 82% 65%, rgba(90,120,60,0.5), transparent 60%),
+      radial-gradient(ellipse 60px 40px at 89% 30%, rgba(168,107,44,0.45), transparent 70%),
+      radial-gradient(ellipse 80px 50px at 95% 55%, rgba(70,90,40,0.5), transparent 60%);
+    /* CSS animation is the no-JS fallback; app.js disables it (.js-driving) and
+       takes over with a drag-aware engine. Planet never freezes if JS is blocked. */
+    animation: rotate-surface 80s linear infinite;
+    z-index: 2;
+  }
+  @keyframes rotate-surface {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-66.666%); } /* loop seamlessly across the 300% strip */
+  }
+
+  /* Cloud layer — moves slower, offset */
+  .planet .clouds {
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%;
+    height: 100%;
+    background-image:
+      radial-gradient(ellipse 100px 30px at 8%  20%, rgba(240,232,210,0.55), transparent 65%),
+      radial-gradient(ellipse 140px 35px at 17% 80%, rgba(240,232,210,0.45), transparent 60%),
+      radial-gradient(ellipse 80px 25px at 25% 50%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 120px 30px at 34% 18%, rgba(240,232,210,0.55), transparent 60%),
+      radial-gradient(ellipse 100px 28px at 43% 75%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 130px 32px at 52% 38%, rgba(240,232,210,0.45), transparent 60%),
+      radial-gradient(ellipse 80px 25px at 61% 60%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 110px 30px at 70% 22%, rgba(240,232,210,0.55), transparent 60%),
+      radial-gradient(ellipse 100px 28px at 79% 78%, rgba(240,232,210,0.5), transparent 65%),
+      radial-gradient(ellipse 90px 25px at 88% 45%, rgba(240,232,210,0.45), transparent 65%),
+      radial-gradient(ellipse 120px 30px at 96% 30%, rgba(240,232,210,0.5), transparent 60%);
+    /* no-JS fallback; app.js disables it (.js-driving) and drives at 2/3 speed */
+    animation: rotate-clouds 120s linear infinite;
+    z-index: 3;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+  @keyframes rotate-clouds {
+    from { transform: translateX(-10%); }
+    to   { transform: translateX(-76.666%); }
+  }
+
+  /* Terminator — day/night boundary, fixed shadow on the right side */
+  .planet .terminator {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 35%,
+      transparent 0%,
+      transparent 35%,
+      rgba(10,8,4,0.15) 55%,
+      rgba(10,8,4,0.55) 75%,
+      rgba(0,0,0,0.85) 95%);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  /* Specular highlight on day side */
+  .planet .highlight {
+    position: absolute;
+    top: 12%; left: 18%;
+    width: 35%; height: 35%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%,
+      rgba(255,220,170,0.35) 0%,
+      rgba(255,200,140,0.18) 25%,
+      transparent 55%);
+    z-index: 5;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* THE RING — angled around the planet */
+  .ring-container {
+    position: absolute;
+    inset: -25%;
+    z-index: 4;
+    transform: rotateX(72deg) rotateZ(-22deg);
+    pointer-events: none;
+  }
+  .ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(200,170,130,0.55);
+    box-shadow:
+      inset 0 0 0 4px rgba(168,140,100,0.18),
+      inset 0 0 0 10px rgba(140,110,80,0.10),
+      0 0 30px rgba(168,140,100,0.15);
+  }
+  .ring.inner {
+    inset: 8%;
+    border: 1px solid rgba(200,170,130,0.35);
+  }
+  .ring.outer {
+    inset: -8%;
+    border: 0.5px solid rgba(200,170,130,0.25);
+  }
+
+  /* The ring needs to pass BEHIND the planet on one side and in FRONT on the other.
+     We fake this with a half-ring overlay clipped to the lower half. */
+  .ring-front {
+    position: absolute;
+    inset: -25%;
+    z-index: 6;
+    transform: rotateX(72deg) rotateZ(-22deg);
+    pointer-events: none;
+    clip-path: inset(50% 0 0 0);
+  }
+  .ring-front .ring {
+    border-color: rgba(200,170,130,0.65);
+    box-shadow:
+      inset 0 0 0 4px rgba(168,140,100,0.22),
+      inset 0 0 0 10px rgba(140,110,80,0.14);
+  }
+
+  /* MOON — small satellite orbiting the planet */
+  .moon-orbit {
+    position: absolute;
+    inset: -22%;
+    z-index: 7;
+    /* no-JS fallback; app.js disables it (.js-driving) and drives the orbit */
+    animation: moon-spin 30s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes moon-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .moon {
+    position: absolute;
+    top: 50%; left: -2%;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #e8dcc2 0%, #a8967a 60%, #4a3f30 100%);
+    box-shadow:
+      inset -4px -3px 6px rgba(0,0,0,0.6),
+      0 0 10px rgba(232,220,194,0.3);
+    transform: translateY(-50%);
+  }
+
+  /* Targeting reticle that crosses the planet */
+  .reticle {
+    position: absolute;
+    inset: -8%;
+    z-index: 8;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* Data labels around the planet */
+  .data-label {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(212,203,180,0.75);
+    z-index: 9;
+    pointer-events: none;
+    line-height: 1.4;
+  }
+  .data-label .accent { color: rgba(232,180,120,0.95); }
+  .data-label .leader {
+    position: absolute;
+    background: rgba(232,180,120,0.5);
+  }
+
+  .dl-1 { top: 13%; left: 9%; }
+  .dl-1 .leader { width: 1px; height: 32px; top: 100%; left: 14px; }
+
+  .dl-2 { top: 15%; right: 10%; text-align: right; }
+  .dl-2 .leader { width: 36px; height: 1px; top: 8px; right: -42px; }
+
+  .dl-3 { bottom: 30%; left: 9%; }
+  .dl-3 .leader { width: 28px; height: 1px; top: 8px; left: -34px; }
+
+  .dl-4 { bottom: 30%; right: 9%; text-align: right; }
+  .dl-4 .leader { width: 28px; height: 1px; top: 8px; right: -34px; }
+
+  /* WORDMARK on top of planet — script italic */
+  .wordmark-wrap {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    isolation: isolate;
+    pointer-events: none;
+    animation: wm-rise 2s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .wordmark, .wordmark-ghost {
+    font-family: var(--script);
+    font-size: clamp(120px, 22vw, 280px);
+    line-height: 0.85;
+    letter-spacing: -0.01em;
+    text-align: center;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .wordmark {
+    color: #f4ecd8;
+    text-shadow:
+      0 0 30px rgba(255,200,140,0.4),
+      0 0 60px rgba(255,150,100,0.25),
+      0 4px 20px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+  }
+  .wordmark .amp { color: var(--neon-glow); }
+  .wordmark-ghost {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+  .wordmark-ghost.r { color: var(--neon); transform: translate(-3px, 1px); z-index: 1; }
+  .wordmark-ghost.c { color: var(--cyan); transform: translate( 3px,-1px); z-index: 1; }
+
+  @keyframes wm-rise {
+    from { opacity: 0; transform: translate(-50%, -45%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+  }
+
+  /* Scanbeam crossing the planet */
+  .stage .scanbeam {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 48%,
+      rgba(232,180,120,0.08) 49.5%,
+      rgba(232,180,120,0.16) 50%,
+      rgba(232,180,120,0.08) 50.5%,
+      transparent 52%,
+      transparent 100%);
+    mix-blend-mode: screen;
+    z-index: 20;
+    pointer-events: none;
+    animation: scan 9s linear infinite;
+    -webkit-mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 28%, transparent 95%);
+            mask-image: radial-gradient(ellipse 75% 86% at center 48%, #000 28%, transparent 95%);
+  }
+  @keyframes scan {
+    0%   { transform: translateY(-50%); opacity: 0; }
+    8%   { opacity: 0.9; }
+    50%  { transform: translateY(50%); opacity: 0.9; }
+    60%  { opacity: 0; }
+    100% { transform: translateY(50%); opacity: 0; }
+  }
+
+  /* Stage corner frame brackets — softened, amber */
+  .stage .frame {
+    position: absolute;
+    width: 22px; height: 22px;
+    border: 0.5px solid rgba(168,107,44,0.55);
+    z-index: 25;
+    pointer-events: none;
+  }
+  .stage .frame.tl { top: 7%; left: 6%; border-right: none; border-bottom: none; }
+  .stage .frame.tr { top: 7%; right: 6%; border-left: none; border-bottom: none; }
+  .stage .frame.bl { bottom: 7%; left: 6%; border-right: none; border-top: none; }
+  .stage .frame.br { bottom: 7%; right: 6%; border-left: none; border-top: none; }
+
+  /* Stage HUD readouts — paper-tone, integrated */
+  .hud-top, .hud-bottom {
+    position: absolute;
+    left: 9%; right: 9%;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(212,203,180,0.7);
+    z-index: 25;
+    pointer-events: none;
+  }
+  .hud-top    { top: 8%; }
+  .hud-bottom { bottom: 22%; }
+  .hud-top .red, .hud-bottom .red { color: rgba(232,180,120,0.85); }
+
+  /* ═════════════ CRT TERMINAL — phosphor green ═════════════
+     Sits at the bottom of the stage, inside the space view */
+  .crt {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+    width: clamp(360px, 56%, 580px);
+    max-width: calc(100% - 120px);
+    min-height: 96px;
+    z-index: 22;
+    pointer-events: none;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: #6affa4;
+    text-shadow:
+      0 0 3px rgba(106,255,164,0.55),
+      0 0 8px rgba(106,255,164,0.25);
+    padding: 12px 18px;
+    background:
+      linear-gradient(180deg, rgba(8,18,14,0.85), rgba(4,12,8,0.92));
+    border: 0.5px solid rgba(168,107,44,0.38);
+    border-radius: 2px;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow:
+      inset 0 0 24px rgba(106,255,164,0.08),
+      0 6px 50px rgba(10,18,14,0.5);
+  }
+  /* CRT scanlines on top of terminal */
+  .crt::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(0,0,0,0.25) 2px,
+      rgba(0,0,0,0.25) 3px);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+  /* Subtle vignette + curvature feel */
+  .crt::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center,
+      transparent 60%,
+      rgba(0,0,0,0.45) 100%);
+    pointer-events: none;
+  }
+  .crt-lines {
+    position: relative;
+    z-index: 2;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    height: 100%;
+    overflow: hidden;
+  }
+  .crt-line { display: block; min-height: 1.45em; }
+  .crt-line .prompt { color: #46c878; opacity: 0.85; }
+  .crt-line .muted  { color: #46c878; opacity: 0.7; }
+  .crt-cursor {
+    display: inline-block;
+    width: 8px; height: 1em;
+    vertical-align: -2px;
+    background: #6affa4;
+    box-shadow: 0 0 8px rgba(106,255,164,0.8);
+    animation: crt-blink 1s steps(2) infinite;
+    margin-left: 2px;
+  }
+  @keyframes crt-blink { 50% { opacity: 0; } }
+  /* CRT power-on flicker */
+  .crt {
+    animation: crt-flicker 6s ease-in-out infinite;
+  }
+  @keyframes crt-flicker {
+    0%, 100% { opacity: 1; }
+    7%       { opacity: 0.85; }
+    8%       { opacity: 1; }
+    33%      { opacity: 0.96; }
+    47%      { opacity: 1; }
+    48%      { opacity: 0.88; }
+    49%      { opacity: 1; }
+  }
+
+  /* ─────────────── LEITMOTIF ─────────────── */
+  .leitmotif {
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: var(--ink-soft);
+    max-width: 740px;
+    margin: 8px auto 0;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 20;
+    animation: fadein 1.4s ease .8s both;
+  }
+  .leitmotif::before, .leitmotif::after {
+    content: "—"; color: var(--rule); margin: 0 14px; font-style: normal;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 10px auto 0;
+    color: var(--rule);
+    animation: fadein 1.4s ease 1.2s both;
+  }
+  .ornament .line { width: 80px; height: 1px; background: var(--rule); }
+  .ornament .diamond {
+    width: 9px; height: 9px;
+    background: var(--neon);
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 4px rgba(255,61,46,0.15), 0 0 14px rgba(255,61,46,0.5);
+  }
+  .ornament .tick {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+
+  /* ─────────────── INTRO ─────────────── */
+  section.intro {
+    padding: 90px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+  }
+  section.intro .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+    padding-top: 12px;
+    border-top: 1px solid var(--ink);
+    width: fit-content;
+  }
+  section.intro .label::before { content: "// "; color: var(--neon); }
+  section.intro .body p {
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  section.intro .body p + p { margin-top: 22px; }
+  section.intro .body .drop {
+    float: left;
+    font-family: var(--serif);
+    font-size: 78px;
+    line-height: 0.85;
+    padding: 8px 12px 0 0;
+    color: var(--amber);
+    font-weight: 500;
+    text-shadow: -1px 0 0 var(--neon), 1px 0 0 var(--cyan);
+  }
+
+  /* ─────────────── PRODUCTS ─────────────── */
+  section.products { padding: 60px 0 100px; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 70px;
+  }
+  .section-head .rule { height: 1px; background: var(--rule); position: relative; }
+  .section-head .rule::after {
+    content: "";
+    position: absolute;
+    top: -2px; right: 0;
+    width: 18px; height: 5px;
+    background: var(--neon);
+    box-shadow: 0 0 8px rgba(255,61,46,0.6);
+  }
+  .section-head .rule:first-child::after { right: auto; left: 0; }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 38px;
+    color: var(--ink);
+  }
+
+  .catalog {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  article.product {
+    padding: 48px 40px 52px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    transition: background .5s ease;
+  }
+  article.product:nth-child(odd) { border-right: 1px solid var(--rule); }
+  /* hover tint is set as background-COLOR so it never wipes the spotlight
+     background-image (see Frente C card spotlight) */
+
+  article.product::before,
+  article.product::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--ink);
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+  }
+  article.product::before { top: 16px; left: 16px; border-right: none; border-bottom: none; }
+  article.product::after  { bottom: 16px; right: 16px; border-left: none; border-top: none; }
+  article.product:hover::before { opacity: 1; transform: translate(-3px,-3px); border-color: var(--neon); }
+  article.product:hover::after  { opacity: 1; transform: translate( 3px, 3px); border-color: var(--neon); }
+
+  .product .index {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+  }
+  .product .index::before { content: "■ "; color: var(--neon); }
+
+  .product .glyph {
+    width: 64px; height: 64px;
+    margin-bottom: 26px;
+    color: var(--ink);
+    filter: drop-shadow(-1px 0 0 rgba(255,61,46,0.5)) drop-shadow(1px 0 0 rgba(31,127,140,0.5));
+  }
+
+  .product h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 34px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .product h3 .it { font-style: italic; color: var(--amber); font-weight: 400; }
+
+  .product .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--ink-mute);
+    margin-bottom: 22px;
+  }
+  .product .tag::before { content: "› "; color: var(--neon); }
+
+  .product p.desc {
+    font-size: 17.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 44ch;
+  }
+
+  .product .status {
+    display: flex;
+    gap: 18px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .product .status .ok { color: var(--olive); }
+  .product .status .ok::before { content: "● "; color: var(--olive); }
+
+  .product .actions {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .product a {
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color .3s;
+  }
+  .product a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 1px;
+    background: var(--ink);
+    transition: background .4s, box-shadow .4s;
+  }
+  .product a:hover { color: var(--neon); }
+  .product a:hover::after { background: var(--neon); box-shadow: 0 0 8px var(--neon); }
+  .product .arrow { display: inline-block; transition: transform .3s; }
+  .product a:hover .arrow { transform: translateX(4px); }
+
+  article.product.placeholder {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 14px,
+      rgba(20,19,15,0.025) 14px,
+      rgba(20,19,15,0.025) 15px
+    );
+  }
+  article.product.placeholder h3 { color: var(--ink-mute); font-style: italic; }
+  article.product.placeholder p.desc { color: var(--ink-mute); }
+  article.product.placeholder .status .pending { color: var(--neon); }
+  article.product.placeholder .status .pending::before { content: "◐ "; color: var(--neon); }
+
+  /* ─────────────── PHILOSOPHY ─────────────── */
+  section.philosophy {
+    padding: 100px 0 110px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+    position: relative;
+  }
+  section.philosophy::before {
+    content: "✦";
+    position: absolute;
+    top: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--paper);
+    color: var(--neon);
+    padding: 0 16px;
+    font-size: 14px;
+    text-shadow: 0 0 12px rgba(255,61,46,0.6);
+  }
+  section.philosophy h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(32px, 4.4vw, 56px);
+    line-height: 1.25;
+    color: var(--ink);
+    max-width: 920px;
+    margin: 0 auto 24px;
+  }
+  section.philosophy h2 .glow {
+    color: var(--neon);
+    font-style: normal;
+    font-family: var(--script);
+    font-size: 1.25em;
+    text-shadow: 0 0 24px rgba(255,61,46,0.4);
+  }
+  section.philosophy .sig {
+    font-family: var(--script);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--amber);
+    margin-top: 24px;
+  }
+
+  /* ─────────────── FOOTER ─────────────── */
+  footer {
+    padding: 70px 0 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  footer h4 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+  }
+  footer h4::before { content: "// "; color: var(--neon); }
+  footer p, footer a {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    text-decoration: none;
+    display: block;
+  }
+  footer a:hover { color: var(--neon); }
+
+  .readout {
+    grid-column: 1 / -1;
+    margin-top: 30px;
+    padding: 14px 18px;
+    background: var(--crt);
+    color: #c9e3df;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.04);
+    overflow: hidden;
+    position: relative;
+  }
+  .readout::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(255,255,255,0.03) 2px,
+      rgba(255,255,255,0.03) 3px);
+    pointer-events: none;
+  }
+  .readout .neon-text { color: var(--neon-glow); text-shadow: 0 0 8px rgba(255,106,77,0.6); }
+  .readout .live { display: inline-flex; align-items: center; gap: 8px; }
+  .readout .live .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 10px var(--neon);
+    animation: blink 1.8s infinite;
+  }
+
+  /* A marca escreve-se SEMPRE "mBrothers" — nunca em maiúsculas */
+  .brand-mb { text-transform: none; }
+  .colophon {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  .meta-row { animation: fadein 1s ease .1s both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .wrap { padding: 0 24px; }
+    nav.top ul { display: none; }
+    section.intro { grid-template-columns: 1fr; gap: 28px; padding: 60px 0; }
+    .catalog { grid-template-columns: 1fr; }
+    article.product:nth-child(odd) { border-right: none; }
+    footer { grid-template-columns: 1fr; gap: 36px; }
+    .section-head { grid-template-columns: 1fr; gap: 14px; text-align: center; }
+    .section-head .rule { display: none; }
+    .leitmotif::before, .leitmotif::after { display: block; margin: 6px auto; }
+    .meta-row { font-size: 9px; gap: 8px; }
+    .readout { flex-direction: column; gap: 8px; text-align: center; }
+    .colophon { flex-direction: column; gap: 8px; text-align: center; }
+    .hud-top, .hud-bottom { left: 16px; right: 16px; font-size: 8px; }
+    .data-label { font-size: 8px; }
+    .stage { margin: 10px -10px 30px; }
+  }
+
+  /* Reduced-motion kill-switch — but NOT when the visitor has explicitly opted
+     into full motion via the in-page toggle (html.motion-full). */
+  @media (prefers-reduced-motion: reduce) {
+    html:not(.motion-full) *,
+    html:not(.motion-full) *::before,
+    html:not(.motion-full) *::after { animation: none !important; transition: none !important; }
+  }
+
+  /* ── Accessibility: skip link + visible focus ── */
+  .skip-link {
+    position: absolute;
+    left: 12px; top: -60px;
+    z-index: 100;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 2px;
+    transition: top .2s ease;
+  }
+  .skip-link:focus { top: 12px; }
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* ═════════════ INTERACTION LAYER (Frente A — living hero) ═════════════ */
+  /* When app.js is alive it adds .js-driving to <html> and takes over the
+     planet via requestAnimationFrame. If the script is blocked or disabled,
+     this class is never added and the CSS fallback animations keep the planet
+     spinning — the page never looks frozen. */
+  .js-driving .planet .surface,
+  .js-driving .planet .clouds,
+  .js-driving .moon-orbit { animation: none !important; }
+
+  .stage { perspective: 1300px; }
+
+  .planet-wrap {
+    will-change: transform;        /* tilts as one flat plate — no preserve-3d */
+    cursor: grab;
+    touch-action: none;            /* let the planet capture touch-drag */
+  }
+  .planet-wrap.dragging { cursor: grabbing; }
+
+  /* hint the compositor about the JS-driven layers */
+  .planet .surface,
+  .planet .clouds,
+  .moon-orbit,
+  .stage .stars,
+  .stage .nebula { will-change: transform; }
+
+  /* reticle wakes up when the cursor is on the stage */
+  .reticle { transition: opacity .5s ease; }
+  .stage:hover .reticle { opacity: 0.85; }
+
+  /* "drag me" affordance — fades after the first interaction */
+  .stage .grab-hint {
+    position: absolute;
+    left: 50%; bottom: 13%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(232,180,120,0.65);
+    z-index: 24;
+    pointer-events: none;
+    opacity: 0;
+    animation: hint-in 1s ease 2.4s forwards, hint-pulse 3s ease 3.4s infinite;
+  }
+  .stage.touched .grab-hint { animation: hint-out .5s ease forwards; }
+  @keyframes hint-in   { to { opacity: 1; } }
+  @keyframes hint-out  { to { opacity: 0; } }
+  @keyframes hint-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html:not(.motion-full) .planet-wrap { cursor: default; }
+    html:not(.motion-full) .stage .grab-hint { display: none; }
+  }
+  /* ═════════════ SELECTOR DE LINGUAS ═════════════
+     <details> em vez de um menu em JavaScript: abre sem script nenhum e as
+     ligacoes ficam no HTML, que e o que os motores de busca leem.
+     O sprite das bandeiras nao ocupa espaco na pagina. */
+  .fl-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .lang-fl {
+    width: 18px; height: 12.6px; flex: none; display: block; border-radius: 1.5px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.18);
+  }
+  html.night .lang-fl { box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+  nav.top .mark .lang-picker { position: relative; }
+  nav.top .mark .lang-cur {
+    list-style: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink);
+    background: var(--paper-deep); border: 1px solid var(--rule);
+    border-radius: 2px; padding: 3px 8px; white-space: nowrap;
+    transition: color .25s, border-color .25s;
+  }
+  nav.top .mark .lang-cur::-webkit-details-marker { display: none; }
+  nav.top .mark .lang-cur::after { content: '\25BE'; color: var(--ink-mute); }
+  nav.top .mark .lang-cur:hover,
+  nav.top .mark .lang-picker[open] .lang-cur { color: var(--amber); border-color: var(--amber); }
+  nav.top .mark .lang-list {
+    position: absolute; left: 0; top: calc(100% + 6px); z-index: 60;
+    display: grid; gap: 2px; min-width: 150px; padding: 5px;
+    background: var(--paper-deep); border: 1px solid var(--rule);
+    border-radius: 3px; box-shadow: 0 14px 30px -12px rgba(0,0,0,.55);
+  }
+  nav.top .mark .lang-btn {
+    display: flex; align-items: center; gap: 7px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    color: var(--ink-mute); text-decoration: none;
+    padding: 5px 7px; border-radius: 2px; white-space: nowrap;
+    transition: color .2s, background .2s;
+  }
+  nav.top .mark .lang-btn:hover { color: var(--ink); background: rgba(0,0,0,.06); }
+  html.night nav.top .mark .lang-btn:hover { background: rgba(255,255,255,.07); }
+  nav.top .mark .lang-btn[aria-current="true"] { color: var(--amber); }
+  /* Dezasseis linguas nao cabem numa coluna: o painel passa a duas, com a
+     mesma largura minima do site do LogViewer. */
+  nav.top .mark .lang-list {
+    grid-template-columns: 1fr 1fr; min-width: 268px;
+  }
+  @media (max-width: 560px) {
+    nav.top .mark .lang-list { grid-template-columns: 1fr; min-width: 176px; }
+  }
+
+  /* ═════════════ DA DIREITA PARA A ESQUERDA (arabe) ═════════════
+     O `dir="rtl"` do <html> vira o texto, o flex e a grelha sozinho. O que NAO
+     vira sao as propriedades fisicas, e fora do palco sao estas.
+     ⛔ O PALCO fica em LTR: e uma imagem de instrumento, e espelha-la punha a
+        luz do planeta do lado errado e os rotulos do HUD nos cantos trocados.
+        O texto arabe la dentro volta a rtl nos elementos que o levam. */
+  [dir="rtl"] .stage { direction: ltr; }
+  [dir="rtl"] .stage .hud-top span,
+  [dir="rtl"] .stage .hud-bottom span,
+  [dir="rtl"] .stage .data-label > div,
+  [dir="rtl"] .stage .grab-hint { direction: rtl; }
+  /* ⛔ O .skip-link esconde-se para CIMA (top: -60px) e nao para o lado: o
+     `left: 12px` e so a ancoragem horizontal. A primeira versao desta regra
+     mandava-o para `right: -9999px`, e como o :focus desta pagina so mexe no
+     `top`, o atalho de acessibilidade NUNCA MAIS aparecia em arabe. Aqui
+     troca-se apenas o lado a que esta encostado. */
+  [dir="rtl"] .skip-link { left: auto; right: 12px; }
+  [dir="rtl"] nav.top .mark .lang-list { left: auto; right: 0; }
+  /* ⚠ A capitular tem de vencer `section.intro .body .drop`, que leva um
+     ELEMENTO na conta da especificidade -- a primeira versao desta regra era
+     `[dir="rtl"] .intro .drop` e perdia em silencio: a letra ficava a flutuar
+     do lado esquerdo numa pagina que se le da direita para a esquerda. */
+  [dir="rtl"] section.intro .body .drop { float: right; padding: 8px 0 0 12px; }
+</style>
+</head>
+<body>
+<!-- Bandeiras em SVG. Os MESMOS desenhos do LogViewer e da pagina da versao 2
+     do ExplorerFocus -- a coerencia entre sites e deliberada.
+     ⚠ NAO se usa emoji de bandeira: o Windows nao tem glifos para elas e
+       sairia um par de letras numa caixa, no unico sistema que nos importa.
+     O sprite nao ocupa espaco nenhum (.fl-sprite). -->
+<svg class="fl-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="fl-pt" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FF0000"/><rect width="8" height="14" fill="#006600"/><circle cx="8" cy="7" r="2.9" fill="#FFCC00"/><circle cx="8" cy="7" r="1.9" fill="#FFFFFF"/><rect x="7.1" y="5.9" width="1.8" height="2.2" fill="#003399"/></symbol>
+<symbol id="fl-br" viewBox="0 0 20 14"><rect width="20" height="14" fill="#009C3B"/><polygon points="10,1.4 18.6,7 10,12.6 1.4,7" fill="#FFDF00"/><circle cx="10" cy="7" r="2.9" fill="#002776"/><path d="M7.2 6.1a3.4 3.4 0 0 1 5.7 1.1l-.9.3a2.5 2.5 0 0 0-4.2-.8z" fill="#FFFFFF"/></symbol>
+<symbol id="fl-gb" viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l20 14M20 0L0 14" stroke="#FFFFFF" stroke-width="2.8"/><path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" stroke-width="1.4"/><path d="M10 0v14M0 7h20" stroke="#FFFFFF" stroke-width="4.6"/><path d="M10 0v14M0 7h20" stroke="#C8102E" stroke-width="2.8"/></symbol>
+<symbol id="fl-us" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/><g fill="#FFFFFF"><circle cx="1.6" cy="1.5" r=".36"/><circle cx="4" cy="1.5" r=".36"/><circle cx="6.4" cy="1.5" r=".36"/><circle cx="2.8" cy="3" r=".36"/><circle cx="5.2" cy="3" r=".36"/><circle cx="1.6" cy="4.5" r=".36"/><circle cx="4" cy="4.5" r=".36"/><circle cx="6.4" cy="4.5" r=".36"/><circle cx="2.8" cy="6" r=".36"/><circle cx="5.2" cy="6" r=".36"/></g></symbol>
+<symbol id="fl-es" viewBox="0 0 20 14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></symbol>
+<symbol id="fl-fr" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></symbol>
+<symbol id="fl-it" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><rect width="6.67" height="14" fill="#009246"/><rect x="13.33" width="6.67" height="14" fill="#CE2B37"/></symbol>
+<symbol id="fl-de" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#000000"/><rect y="4.67" width="20" height="4.66" fill="#DD0000"/><rect y="9.33" width="20" height="4.67" fill="#FFCE00"/></symbol>
+<symbol id="fl-pl" viewBox="0 0 20 14"><rect width="20" height="7" fill="#FFFFFF"/><rect y="7" width="20" height="7" fill="#DC143C"/></symbol>
+<symbol id="fl-ru" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#FFFFFF"/><rect y="4.67" width="20" height="4.66" fill="#0039A6"/><rect y="9.33" width="20" height="4.67" fill="#D52B1E"/></symbol>
+<symbol id="fl-sa" viewBox="0 0 20 14"><rect width="20" height="14" fill="#006C35"/><path d="M4.2 6.2q1.45-1.4 2.9 0t2.9 0t2.9 0t2.9 0" fill="none" stroke="#FFFFFF" stroke-width=".9" stroke-linecap="round"/><rect x="4.6" y="8.7" width="11" height=".8" rx=".4" fill="#FFFFFF"/><path d="M4.6 9.1l1.7-1.2v2.4z" fill="#FFFFFF"/></symbol>
+<symbol id="fl-in" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#FF9933"/><rect y="4.67" width="20" height="4.66" fill="#FFFFFF"/><rect y="9.33" width="20" height="4.67" fill="#138808"/><circle cx="10" cy="7" r="1.8" fill="none" stroke="#000080" stroke-width=".45"/><circle cx="10" cy="7" r=".45" fill="#000080"/></symbol>
+<symbol id="fl-cn" viewBox="0 0 20 14"><rect width="20" height="14" fill="#DE2910"/><g fill="#FFDE00"><polygon points="3.33,1.33 3.73,2.55 5,2.55 3.97,3.30 4.36,4.51 3.33,3.76 2.30,4.51 2.70,3.30 1.67,2.55 2.94,2.55"/><polygon points="6.67,0.83 6.82,1.32 7.33,1.32 6.92,1.61 7.08,2.10 6.67,1.80 6.26,2.10 6.41,1.61 6.00,1.32 6.51,1.32"/><polygon points="8.00,2.00 8.16,2.48 8.66,2.48 8.25,2.78 8.41,3.26 8.00,2.97 7.59,3.26 7.75,2.78 7.34,2.48 7.84,2.48"/><polygon points="8.00,3.67 8.16,4.15 8.66,4.15 8.25,4.45 8.41,4.93 8.00,4.63 7.59,4.93 7.75,4.45 7.34,4.15 7.84,4.15"/><polygon points="6.67,4.83 6.82,5.32 7.33,5.32 6.92,5.61 7.08,6.10 6.67,5.80 6.26,6.10 6.41,5.61 6.00,5.32 6.51,5.32"/></g></symbol>
+<symbol id="fl-tw" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FE0000"/><rect width="10" height="7" fill="#000095"/><circle cx="5" cy="3.5" r="2.1" fill="#FFFFFF"/><circle cx="5" cy="3.5" r="1.4" fill="#000095"/><circle cx="5" cy="3.5" r="1" fill="#FFFFFF"/></symbol>
+<symbol id="fl-jp" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><circle cx="10" cy="7" r="4.2" fill="#BC002D"/></symbol>
+<symbol id="fl-kr" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><circle cx="10" cy="7" r="3" fill="#CD2E3A"/><path d="M7 7a1.5 1.5 0 0 1 3 0 1.5 1.5 0 0 0 3 0 3 3 0 0 1-6 0z" fill="#0047A0"/></symbol>
+</defs></svg>
+
+<!-- BOOT SEQUENCE overlay (Frente B) — shown once per session -->
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner">
+    <div class="boot-title">mBROTHERS · ORBITAL SYSTEM</div>
+    <pre class="boot-log" id="bootLog"></pre>
+    <div class="boot-hint" data-i18n="boot.hint">klicken oder eine Taste drücken zum Überspringen</div>
+  </div>
+</div>
+
+<a class="skip-link" href="#products" data-i18n="skip.link">Zum Inhalt springen</a>
+
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="top">
+    <div class="mark">
+      <span class="dot"></span>
+      <span class="id">mBROTHERS // STUDIO</span>
+      <span class="build" id="buildTag" data-build="BUILD 10.12">BUILD 10.12</span>
+      <button class="motion-toggle" id="motionToggle" type="button" hidden></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Tag / Nacht umschalten" title="Tag / Nacht umschalten" data-i18n-attr="aria-label:theme.toggle;title:theme.toggle">☾</button>
+      <details class="lang-picker">
+        <summary class="lang-cur" title="Sprache"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-de"/></svg><span>Deutsch</span></summary>
+        <div class="lang-list">
+          <a class="lang-btn" href="../pt/" lang="pt"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-pt"/></svg><span>Português</span></a>
+          <a class="lang-btn" href="../br/" lang="pt-BR"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-br"/></svg><span>Português (BR)</span></a>
+          <a class="lang-btn" href="../" lang="en"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-gb"/></svg><span>English (GB)</span></a>
+          <a class="lang-btn" href="../" lang="en"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-us"/></svg><span>English (US)</span></a>
+          <a class="lang-btn" href="../es/" lang="es"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-es"/></svg><span>Español</span></a>
+          <a class="lang-btn" href="../fr/" lang="fr"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-fr"/></svg><span>Français</span></a>
+          <a class="lang-btn" href="../it/" lang="it"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-it"/></svg><span>Italiano</span></a>
+          <a class="lang-btn" href="../de/" lang="de" aria-current="true"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-de"/></svg><span>Deutsch</span></a>
+          <a class="lang-btn" href="../pl/" lang="pl"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-pl"/></svg><span>Polski</span></a>
+          <a class="lang-btn" href="../ru/" lang="ru"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-ru"/></svg><span>Русский</span></a>
+          <a class="lang-btn" href="../ar/" lang="ar"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-sa"/></svg><span>العربية</span></a>
+          <a class="lang-btn" href="../hi/" lang="hi"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-in"/></svg><span>हिन्दी</span></a>
+          <a class="lang-btn" href="../zh/" lang="zh-Hans"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-cn"/></svg><span>中文 (简体)</span></a>
+          <a class="lang-btn" href="../zh-tw/" lang="zh-Hant"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-tw"/></svg><span>中文 (繁體)</span></a>
+          <a class="lang-btn" href="../ja/" lang="ja"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-jp"/></svg><span>日本語</span></a>
+          <a class="lang-btn" href="../ko/" lang="ko"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-kr"/></svg><span>한국어</span></a>
+        </div>
+      </details>
+    </div>
+    <ul>
+      <li><a href="#products" data-i18n="nav.products">Produkte</a></li>
+      <li><a href="#philosophy" data-i18n="nav.philosophy">Haltung</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Übertragung</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="meta-row">
+      <span data-i18n="hero.vol">VOL. I · MMXXVI</span>
+      <span class="blink-cursor" id="utcClock" data-i18n="hero.signal">SIGNAL EMPFANGEN</span>
+      <span data-i18n="hero.place">LISSABON · 38,7°N 9,1°W</span>
+    </div>
+
+    <!-- ════════ PLANETARY STAGE ════════ -->
+    <div class="stage">
+      <div class="void"></div>
+      <div class="nebula"></div>
+      <canvas class="starfield-canvas" id="starfield" aria-hidden="true"></canvas>
+      <div class="stars"></div>
+      <div class="shooting"></div>
+      <div class="plate-frame"></div>
+
+      <!-- Stage frame brackets -->
+      <span class="frame tl"></span>
+      <span class="frame tr"></span>
+      <span class="frame bl"></span>
+      <span class="frame br"></span>
+
+      <!-- HUD readouts -->
+      <div class="hud-top">
+        <span data-i18n="hud.feed">LIVE-BILD · ORBITKAMERA 04</span>
+        <span style="color:var(--neon-glow)">● REC <span id="recTimer">00:00</span></span>
+        <span>38.7223°N · 9.1393°W</span>
+      </div>
+      <div class="hud-bottom">
+        <span data-i18n="hud.obj">OBJ-001 / PLANET · KLASSE M</span>
+        <span class="red" data-i18n="hud.signal">SIGNAL : STABIL</span>
+        <span>DIST · <span id="distAU">0.0021</span> AU</span>
+      </div>
+
+      <!-- CRT phosphor terminal -->
+      <div class="crt" aria-hidden="true">
+        <div class="crt-lines" id="crtLines"></div>
+      </div>
+
+      <!-- Data labels around planet -->
+      <div class="data-label dl-1">
+        <div data-i18n="dl.temp">OBERFLÄCHENTEMP.</div>
+        <div class="accent"><span id="temp">+286</span> K</div>
+        <span class="leader"></span>
+      </div>
+      <div class="data-label dl-2">
+        <div data-i18n="dl.atmo">ATMOSPHÄRE</div>
+        <div class="accent" data-i18n="dl.atmo.v">N₂ · O₂ · SPUREN</div>
+        <span class="leader"></span>
+      </div>
+      <div class="data-label dl-3">
+        <div data-i18n="dl.rot">ROTATION</div>
+        <div class="accent"><span id="rot">0.079</span> RAD/S</div>
+        <span class="leader"></span>
+      </div>
+      <div class="data-label dl-4">
+        <div data-i18n="dl.moon">MOND · 1</div>
+        <div class="accent" data-i18n="dl.moon.v">PERIODE 30 s</div>
+        <span class="leader"></span>
+      </div>
+
+      <!-- Scan beam -->
+      <div class="scanbeam"></div>
+
+      <!-- Interaction affordance -->
+      <div class="grab-hint" data-i18n="grab.hint">⟲ ziehen zum Drehen · bewegen zum Umsehen</div>
+
+      <!-- The planet itself -->
+      <div class="planet-wrap">
+        <!-- Back portion of ring (behind planet) -->
+        <div class="ring-container">
+          <div class="ring outer"></div>
+          <div class="ring"></div>
+          <div class="ring inner"></div>
+        </div>
+
+        <!-- Planet sphere -->
+        <div class="planet">
+          <div class="surface"></div>
+          <div class="clouds"></div>
+          <div class="highlight"></div>
+          <div class="terminator"></div>
+        </div>
+
+        <!-- Front portion of ring (covers planet bottom) -->
+        <div class="ring-front">
+          <div class="ring outer"></div>
+          <div class="ring"></div>
+          <div class="ring inner"></div>
+        </div>
+
+        <!-- Orbiting moon -->
+        <div class="moon-orbit">
+          <div class="moon"></div>
+        </div>
+
+        <!-- Reticle SVG -->
+        <svg class="reticle" viewBox="0 0 100 100" fill="none" stroke="rgba(232,180,120,0.45)" stroke-width="0.25">
+          <circle cx="50" cy="50" r="48" stroke-dasharray="0.6 2"/>
+          <line x1="50" y1="0"  x2="50" y2="6"/>
+          <line x1="50" y1="94" x2="50" y2="100"/>
+          <line x1="0"  y1="50" x2="6"  y2="50"/>
+          <line x1="94" y1="50" x2="100" y2="50"/>
+        </svg>
+
+        <!-- WORDMARK floating over planet -->
+        <div class="wordmark-wrap">
+          <div class="wordmark-ghost r" aria-hidden="true">mBrothers</div>
+          <div class="wordmark-ghost c" aria-hidden="true">mBrothers</div>
+          <h1 class="wordmark"><span class="amp">m</span>Brothers</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="ornament">
+      <span class="line"></span>
+      <span class="tick" data-i18n="orn.est">GEGR. 2026</span>
+      <span class="diamond"></span>
+      <span class="tick">v0.1</span>
+      <span class="line"></span>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="label" data-i18n="intro.label">Über das Studio</div>
+    <div class="body">
+      <p data-i18n-html="intro.p1"><span class="drop">W</span>ir sind eine kleine Werkstatt von Software-Handwerkern, die eine stille Sonne umkreist. Uns beschäftigt das Alltägliche — die Fenster, die offen bleiben, die Logs, in die man starrt, die Konzentration, die immer wieder verloren geht. Wir bauen Werkzeuge, die sich ihren Platz auf dem Schreibtisch verdienen, indem sie leise, schnell und rücksichtsvoll sind.</p>
+      <p data-i18n="intro.p2">Keine Abos, die man zu kündigen vergisst. Keine Telemetrie, die man fürchten muss. Nur Instrumente, die eine Sache sorgfältig tun, nichts nach Hause senden und dann aus dem Weg gehen.</p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <div class="section-head">
+      <div class="rule"></div>
+      <h2 data-i18n="products.title">Der Katalog</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="catalog">
+
+      <article class="product">
+        <span class="index">№ 01 / SIG-01</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <rect x="10" y="8" width="44" height="48" rx="2"/>
+          <line x1="18" y1="20" x2="46" y2="20"/>
+          <line x1="18" y1="28" x2="40" y2="28"/>
+          <line x1="18" y1="36" x2="44" y2="36"/>
+          <line x1="18" y1="44" x2="36" y2="44"/>
+          <circle cx="50" cy="50" r="6" stroke="#a86b2c"/>
+          <line x1="54.5" y1="54.5" x2="58" y2="58" stroke="#a86b2c"/>
+        </svg>
+        <h3>The Absolute Log<span class="it">Viewer</span></h3>
+        <div class="tag" data-i18n="p1.tag">Beobachtung · Spurensuche · Ruhe</div>
+        <p class="desc" data-i18n="p1.desc">Ein gelassener Leser für Logdateien jeder Größe. Mitlesen, filtern und verfolgen, ohne dass der Editor stockt. Für die Momente, in denen das System spricht und man wirklich zuhören muss.</p>
+        <div class="status">
+          <span class="ok" data-i18n="status.ok">Status · in Betrieb</span>
+          <span>Build · 1.5</span>
+          <span>WIN</span>
+        </div>
+        <div class="actions">
+          <a href="https://nunex-mbrothers.github.io/TheAbsoluteLogViewer" target="_blank" rel="noopener" data-i18n-html="more">Mehr erfahren <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="product">
+        <span class="index">№ 02 / SIG-02</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <rect x="8" y="14" width="48" height="38" rx="2"/>
+          <path d="M8 22 L24 22 L28 14"/>
+          <circle cx="32" cy="34" r="9" fill="#f4ecd8" stroke="#a86b2c"/>
+          <circle cx="32" cy="34" r="2.5" fill="#a86b2c" stroke="none"/>
+          <line x1="32" y1="20" x2="32" y2="24" stroke="#a86b2c"/>
+          <line x1="32" y1="44" x2="32" y2="48" stroke="#a86b2c"/>
+          <line x1="18" y1="34" x2="22" y2="34" stroke="#a86b2c"/>
+          <line x1="42" y1="34" x2="46" y2="34" stroke="#a86b2c"/>
+        </svg>
+        <h3>Explorer<span class="it">Focus</span></h3>
+        <div class="tag" data-i18n="p2.tag">Aufmerksamkeit · Dateisysteme · Stille</div>
+        <p class="desc" data-i18n="p2.desc">Holt den Windows-Explorer nach vorn, ohne die Stelle zu verlieren, an der man war. Ein kleines, bewusst gebautes Hilfsmittel für Menschen, die per Tastatur navigieren und die Hände dort lassen wollen, wo sie sind.</p>
+        <div class="status">
+          <span class="ok" data-i18n="status.ok">Status · in Betrieb</span>
+          <span>Build · 1.2</span>
+          <span>WIN</span>
+        </div>
+        <div class="actions">
+          <a href="https://nunex-mbrothers.github.io/ExplorerFocus" target="_blank" rel="noopener" data-i18n-html="more">Mehr erfahren <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="product placeholder">
+        <span class="index">№ 03 / SIG-03</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.55">
+          <circle cx="32" cy="32" r="20" stroke-dasharray="3 4"/>
+          <circle cx="32" cy="32" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3 data-i18n="p3.h">In Übertragung</h3>
+        <div class="tag" data-i18n="p3.tag">Demnächst · 2026</div>
+        <p class="desc" data-i18n="p3.desc">Auf der Werkbank nimmt ein weiteres kleines Instrument Gestalt an. Gebaut mit derselben Geduld und derselben Weigerung, hinzuzufügen, was nicht gebraucht wird.</p>
+        <div class="status">
+          <span class="pending" data-i18n="p3.status">Status · im Anflug</span>
+          <span>ETA · ████</span>
+        </div>
+        <div class="actions">
+          <a href="#contact" data-i18n-html="p3.cta">Benachrichtigt werden <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="product placeholder">
+        <span class="index">№ 04 / SIG-??</span>
+        <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.4">
+          <path d="M14 50 L32 14 L50 50 Z"/>
+        </svg>
+        <h3 data-i18n="p4.h">Reserviert</h3>
+        <div class="tag" data-i18n="p4.tag">Eine Idee, noch still</div>
+        <p class="desc" data-i18n="p4.desc">Platz freigehalten für die nächste Lösung, die es wert ist, gebaut zu werden. Der Katalog wächst langsam — mit Absicht.</p>
+        <div class="status">
+          <span class="pending" data-i18n="p4.status">Status · ruhend</span>
+          <span data-i18n="p4.signal">Signal · schwach</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy" id="philosophy">
+    <h2 data-i18n-html="phil.quote">„Wir machen Software, wie eine alte Werkstatt <span class="glow">Instrumente</span> macht —<br/>wenige an Zahl, im Detail durchdacht, gebaut, um die Mode zu überleben.“</h2>
+    <p class="sig" data-i18n="phil.sig">— die mBrothers</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div>
+      <h4 data-i18n="foot.studio.h">Das Studio</h4>
+      <p data-i18n="foot.studio.p">mBrothers ist ein unabhängiges Software-Studio. Zwei Köpfe, ein paar gute Werkzeuge und ein langer Blick auf kleine Welten.</p>
+    </div>
+    <div>
+      <h4 data-i18n="foot.trans.h">Übertragung</h4>
+      <a href="mailto:NuneXmBrothers@gmail.com">NuneXmBrothers@gmail.com</a>
+      <a href="https://github.com/nunex-mbrothers" target="_blank" rel="noopener">GitHub · @nunex-mbrothers</a>
+    </div>
+    <div>
+      <h4 data-i18n="foot.prov.h">Herkunft</h4>
+      <p data-i18n-html="foot.prov.p">Von Hand gebaut in Lissabon.<br/>Gehostet auf nunex-mbrothers.github.io</p>
+    </div>
+
+    <div class="readout">
+      <span class="live"><span class="dot"></span>SYSTEM <span class="neon-text">ONLINE</span> · UPTIME <span id="uptime">00:00</span> · <span id="fps">60</span> FPS</span>
+      <span>UPLINK · 38.7223°N · 9.1393°W · ALT 0.011km</span>
+    </div>
+
+    <div class="colophon">
+      <span>© <span class="brand-mb">mBrothers</span> · MMXXVI</span>
+      <span data-i18n="foot.set">Gesetzt in Cormorant · Italianno · JetBrains Mono</span>
+      <span>practical solutions // small planetary systems</span>
+      <span id="viewCounter" hidden title="Seitenaufrufe" data-i18n-attr="title:foot.views"></span>
+    </div>
+  </footer>
+
+</div>
+
+</div>
+
+<script src="../app.js" defer></script>
+
+<!-- GoatCounter — privacy-friendly analytics (no cookies, no PII). Counts the
+     page visit; same account as the other mBrothers product pages. -->
+<script data-goatcounter="https://nunex.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>
