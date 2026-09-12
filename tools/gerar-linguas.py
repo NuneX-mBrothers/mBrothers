@@ -8,7 +8,7 @@
 
 ⛔ Isto não é conteúdo escrito à mão: é GERADO. Sempre que o texto do site
    mudar, correr outra vez — senão a página por idioma fica para trás. O
-   `publicar-site_mBrothers.cmd` já o corre antes de commitar.
+   `__publicar-site_mBrothers.cmd` já o corre antes de commitar.
 
 📌 Só gera as línguas cujo dicionário existe em i18n/. Acrescentar o Brasil é
    escrever `i18n/br.js` e uma linha no LINGUAS — mais nada.
