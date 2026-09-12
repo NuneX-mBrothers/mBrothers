@@ -63,7 +63,7 @@ echo [2/5] A gerar a pagina por idioma...
 python "%SITE_DIR%tools\gerar-linguas.py"
 if errorlevel 1 (
     echo [ERRO] O gerador das paginas por idioma falhou.
-    echo        Sem ele, a pagina /pt/ fica desactualizada. Abortado.
+    echo        Sem ele, as 15 paginas por idioma ficam desactualizadas. Abortado.
     pause
     exit /b 1
 )
@@ -79,9 +79,18 @@ set "NCH=0"
 for /f %%c in ('git status --porcelain ^| find /c /v ""') do set "NCH=%%c"
 if "%NCH%"=="0" goto :nada
 
-set "MSG="
-set /p "MSG=      Mensagem do commit (Enter = Site: atualizacao): "
-if not defined MSG set "MSG=Site: atualizacao"
+rem A mensagem do commit NAO se pergunta: o `set /p` parava aqui a pedir
+rem uma resposta que era sempre a mesma. Usa-se a de omissao, e quem quiser
+rem outra passa-a como argumento:
+rem     __publicar-site_mBrothers.cmd "Os cartoes dos produtos"
+rem
+rem Os dois `set` ficam ao nivel de cima, FORA de qualquer bloco `if (...)`:
+rem este ficheiro nao tem delayed expansion, e dentro de um bloco o %MSG%
+rem seria expandido quando o bloco e LIDO e nao quando corre -- sairia
+rem vazio. O `if` de uma linha so, sem parenteses, nao tem esse problema.
+set "MSG=Site: atualizacao"
+if not "%~1"=="" set "MSG=%~1"
+echo       Mensagem: %MSG%
 
 rem -- 4. Adicionar e commitar ----------------------------------------
 echo.
@@ -127,7 +136,13 @@ echo   Landing:  %URL%
 echo   (GitHub Pages pode demorar cerca de 1 min)
 echo.
 echo   Sem build e sem Release. A versao continua escrita a mao;
-echo   a pagina /pt/ e o sitemap.xml foram gerados no passo [2/5].
+echo   as 15 paginas por idioma e o sitemap.xml foram gerados no passo [2/5].
 echo ==========================================
 echo.
-pause
+rem O pause FINAL saiu, por pedido do Joao: nao ter de carregar nada.
+rem Nao se apaga sem mais: se o script for corrido por duplo clique, a
+rem janela fechava-se antes de dar tempo de ler o resultado. O timeout
+rem mostra a contagem, fecha-se sozinho ao fim de 12s, e fecha logo se se
+rem carregar numa tecla -- as tres coisas ao mesmo tempo.
+rem Os outros cinco pause FICAM: sao caminhos de erro, e ai queremos parar.
+timeout /t 12
