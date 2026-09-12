@@ -38,29 +38,95 @@
      nesta tabela, e o botao voltava ao ingles sem um unico sinal. Procura-se
      pela etiqueta INTEIRA e so depois pelo prefixo. */
   var STR = {
-    en: {
-      'motion.full': '▸ full motion',
-      'motion.calm': 'motion · full',
-      'motion.t.on': 'Enable the full animated experience (overrides the system setting)',
-      'motion.t.off': 'Full motion on — click to follow the system setting again'
+    'ar': {
+      'motion.full': "▸ حركة كاملة",
+      'motion.calm': "حركة · كاملة",
+      'motion.t.on': "تشغيل التجربة المتحرّكة الكاملة (يتجاوز إعداد النظام)",
+      'motion.t.off': "الحركة الكاملة مشغّلة — اضغط للعودة إلى اتّباع إعداد النظام"
     },
-    pt: {
-      'motion.full': '▸ movimento completo',
-      'motion.calm': 'movimento · completo',
-      'motion.t.on': 'Ligar a experiência animada completa (ignora a definição do sistema)',
-      'motion.t.off': 'Movimento completo ligado — clica para voltar a seguir a definição do sistema'
+    'de': {
+      'motion.full': "▸ volle Bewegung",
+      'motion.calm': "Bewegung · voll",
+      'motion.t.on': "Die vollständig animierte Darstellung einschalten (übergeht die Systemeinstellung)",
+      'motion.t.off': "Volle Bewegung ein — klicken, um wieder der Systemeinstellung zu folgen"
+    },
+    'en': {
+      'motion.full': "▸ full motion",
+      'motion.calm': "motion · full",
+      'motion.t.on': "Enable the full animated experience (overrides the system setting)",
+      'motion.t.off': "Full motion on — click to follow the system setting again"
+    },
+    'es': {
+      'motion.full': "▸ movimiento completo",
+      'motion.calm': "movimiento · completo",
+      'motion.t.on': "Activar la experiencia animada completa (ignora el ajuste del sistema)",
+      'motion.t.off': "Movimiento completo activado — haz clic para volver a seguir el ajuste del sistema"
+    },
+    'fr': {
+      'motion.full': "▸ animation complète",
+      'motion.calm': "animation · complète",
+      'motion.t.on': "Activer l'expérience animée complète (remplace le réglage du système)",
+      'motion.t.off': "Animation complète activée — cliquez pour suivre de nouveau le réglage du système"
+    },
+    'hi': {
+      'motion.full': "▸ पूरी गति",
+      'motion.calm': "गति · पूरी",
+      'motion.t.on': "पूरी एनिमेशन चालू कीजिए (सिस्टम की सेटिंग को दरकिनार करता है)",
+      'motion.t.off': "पूरी गति चालू — सिस्टम की सेटिंग पर लौटने के लिए क्लिक कीजिए"
+    },
+    'it': {
+      'motion.full': "▸ movimento completo",
+      'motion.calm': "movimento · completo",
+      'motion.t.on': "Attivare l'esperienza animata completa (ignora l'impostazione di sistema)",
+      'motion.t.off': "Movimento completo attivo — clicca per tornare a seguire l'impostazione di sistema"
+    },
+    'ja': {
+      'motion.full': "▸ フルモーション",
+      'motion.calm': "モーション · フル",
+      'motion.t.on': "アニメーションを完全に有効にする（システム設定を上書きします）",
+      'motion.t.off': "フルモーション有効 — クリックでシステム設定に戻します"
+    },
+    'ko': {
+      'motion.full': "▸ 전체 모션",
+      'motion.calm': "모션 · 전체",
+      'motion.t.on': "완전한 애니메이션을 켭니다 (시스템 설정을 무시합니다)",
+      'motion.t.off': "전체 모션 켜짐 — 클릭하면 다시 시스템 설정을 따릅니다"
+    },
+    'pl': {
+      'motion.full': "▸ pełny ruch",
+      'motion.calm': "ruch · pełny",
+      'motion.t.on': "Włącz pełne animacje (pomija ustawienie systemu)",
+      'motion.t.off': "Pełny ruch włączony — kliknij, aby znów podążać za ustawieniem systemu"
+    },
+    'pt': {
+      'motion.full': "▸ movimento completo",
+      'motion.calm': "movimento · completo",
+      'motion.t.on': "Ligar a experiência animada completa (ignora a definição do sistema)",
+      'motion.t.off': "Movimento completo ligado — clica para voltar a seguir a definição do sistema"
+    },
+    'pt-br': {
+      'motion.full': "▸ movimento completo",
+      'motion.calm': "movimento · completo",
+      'motion.t.on': "Ligar a experiência animada completa (ignora a configuração do sistema)",
+      'motion.t.off': "Movimento completo ligado — clique para voltar a seguir a configuração do sistema"
+    },
+    'ru': {
+      'motion.full': "▸ полное движение",
+      'motion.calm': "движение · полное",
+      'motion.t.on': "Включить полную анимацию (переопределяет системную настройку)",
+      'motion.t.off': "Полное движение включено — нажмите, чтобы снова следовать системной настройке"
+    },
+    'zh-hans': {
+      'motion.full': "▸ 完整动态",
+      'motion.calm': "动态 · 完整",
+      'motion.t.on': "开启完整动画效果（覆盖系统设置）",
+      'motion.t.off': "完整动态已开启 — 点击即可改回跟随系统设置"
     },
     'zh-hant': {
-      'motion.full': '▸ 完整動態',
-      'motion.calm': '動態 · 完整',
-      'motion.t.on': '開啟完整動畫效果（覆寫系統設定）',
-      'motion.t.off': '完整動態已開啟 — 點擊即可改回跟隨系統設定'
-    },
-    ja: {
-      'motion.full': '▸ フルモーション',
-      'motion.calm': 'モーション · フル',
-      'motion.t.on': 'アニメーションを完全に有効にする（システム設定を上書きします）',
-      'motion.t.off': 'フルモーション有効 — クリックでシステム設定に戻します'
+      'motion.full': "▸ 完整動態",
+      'motion.calm': "動態 · 完整",
+      'motion.t.on': "開啟完整動畫效果（覆寫系統設定）",
+      'motion.t.off': "完整動態已開啟 — 點擊即可改回跟隨系統設定"
     }
   };
   var _tag = (document.documentElement.lang || 'en').toLowerCase();
