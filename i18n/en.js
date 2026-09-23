@@ -57,7 +57,7 @@ window.I18N.en = {
   "p1.tag": "Observation · Forensics · Calm",
   "p1.desc": "A serene reader for log files of any size. Stream, filter, and follow without the editor stuttering. For when the system speaks and you actually need to listen.",
   "p2.tag": "Attention · File systems · Quiet",
-  "p2.desc": "Bring Windows Explorer forward without losing your place. A small, deliberate utility for people who navigate by keyboard and want their hands to stay where they are.",
+  "p2.desc": "A focused Windows Explorer alternative — profiles, configurable trees, rich preview, honest file operations. Version 2 adds encrypted vaults that mount as a drive letter.",
   "p3.h": "In transmission",
   "p3.tag": "Forthcoming · 2026",
   "p3.desc": "Another small instrument is taking shape on the workbench. Built with the same patience and the same refusal to add what isn't needed.",

@@ -44,7 +44,7 @@ window.I18N.pl = {
   "p1.tag": "Obserwacja · Dochodzenie · Spokój",
   "p1.desc": "Spokojna czytelnia dla plików logów każdej wielkości. Śledź, filtruj i podążaj za nimi bez zacinania się edytora. Na chwile, gdy system mówi i naprawdę trzeba go wysłuchać.",
   "p2.tag": "Uwaga · Systemy plików · Cisza",
-  "p2.desc": "Wyciąga Eksplorator Windows na wierzch, nie gubiąc miejsca, w którym byłeś. Małe, przemyślane narzędzie dla ludzi, którzy nawigują klawiaturą i chcą, by ręce zostały tam, gdzie są.",
+  "p2.desc": "Skupiona alternatywa dla Eksploratora plików Windows — profile, konfigurowalne drzewa, bogaty podgląd, uczciwe operacje na plikach. Wersja 2 dodaje zaszyfrowane sejfy montowane jako litera dysku.",
   "p3.h": "W transmisji",
   "p3.tag": "Wkrótce · 2026",
   "p3.desc": "Na warsztacie nabiera kształtu kolejne małe narzędzie. Budowane z tą samą cierpliwością i tą samą odmową dodawania tego, co niepotrzebne.",

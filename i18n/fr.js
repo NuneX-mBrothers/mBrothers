@@ -44,7 +44,7 @@ window.I18N.fr = {
   "p1.tag": "Observation · Investigation · Calme",
   "p1.desc": "Un lecteur serein pour les journaux de toute taille. Suivez, filtrez et accompagnez sans que l'éditeur bégaie. Pour les moments où le système parle et où il faut vraiment l'écouter.",
   "p2.tag": "Attention · Systèmes de fichiers · Silence",
-  "p2.desc": "Ramène l'Explorateur Windows au premier plan sans perdre où vous en étiez. Un utilitaire petit et délibéré, pour ceux qui naviguent au clavier et veulent garder les mains là où elles sont.",
+  "p2.desc": "Un explorateur épuré — profils, arborescences configurables, aperçu riche, opérations de fichiers honnêtes. La version 2 ajoute des coffres chiffrés montés comme un lecteur.",
   "p3.h": "En transmission",
   "p3.tag": "À venir · 2026",
   "p3.desc": "Un autre petit instrument prend forme sur l'établi. Fait avec la même patience et le même refus d'ajouter ce qui n'est pas nécessaire.",
