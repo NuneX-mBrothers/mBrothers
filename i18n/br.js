@@ -46,7 +46,7 @@ window.I18N.br = {
   "p1.tag": "Observação · Investigação · Calma",
   "p1.desc": "Um leitor sereno para arquivos de log de qualquer tamanho. Acompanhe, filtre e siga sem o editor engasgar. Para quando o sistema fala e você precisa mesmo ouvir.",
   "p2.tag": "Atenção · Sistemas de arquivos · Silêncio",
-  "p2.desc": "Traz o Explorador do Windows para a frente sem você perder onde estava. Um utilitário pequeno e deliberado, para quem navega pelo teclado e quer que as mãos fiquem onde estão.",
+  "p2.desc": "Um explorador focado — perfis, árvores configuráveis, pré-visualização rica e operações que dizem a verdade. A versão 2 traz cofres cifrados que ganham letra de unidade.",
   "p3.h": "Em transmissão",
   "p3.tag": "Em breve · 2026",
   "p3.desc": "Outro instrumento pequeno está tomando forma na bancada. Feito com a mesma paciência e a mesma recusa de acrescentar o que não é preciso.",

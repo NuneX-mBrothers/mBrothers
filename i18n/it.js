@@ -44,7 +44,7 @@ window.I18N.it = {
   "p1.tag": "Osservazione · Indagine · Calma",
   "p1.desc": "Un lettore sereno per file di log di qualunque dimensione. Segui, filtra e accompagna senza che l'editor si impunti. Per quando il sistema parla e davvero bisogna ascoltarlo.",
   "p2.tag": "Attenzione · File system · Silenzio",
-  "p2.desc": "Porta Esplora file di Windows in primo piano senza perdere dov'eri. Un'utilità piccola e deliberata, per chi si muove con la tastiera e vuole che le mani restino dove sono.",
+  "p2.desc": "Un’alternativa concentrata a Esplora file di Windows — profili, alberi configurabili, anteprima ricca, operazioni sui file oneste. La versione 2 aggiunge casseforti cifrate che si montano come lettera di unità.",
   "p3.h": "In trasmissione",
   "p3.tag": "In arrivo · 2026",
   "p3.desc": "Sul banco di lavoro sta prendendo forma un altro piccolo strumento. Fatto con la stessa pazienza e lo stesso rifiuto di aggiungere ciò che non serve.",

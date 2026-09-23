@@ -44,7 +44,7 @@ window.I18N.de = {
   "p1.tag": "Beobachtung · Spurensuche · Ruhe",
   "p1.desc": "Ein gelassener Leser für Logdateien jeder Größe. Mitlesen, filtern und verfolgen, ohne dass der Editor stockt. Für die Momente, in denen das System spricht und man wirklich zuhören muss.",
   "p2.tag": "Aufmerksamkeit · Dateisysteme · Stille",
-  "p2.desc": "Holt den Windows-Explorer nach vorn, ohne die Stelle zu verlieren, an der man war. Ein kleines, bewusst gebautes Hilfsmittel für Menschen, die per Tastatur navigieren und die Hände dort lassen wollen, wo sie sind.",
+  "p2.desc": "Eine fokussierte Alternative zum Windows-Explorer — Profile, konfigurierbare Bäume, Vorschau, ehrliche Dateioperationen. Version 2 bringt verschlüsselte Tresore mit Laufwerksbuchstaben.",
   "p3.h": "In Übertragung",
   "p3.tag": "Demnächst · 2026",
   "p3.desc": "Auf der Werkbank nimmt ein weiteres kleines Instrument Gestalt an. Gebaut mit derselben Geduld und derselben Weigerung, hinzuzufügen, was nicht gebraucht wird.",

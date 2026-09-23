@@ -44,7 +44,7 @@ window.I18N.es = {
   "p1.tag": "Observación · Investigación · Calma",
   "p1.desc": "Un lector sereno para archivos de registro de cualquier tamaño. Sigue, filtra y acompaña sin que el editor se atasque. Para cuando el sistema habla y de verdad hay que escucharlo.",
   "p2.tag": "Atención · Sistemas de archivos · Silencio",
-  "p2.desc": "Trae el Explorador de Windows al frente sin perder dónde estabas. Una utilidad pequeña y deliberada, para quien navega con el teclado y quiere que sus manos sigan donde están.",
+  "p2.desc": "Un explorador centrado — perfiles, árboles configurables, vista previa rica y operaciones de archivo honestas. La versión 2 añade bóvedas cifradas con letra de unidad.",
   "p3.h": "En transmisión",
   "p3.tag": "Próximamente · 2026",
   "p3.desc": "Otro instrumento pequeño va tomando forma en el banco de trabajo. Hecho con la misma paciencia y la misma negativa a añadir lo que no hace falta.",

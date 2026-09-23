@@ -49,7 +49,7 @@ window.I18N.pt = {
   "p1.tag": "Observação · Investigação · Calma",
   "p1.desc": "Um leitor sereno para ficheiros de log de qualquer tamanho. Segue, filtra e acompanha sem o editor engasgar. Para quando o sistema fala e é mesmo preciso ouvi-lo.",
   "p2.tag": "Atenção · Sistemas de ficheiros · Silêncio",
-  "p2.desc": "Traz o Explorador do Windows para a frente sem perderes onde estavas. Um utilitário pequeno e deliberado, para quem navega pelo teclado e quer que as mãos fiquem onde estão.",
+  "p2.desc": "Um explorador focado — perfis, árvores configuráveis, pré-visualização rica e operações que dizem a verdade. A versão 2 traz cofres cifrados que ganham letra de unidade.",
   "p3.h": "Em transmissão",
   "p3.tag": "A chegar · 2026",
   "p3.desc": "Está outro instrumento pequeno a tomar forma na bancada. Feito com a mesma paciência e a mesma recusa de acrescentar o que não é preciso.",
