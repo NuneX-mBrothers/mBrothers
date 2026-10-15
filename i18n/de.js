@@ -70,5 +70,7 @@ window.I18N.de = {
   "motion.full": "▸ volle Bewegung",
   "motion.calm": "Bewegung · voll",
   "motion.t.on": "Die vollständig animierte Darstellung einschalten (übergeht die Systemeinstellung)",
-  "motion.t.off": "Volle Bewegung ein — klicken, um wieder der Systemeinstellung zu folgen"
+  "motion.t.off": "Volle Bewegung ein — klicken, um wieder der Systemeinstellung zu folgen",
+  // 2.1.1 (15/10/2026): o cartão do EF
+  "p2.desc_211": "Eine fokussierte Alternative zum Windows-Explorer — Profile, konfigurierbare Bäume, Vorschau, ehrliche Dateioperationen. Version 2 brachte verschlüsselte Tresore mit Laufwerksbuchstaben; 2.1 bringt Werkzeuge für Audio, Video, Bilder und PDF sowie ein helles Design."
 };

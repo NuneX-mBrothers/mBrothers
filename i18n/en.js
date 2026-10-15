@@ -83,5 +83,7 @@ window.I18N.en = {
   "motion.full": "▸ full motion",
   "motion.calm": "motion · full",
   "motion.t.on": "Enable the full animated experience (overrides the system setting)",
-  "motion.t.off": "Full motion on — click to follow the system setting again"
+  "motion.t.off": "Full motion on — click to follow the system setting again",
+  // 2.1.1 (15/10/2026): o cartão do EF
+  "p2.desc_211": "A focused Windows Explorer alternative — profiles, configurable trees, rich preview, honest file operations. Version 2 added encrypted vaults that mount as a drive letter; 2.1 brings tools for audio, video, images and PDF, and a light theme."
 };

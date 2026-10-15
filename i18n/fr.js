@@ -70,5 +70,7 @@ window.I18N.fr = {
   "motion.full": "▸ animation complète",
   "motion.calm": "animation · complète",
   "motion.t.on": "Activer l'expérience animée complète (remplace le réglage du système)",
-  "motion.t.off": "Animation complète activée — cliquez pour suivre de nouveau le réglage du système"
+  "motion.t.off": "Animation complète activée — cliquez pour suivre de nouveau le réglage du système",
+  // 2.1.1 (15/10/2026): o cartão do EF
+  "p2.desc_211": "Un explorateur épuré — profils, arborescences configurables, aperçu riche, opérations de fichiers honnêtes. La version 2 a ajouté des coffres chiffrés montés comme un lecteur. La 2.1 apporte des outils pour l'audio, la vidéo, l'image et le PDF, ainsi qu'un thème clair."
 };

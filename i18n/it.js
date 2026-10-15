@@ -70,5 +70,7 @@ window.I18N.it = {
   "motion.full": "▸ movimento completo",
   "motion.calm": "movimento · completo",
   "motion.t.on": "Attivare l'esperienza animata completa (ignora l'impostazione di sistema)",
-  "motion.t.off": "Movimento completo attivo — clicca per tornare a seguire l'impostazione di sistema"
+  "motion.t.off": "Movimento completo attivo — clicca per tornare a seguire l'impostazione di sistema",
+  // 2.1.1 (15/10/2026): o cartão do EF
+  "p2.desc_211": "Un’alternativa concentrata a Esplora file di Windows — profili, alberi configurabili, anteprima ricca, operazioni sui file oneste. La versione 2 ha aggiunto casseforti cifrate che si montano come lettera di unità; la 2.1 porta strumenti per audio, video, immagini e PDF, e un tema chiaro."
 };

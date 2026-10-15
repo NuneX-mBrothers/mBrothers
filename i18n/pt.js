@@ -75,5 +75,7 @@ window.I18N.pt = {
   "motion.full": "▸ movimento completo",
   "motion.calm": "movimento · completo",
   "motion.t.on": "Ligar a experiência animada completa (ignora a definição do sistema)",
-  "motion.t.off": "Movimento completo ligado — clica para voltar a seguir a definição do sistema"
+  "motion.t.off": "Movimento completo ligado — clica para voltar a seguir a definição do sistema",
+  // 2.1.1 (15/10/2026): o cartão do EF
+  "p2.desc_211": "Um explorador focado — perfis, árvores configuráveis, pré-visualização rica e operações que dizem a verdade. A versão 2 trouxe cofres cifrados que ganham letra de unidade; a 2.1 traz ferramentas para áudio, vídeo, imagem e PDF, e um tema claro."
 };

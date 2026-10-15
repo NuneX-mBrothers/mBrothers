@@ -70,5 +70,7 @@ window.I18N.pl = {
   "motion.full": "▸ pełny ruch",
   "motion.calm": "ruch · pełny",
   "motion.t.on": "Włącz pełne animacje (pomija ustawienie systemu)",
-  "motion.t.off": "Pełny ruch włączony — kliknij, aby znów podążać za ustawieniem systemu"
+  "motion.t.off": "Pełny ruch włączony — kliknij, aby znów podążać za ustawieniem systemu",
+  // 2.1.1 (15/10/2026): o cartão do EF
+  "p2.desc_211": "Skupiona alternatywa dla Eksploratora plików Windows — profile, konfigurowalne drzewa, bogaty podgląd, uczciwe operacje na plikach. Wersja 2 dodała zaszyfrowane sejfy montowane jako litera dysku; 2.1 wnosi narzędzia do audio, wideo, obrazów i PDF oraz jasny motyw."
 };
