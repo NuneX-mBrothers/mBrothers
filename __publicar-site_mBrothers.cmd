@@ -139,7 +139,7 @@ echo   Sem build e sem Release. A versao continua escrita a mao;
 echo   as 15 paginas por idioma e o sitemap.xml foram gerados no passo [2/5].
 echo ==========================================
 echo.
-rem O pause FINAL saiu, por pedido do Joao: nao ter de carregar nada.
+rem O pause FINAL saiu: nao ter de carregar nada.
 rem Nao se apaga sem mais: se o script for corrido por duplo clique, a
 rem janela fechava-se antes de dar tempo de ler o resultado. O timeout
 rem mostra a contagem, fecha-se sozinho ao fim de 12s, e fecha logo se se
