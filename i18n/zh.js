@@ -67,6 +67,7 @@ window.I18N.zh = {
   "foot.prov.h": "来历",
   "foot.prov.p": "在里斯本手工打造。<br/>托管于 nunex-mbrothers.github.io",
   "foot.set": "字体采用 Cormorant · Italianno · JetBrains Mono",
+  "foot.company": "mBrothers 是 Intrepid Parallel, Lda 旗下的品牌，总部位于葡萄牙里斯本。",
   "foot.views": "页面浏览次数",
 
   "motion.full": "▸ 完整动态",

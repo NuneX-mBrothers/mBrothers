@@ -78,6 +78,7 @@ window.I18N.en = {
   "foot.prov.h": "Provenance",
   "foot.prov.p": "Hand-built in Lisbon.<br/>Hosted at nunex-mbrothers.github.io",
   "foot.set": "Set in Cormorant · Italianno · JetBrains Mono",
+  "foot.company": "mBrothers is a brand of Intrepid Parallel, Lda, located in Lisbon, Portugal.",
   "foot.views": "Page visits",
 
   "motion.full": "▸ full motion",
