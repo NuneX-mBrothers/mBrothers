@@ -72,6 +72,7 @@ window.I18N.ar = {
   "foot.prov.p": "مصنوع باليد في لشبونة.<br/>مستضاف على nunex-mbrothers.github.io",
   "foot.set": "الحروف: Cormorant · Italianno · JetBrains Mono",
   "foot.company": "mBrothers علامة تجارية لشركة Intrepid Parallel, Lda، ومقرّها لشبونة، البرتغال.",
+  "foot.legal": "إشعار قانوني",
   "foot.views": "زيارات الصفحة",
 
   "motion.full": "▸ حركة كاملة",

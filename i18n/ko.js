@@ -66,6 +66,7 @@ window.I18N.ko = {
   "foot.prov.p": "리스본에서 손으로 만들었습니다.<br/>nunex-mbrothers.github.io에서 제공",
   "foot.set": "서체는 Cormorant · Italianno · JetBrains Mono",
   "foot.company": "mBrothers는 포르투갈 리스본에 있는 Intrepid Parallel, Lda의 브랜드입니다.",
+  "foot.legal": "법적 고지",
   "foot.views": "페이지 방문 수",
 
   "motion.full": "▸ 전체 모션",
