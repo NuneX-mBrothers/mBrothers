@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://nunex-mbrothers.github.io/mBrothers/"
 
 # código do dicionário → pasta, rótulo, hreflang (BCP-47), og:locale, bandeira.
-# 🥇 Decisão do João a 2026-09-12: **as MESMAS 16 línguas do LogViewer**, e não
+# 🥇 Decisão de 2026-09-12: **as MESMAS 16 línguas do LogViewer**, e não
 #    uma escolha pela medição — *«não faz sentido limitar a pesquisa»*. A minha
 #    proposta anterior era duas (tradicional e japonês) e foi revogada: com o
 #    gerador feito, cada porta nova custa um dicionário, e uma porta a menos é
@@ -68,7 +68,7 @@ LINGUAS = [
 
 # A BARRA DA APP, espelhada: dezasseis bandeiras pela ordem da barra do
 # programa, mesmo que o GB e o US levem à mesma página. É o mesmo desenho e a
-# mesma ordem dos outros dois sites — a coerência é ordem do João.
+# mesma ordem dos outros dois sites — por coerência.
 #   (bandeira, rótulo, código do dicionário)
 BARRA_DA_APP = [
     ("pt", "Português",      "pt"),
