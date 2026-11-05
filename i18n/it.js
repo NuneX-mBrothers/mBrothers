@@ -3,7 +3,7 @@ window.I18N.it = {
   "meta.title": "mBrothers // Soluzioni pratiche per piccoli sistemi planetari",
   "meta.desc": "mBrothers costruisce software discreto e pratico per piccoli sistemi planetari. La casa di The Absolute LogViewer e di ExplorerFocus.",
   "og.title": "mBrothers — Soluzioni pratiche per piccoli sistemi planetari",
-  "og.desc": "Un piccolo studio di software che costruisce strumenti discreti e pratici. Senza abbonamenti, senza telemetria — strumenti che fanno una cosa con cura e poi si tolgono di mezzo.",
+  "og.desc2": "Un piccolo studio di software che costruisce strumenti discreti e pratici. Senza abbonamenti, senza pubblicità — strumenti che fanno una cosa con cura e poi si tolgono di mezzo.",
   "og.imgalt": "mBrothers — un pianeta con anelli accanto al logotipo dello studio.",
   "tw.title": "mBrothers — piccoli sistemi planetari",
   "tw.desc": "Software discreto e pratico. La casa di The Absolute LogViewer e di ExplorerFocus.",
@@ -35,7 +35,7 @@ window.I18N.it = {
 
   "intro.label": "Sullo studio",
   "intro.p1": '<span class="drop">S</span>iamo una piccola bottega di artigiani del software in orbita attorno a un sole tranquillo. Ci occupiamo del quotidiano — le finestre che lasci aperte, i log che stai a fissare, la concentrazione che continui a perdere. Costruiamo strumenti che si guadagnano il loro posto sulla tua scrivania essendo discreti, rapidi e attenti.',
-  "intro.p2": "Nessun abbonamento da dimenticare. Nessuna telemetria da temere. Solo strumenti che fanno una cosa con cura, non mandano niente a casa e poi si tolgono di mezzo.",
+  "intro.p2b": "Nessun abbonamento da dimenticare. Nessuna pubblicità, e non vendiamo mai i tuoi dati. Solo strumenti che fanno una cosa con cura, inviano solo ciò che dicono di inviare e poi si tolgono di mezzo.",
 
   "products.title": "Il Catalogo",
   "status.ok": "Stato · operativo",

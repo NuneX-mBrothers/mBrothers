@@ -97,7 +97,7 @@ CABECA = [
     (r'<title>.*?</title>', None, "meta.title"),
     (r'(<meta name="description" content=")[^"]*(")', True, "meta.desc"),
     (r'(<meta property="og:title" content=")[^"]*(")', True, "og.title"),
-    (r'(<meta property="og:description" content=")[^"]*(")', True, "og.desc"),
+    (r'(<meta property="og:description" content=")[^"]*(")', True, "og.desc2"),
     (r'(<meta property="og:image:alt" content=")[^"]*(")', True, "og.imgalt"),
     (r'(<meta name="twitter:title" content=")[^"]*(")', True, "tw.title"),
     (r'(<meta name="twitter:description" content=")[^"]*(")', True, "tw.desc"),

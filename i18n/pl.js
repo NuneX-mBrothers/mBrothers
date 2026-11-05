@@ -3,7 +3,7 @@ window.I18N.pl = {
   "meta.title": "mBrothers // Praktyczne rozwiązania dla małych układów planetarnych",
   "meta.desc": "mBrothers tworzy ciche, praktyczne oprogramowanie dla małych układów planetarnych. Dom programów The Absolute LogViewer i ExplorerFocus.",
   "og.title": "mBrothers — Praktyczne rozwiązania dla małych układów planetarnych",
-  "og.desc": "Małe studio programistyczne, które buduje ciche, praktyczne narzędzia. Bez subskrypcji, bez telemetrii — narzędzia, które robią jedną rzecz starannie, a potem schodzą z drogi.",
+  "og.desc2": "Małe studio programistyczne, które buduje ciche, praktyczne narzędzia. Bez subskrypcji, bez reklam — narzędzia, które robią jedną rzecz starannie, a potem schodzą z drogi.",
   "og.imgalt": "mBrothers — planeta z pierścieniami obok znaku studia.",
   "tw.title": "mBrothers — małe układy planetarne",
   "tw.desc": "Ciche, praktyczne oprogramowanie. Dom programów The Absolute LogViewer i ExplorerFocus.",
@@ -35,7 +35,7 @@ window.I18N.pl = {
 
   "intro.label": "O studiu",
   "intro.p1": '<span class="drop">J</span>esteśmy małym warsztatem rzemieślników oprogramowania, krążącym wokół cichego słońca. Zajmuje nas codzienność — okna, które zostawiasz otwarte, logi, w które się wpatrujesz, skupienie, które wciąż tracisz. Budujemy narzędzia, które zasługują na swoje miejsce na pulpicie tym, że są ciche, szybkie i uważne.',
-  "intro.p2": "Żadnych subskrypcji, o których trzeba pamiętać. Żadnej telemetrii, której trzeba się bać. Tylko narzędzia, które robią jedną rzecz starannie, nic nie wysyłają do domu, a potem schodzą z drogi.",
+  "intro.p2b": "Żadnych subskrypcji, o których trzeba pamiętać. Żadnych reklam i nigdy nie sprzedajemy Twoich danych. Tylko narzędzia, które robią jedną rzecz starannie, wysyłają tylko to, o czym mówią, a potem schodzą z drogi.",
 
   "products.title": "Katalog",
   "status.ok": "Stan · działa",

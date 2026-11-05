@@ -16,7 +16,7 @@ window.I18N.en = {
   "meta.title": "mBrothers // Developing practical solutions for small planetary systems",
   "meta.desc": "mBrothers builds quiet, practical software for small planetary systems. Home of The Absolute LogViewer and ExplorerFocus.",
   "og.title": "mBrothers — Developing practical solutions for small planetary systems",
-  "og.desc": "A small software studio building quiet, practical instruments. No subscriptions, no telemetry — tools that do one thing carefully and get out of the way.",
+  "og.desc2": "A small software studio building quiet, practical instruments. No subscriptions, no ads — tools that do one thing carefully and get out of the way.",
   "og.imgalt": "mBrothers — a ringed planet beside the studio wordmark.",
   "tw.title": "mBrothers — small planetary systems",
   "tw.desc": "Quiet, practical software. Home of The Absolute LogViewer and ExplorerFocus.",
@@ -48,7 +48,7 @@ window.I18N.en = {
 
   "intro.label": "On the studio",
   "intro.p1": '<span class="drop">W</span>e are a small workshop of software craftspeople orbiting a quiet sun. Our concern is the everyday — the windows you keep open, the logs you stare at, the focus you keep losing. We build tools that earn their place on your desktop by being quiet, fast, and considerate.',
-  "intro.p2": "No subscriptions to forget. No telemetry to dread. Just instruments that do one thing carefully, transmit nothing home, and then get out of the way.",
+  "intro.p2b": "No subscriptions to forget. No ads, and we never sell your data. Just instruments that do one thing carefully, send only what they tell you they send, and then get out of the way.",
 
   "products.title": "The Catalogue",
   "status.ok": "Status · operational",

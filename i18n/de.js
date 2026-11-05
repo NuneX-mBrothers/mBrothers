@@ -3,7 +3,7 @@ window.I18N.de = {
   "meta.title": "mBrothers // Praktische Lösungen für kleine Planetensysteme",
   "meta.desc": "mBrothers baut leise, praktische Software für kleine Planetensysteme. Die Heimat von The Absolute LogViewer und ExplorerFocus.",
   "og.title": "mBrothers — Praktische Lösungen für kleine Planetensysteme",
-  "og.desc": "Ein kleines Software-Studio, das leise, praktische Instrumente baut. Keine Abos, keine Telemetrie — Werkzeuge, die eine Sache sorgfältig tun und dann aus dem Weg gehen.",
+  "og.desc2": "Ein kleines Software-Studio, das leise, praktische Instrumente baut. Keine Abos, keine Werbung — Werkzeuge, die eine Sache sorgfältig tun und dann aus dem Weg gehen.",
   "og.imgalt": "mBrothers — ein Planet mit Ringen neben dem Schriftzug des Studios.",
   "tw.title": "mBrothers — kleine Planetensysteme",
   "tw.desc": "Leise, praktische Software. Die Heimat von The Absolute LogViewer und ExplorerFocus.",
@@ -35,7 +35,7 @@ window.I18N.de = {
 
   "intro.label": "Über das Studio",
   "intro.p1": '<span class="drop">W</span>ir sind eine kleine Werkstatt von Software-Handwerkern, die eine stille Sonne umkreist. Uns beschäftigt das Alltägliche — die Fenster, die offen bleiben, die Logs, in die man starrt, die Konzentration, die immer wieder verloren geht. Wir bauen Werkzeuge, die sich ihren Platz auf dem Schreibtisch verdienen, indem sie leise, schnell und rücksichtsvoll sind.',
-  "intro.p2": "Keine Abos, die man zu kündigen vergisst. Keine Telemetrie, die man fürchten muss. Nur Instrumente, die eine Sache sorgfältig tun, nichts nach Hause senden und dann aus dem Weg gehen.",
+  "intro.p2b": "Keine Abos, die man zu kündigen vergisst. Keine Werbung, und wir verkaufen nie Ihre Daten. Nur Instrumente, die eine Sache sorgfältig tun, nur senden, was sie ankündigen, und dann aus dem Weg gehen.",
 
   "products.title": "Der Katalog",
   "status.ok": "Status · in Betrieb",

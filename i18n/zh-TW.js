@@ -9,7 +9,7 @@ window.I18N["zh-TW"] = {
   "meta.title": "mBrothers // 為小型行星系統打造實用的解決方案",
   "meta.desc": "mBrothers 為小型行星系統打造安靜而實用的軟體。The Absolute LogViewer 與 ExplorerFocus 的家。",
   "og.title": "mBrothers — 為小型行星系統打造實用的解決方案",
-  "og.desc": "一間小小的軟體工作室，打造安靜而實用的工具。沒有訂閱，沒有遙測 — 只是把一件事做好，然後讓開。",
+  "og.desc2": "一間小小的軟體工作室，打造安靜而實用的工具。沒有訂閱，沒有廣告 — 只是把一件事做好，然後讓開。",
   "og.imgalt": "mBrothers — 一顆帶環的行星，旁邊是工作室的字標。",
   "tw.title": "mBrothers — 小型行星系統",
   "tw.desc": "安靜而實用的軟體。The Absolute LogViewer 與 ExplorerFocus 的家。",
@@ -41,7 +41,7 @@ window.I18N["zh-TW"] = {
 
   "intro.label": "關於工作室",
   "intro.p1": '<span class="drop">我</span>們是一間小小的軟體工藝工作室，繞著一顆安靜的恆星運行。我們關心的是日常 — 你一直開著的視窗、你盯著看的日誌、你一再失去的專注。我們做的工具，靠安靜、快速與體貼，來換得桌面上的一席之地。',
-  "intro.p2": "沒有訂閱要記得取消。沒有遙測要擔心。只有一些把一件事做好、什麼都不往家裡傳、然後就讓開的工具。",
+  "intro.p2b": "沒有訂閱要記得取消。沒有廣告，我們也從不出售你的資料。只有一些把一件事做好、只傳送它們說明會傳送的內容、然後就讓開的工具。",
 
   "products.title": "目錄",
   "status.ok": "狀態 · 運作中",
