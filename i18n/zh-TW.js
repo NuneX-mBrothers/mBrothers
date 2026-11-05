@@ -66,7 +66,7 @@ window.I18N["zh-TW"] = {
   "phil.sig": "— mBrothers",
 
   "foot.studio.h": "工作室",
-  "foot.studio.p": "mBrothers 是一間獨立的軟體工作室。兩個腦袋、幾件好工具，以及對小小世界的長遠眼光。",
+  "foot.studio.p2": "mBrothers 是一間獨立的軟體工作室。三兄弟、幾件好工具，以及對小小世界的長遠眼光。",
   "foot.trans.h": "通訊",
   "foot.prov.h": "來歷",
   "foot.prov.p": "在里斯本手工打造。<br/>託管於 nunex-mbrothers.github.io",

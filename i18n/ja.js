@@ -63,7 +63,7 @@ window.I18N.ja = {
   "phil.sig": "— mBrothers",
 
   "foot.studio.h": "工房",
-  "foot.studio.p": "mBrothers は独立系のソフトウェア工房です。ふたつの頭、いくつかの良い道具、そして小さな世界への長い視線。",
+  "foot.studio.p2": "mBrothers は独立系のソフトウェア工房です。三人の兄弟、いくつかの良い道具、そして小さな世界への長い視線。",
   "foot.trans.h": "通信",
   "foot.prov.h": "出どころ",
   "foot.prov.p": "リスボンで手づくり。<br/>nunex-mbrothers.github.io にて公開",

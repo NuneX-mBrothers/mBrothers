@@ -60,7 +60,7 @@ window.I18N.ko = {
   "phil.sig": "— mBrothers",
 
   "foot.studio.h": "공방",
-  "foot.studio.p": "mBrothers는 독립 소프트웨어 공방입니다. 두 개의 머리, 몇 가지 좋은 도구, 그리고 작은 세계를 향한 긴 시선.",
+  "foot.studio.p2": "mBrothers는 독립 소프트웨어 공방입니다. 세 형제, 몇 가지 좋은 도구, 그리고 작은 세계를 향한 긴 시선.",
   "foot.trans.h": "송신",
   "foot.prov.h": "출처",
   "foot.prov.p": "리스본에서 손으로 만들었습니다.<br/>nunex-mbrothers.github.io에서 제공",

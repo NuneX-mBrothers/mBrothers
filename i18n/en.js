@@ -73,7 +73,7 @@ window.I18N.en = {
   "phil.sig": "— the mBrothers",
 
   "foot.studio.h": "The Studio",
-  "foot.studio.p": "mBrothers is an independent software studio. Two minds, a few good tools, and a long view of small worlds.",
+  "foot.studio.p2": "mBrothers is an independent software studio. Three brothers, a few good tools, and a long view of small worlds.",
   "foot.trans.h": "Transmission",
   "foot.prov.h": "Provenance",
   "foot.prov.p": "Hand-built in Lisbon.<br/>Hosted at nunex-mbrothers.github.io",

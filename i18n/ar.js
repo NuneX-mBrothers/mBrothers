@@ -66,7 +66,7 @@ window.I18N.ar = {
   "phil.sig": "— الـ mBrothers",
 
   "foot.studio.h": "الاستوديو",
-  "foot.studio.p": "mBrothers استوديو برمجيات مستقل. عقلان، وبعض الأدوات الجيدة، ونظرة طويلة إلى عوالم صغيرة.",
+  "foot.studio.p2": "mBrothers استوديو برمجيات مستقل. ثلاثة إخوة، وبعض الأدوات الجيدة، ونظرة طويلة إلى عوالم صغيرة.",
   "foot.trans.h": "الإرسال",
   "foot.prov.h": "المنشأ",
   "foot.prov.p": "مصنوع باليد في لشبونة.<br/>مستضاف على nunex-mbrothers.github.io",

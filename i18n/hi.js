@@ -62,7 +62,7 @@ window.I18N.hi = {
   "phil.sig": "— mBrothers",
 
   "foot.studio.h": "स्टूडियो",
-  "foot.studio.p": "mBrothers एक स्वतंत्र सॉफ़्टवेयर स्टूडियो है। दो दिमाग़, कुछ अच्छे उपकरण, और छोटी दुनियाओं पर एक लंबी नज़र।",
+  "foot.studio.p2": "mBrothers एक स्वतंत्र सॉफ़्टवेयर स्टूडियो है। तीन भाई, कुछ अच्छे उपकरण, और छोटी दुनियाओं पर एक लंबी नज़र।",
   "foot.trans.h": "संप्रेषण",
   "foot.prov.h": "उद्गम",
   "foot.prov.p": "लिस्बन में हाथ से बना।<br/>nunex-mbrothers.github.io पर होस्ट किया गया",

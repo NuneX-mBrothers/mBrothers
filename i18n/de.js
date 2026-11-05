@@ -60,7 +60,7 @@ window.I18N.de = {
   "phil.sig": "— die mBrothers",
 
   "foot.studio.h": "Das Studio",
-  "foot.studio.p": "mBrothers ist ein unabhängiges Software-Studio. Zwei Köpfe, ein paar gute Werkzeuge und ein langer Blick auf kleine Welten.",
+  "foot.studio.p2": "mBrothers ist ein unabhängiges Software-Studio. Drei Brüder, ein paar gute Werkzeuge und ein langer Blick auf kleine Welten.",
   "foot.trans.h": "Übertragung",
   "foot.prov.h": "Herkunft",
   "foot.prov.p": "Von Hand gebaut in Lissabon.<br/>Gehostet auf nunex-mbrothers.github.io",
