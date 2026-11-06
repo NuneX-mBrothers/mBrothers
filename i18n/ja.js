@@ -66,7 +66,7 @@ window.I18N.ja = {
   "foot.studio.p2": "mBrothers は独立系のソフトウェア工房です。三人の兄弟、いくつかの良い道具、そして小さな世界への長い視線。",
   "foot.trans.h": "通信",
   "foot.prov.h": "出どころ",
-  "foot.prov.p": "リスボンで手づくり。<br/>nunex-mbrothers.github.io にて公開",
+  "foot.prov.p2": "リスボンで手づくり。<br/>intrepidparallel.com にて公開",
   "foot.set": "書体は Cormorant · Italianno · JetBrains Mono",
   "foot.company2": "mBrothers は Intrepid Parallel, Lda（ポルトガル・リスボン）が使用しているブランドです。",
   "foot.legal": "法的表示",

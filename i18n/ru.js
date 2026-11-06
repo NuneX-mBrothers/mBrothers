@@ -63,7 +63,7 @@ window.I18N.ru = {
   "foot.studio.p2": "mBrothers — независимая студия программного обеспечения. Три брата, несколько хороших инструментов и долгий взгляд на маленькие миры.",
   "foot.trans.h": "Связь",
   "foot.prov.h": "Происхождение",
-  "foot.prov.p": "Сделано вручную в Лиссабоне.<br/>Размещено на nunex-mbrothers.github.io",
+  "foot.prov.p2": "Сделано вручную в Лиссабоне.<br/>Размещено на intrepidparallel.com",
   "foot.set": "Набрано шрифтами Cormorant · Italianno · JetBrains Mono",
   "foot.company2": "mBrothers — бренд, который использует компания Intrepid Parallel, Lda из Лиссабона, Португалия.",
   "foot.legal": "Правовая информация",

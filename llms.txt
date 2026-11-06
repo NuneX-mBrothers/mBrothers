@@ -9,6 +9,6 @@
 
 ## Links
 
-- [Website](https://nunex-mbrothers.github.io/mBrothers/)
+- [Website](https://intrepidparallel.com/mbrothers/)
 - [GitHub](https://github.com/NuneX-mBrothers)
 - Contact: info@intrepidparallel.com

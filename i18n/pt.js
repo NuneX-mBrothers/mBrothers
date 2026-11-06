@@ -68,7 +68,7 @@ window.I18N.pt = {
   "foot.studio.p2": "A mBrothers é um estúdio de software independente. Três irmãos, algumas boas ferramentas e uma vista longa sobre mundos pequenos.",
   "foot.trans.h": "Transmissão",
   "foot.prov.h": "Procedência",
-  "foot.prov.p": "Feito à mão em Lisboa.<br/>Alojado em nunex-mbrothers.github.io",
+  "foot.prov.p2": "Feito à mão em Lisboa.<br/>Alojado em intrepidparallel.com",
   "foot.set": "Composto em Cormorant · Italianno · JetBrains Mono",
   "foot.company2": "A mBrothers é uma marca usada pela Intrepid Parallel, Lda, com sede em Lisboa, Portugal.",
   "foot.legal": "Aviso legal",

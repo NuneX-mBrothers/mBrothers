@@ -69,7 +69,7 @@ window.I18N["zh-TW"] = {
   "foot.studio.p2": "mBrothers 是一間獨立的軟體工作室。三兄弟、幾件好工具，以及對小小世界的長遠眼光。",
   "foot.trans.h": "通訊",
   "foot.prov.h": "來歷",
-  "foot.prov.p": "在里斯本手工打造。<br/>託管於 nunex-mbrothers.github.io",
+  "foot.prov.p2": "在里斯本手工打造。<br/>託管於 intrepidparallel.com",
   "foot.set": "字體採用 Cormorant · Italianno · JetBrains Mono",
   "foot.company2": "mBrothers 是總部位於葡萄牙里斯本的 Intrepid Parallel, Lda 所使用的品牌。",
   "foot.legal": "法律聲明",

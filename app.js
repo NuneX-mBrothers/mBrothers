@@ -590,12 +590,12 @@
   /* ── service worker (offline support; network-first keeps versions honest) ── */
   /* ⛔ O caminho do sw.js NAO pode ser relativo a PAGINA. Um `register('sw.js')`
      resolve contra o endereco do documento, e na pagina /pt/ isso da
-     /mBrothers/pt/sw.js -- que nao existe. O `.catch()` engolia o 404 e a
+     /mbrothers/pt/sw.js -- que nao existe. O `.catch()` engolia o 404 e a
      pagina portuguesa ficava simplesmente SEM service worker, sem um unico
      sinal de que algo faltava.
      Resolve-se contra o endereco do PROPRIO app.js, que e o mesmo nas duas
      paginas (a /pt/ carrega-o de ../app.js). Assim o worker fica sempre em
-     /mBrothers/sw.js, e o ambito dele -- /mBrothers/ -- cobre as duas. */
+     /mbrothers/sw.js, e o ambito dele -- /mbrothers/ -- cobre as duas. */
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
       var alvo = 'sw.js';

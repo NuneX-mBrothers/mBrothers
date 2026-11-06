@@ -65,7 +65,7 @@ window.I18N.hi = {
   "foot.studio.p2": "mBrothers एक स्वतंत्र सॉफ़्टवेयर स्टूडियो है। तीन भाई, कुछ अच्छे उपकरण, और छोटी दुनियाओं पर एक लंबी नज़र।",
   "foot.trans.h": "संप्रेषण",
   "foot.prov.h": "उद्गम",
-  "foot.prov.p": "लिस्बन में हाथ से बना।<br/>nunex-mbrothers.github.io पर होस्ट किया गया",
+  "foot.prov.p2": "लिस्बन में हाथ से बना।<br/>intrepidparallel.com पर होस्ट किया गया",
   "foot.set": "टाइपफ़ेस: Cormorant · Italianno · JetBrains Mono",
   "foot.company2": "mBrothers, लिस्बन (पुर्तगाल) स्थित Intrepid Parallel, Lda द्वारा उपयोग किया जाने वाला ब्रांड है।",
   "foot.legal": "कानूनी सूचना",

@@ -33,7 +33,7 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = "https://nunex-mbrothers.github.io/mBrothers/"
+BASE = "https://intrepidparallel.com/mbrothers/"
 
 # código do dicionário → pasta, rótulo, hreflang (BCP-47), og:locale, bandeira.
 # 🥇 Decisão de 2026-09-12: **as MESMAS 16 línguas do LogViewer**, e não
