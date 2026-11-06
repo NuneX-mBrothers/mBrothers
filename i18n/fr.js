@@ -65,7 +65,7 @@ window.I18N.fr = {
   "foot.prov.h": "Provenance",
   "foot.prov.p": "Fait main à Lisbonne.<br/>Hébergé sur nunex-mbrothers.github.io",
   "foot.set": "Composé en Cormorant · Italianno · JetBrains Mono",
-  "foot.company": "mBrothers est une marque d'Intrepid Parallel, Lda, basée à Lisbonne, au Portugal.",
+  "foot.company2": "mBrothers est une marque utilisée par Intrepid Parallel, Lda, basée à Lisbonne, au Portugal.",
   "foot.legal": "Mentions légales",
   "foot.views": "Visites de la page",
 

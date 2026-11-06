@@ -68,7 +68,7 @@ window.I18N.ja = {
   "foot.prov.h": "出どころ",
   "foot.prov.p": "リスボンで手づくり。<br/>nunex-mbrothers.github.io にて公開",
   "foot.set": "書体は Cormorant · Italianno · JetBrains Mono",
-  "foot.company": "mBrothers は Intrepid Parallel, Lda（ポルトガル・リスボン）のブランドです。",
+  "foot.company2": "mBrothers は Intrepid Parallel, Lda（ポルトガル・リスボン）が使用しているブランドです。",
   "foot.legal": "法的表示",
   "foot.views": "ページ閲覧数",
 

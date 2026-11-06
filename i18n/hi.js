@@ -67,7 +67,7 @@ window.I18N.hi = {
   "foot.prov.h": "उद्गम",
   "foot.prov.p": "लिस्बन में हाथ से बना।<br/>nunex-mbrothers.github.io पर होस्ट किया गया",
   "foot.set": "टाइपफ़ेस: Cormorant · Italianno · JetBrains Mono",
-  "foot.company": "mBrothers, Intrepid Parallel, Lda का एक ब्रांड है, जिसका मुख्यालय लिस्बन, पुर्तगाल में है।",
+  "foot.company2": "mBrothers, लिस्बन (पुर्तगाल) स्थित Intrepid Parallel, Lda द्वारा उपयोग किया जाने वाला ब्रांड है।",
   "foot.legal": "कानूनी सूचना",
   "foot.views": "पृष्ठ के दर्शन",
 

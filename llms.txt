@@ -1,6 +1,6 @@
 # mBrothers
 
-> mBrothers is a software brand of Intrepid Parallel, Lda, in Lisbon, Portugal, "developing practical solutions for small planetary systems". It makes Windows desktop programs with interfaces in 16 languages.
+> mBrothers is a software brand used by Intrepid Parallel, Lda, in Lisbon, Portugal, "developing practical solutions for small planetary systems". It makes Windows desktop programs with interfaces in 16 languages.
 
 ## Programs
 

@@ -65,7 +65,7 @@ window.I18N.ru = {
   "foot.prov.h": "Происхождение",
   "foot.prov.p": "Сделано вручную в Лиссабоне.<br/>Размещено на nunex-mbrothers.github.io",
   "foot.set": "Набрано шрифтами Cormorant · Italianno · JetBrains Mono",
-  "foot.company": "mBrothers — бренд компании Intrepid Parallel, Lda из Лиссабона, Португалия.",
+  "foot.company2": "mBrothers — бренд, который использует компания Intrepid Parallel, Lda из Лиссабона, Португалия.",
   "foot.legal": "Правовая информация",
   "foot.views": "Посещений страницы",
 

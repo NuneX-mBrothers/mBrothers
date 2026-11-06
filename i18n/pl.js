@@ -65,7 +65,7 @@ window.I18N.pl = {
   "foot.prov.h": "Pochodzenie",
   "foot.prov.p": "Zrobione ręcznie w Lizbonie.<br/>Hostowane na nunex-mbrothers.github.io",
   "foot.set": "Złożone krojami Cormorant · Italianno · JetBrains Mono",
-  "foot.company": "mBrothers to marka firmy Intrepid Parallel, Lda z siedzibą w Lizbonie w Portugalii.",
+  "foot.company2": "mBrothers to marka używana przez firmę Intrepid Parallel, Lda z siedzibą w Lizbonie w Portugalii.",
   "foot.legal": "Nota prawna",
   "foot.views": "Odwiedziny strony",
 
