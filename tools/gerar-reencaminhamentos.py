@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Gera, em docs/, as páginas que o GitHub Pages passa a servir depois da mudança do site.
 
-O site da mBrothers mudou-se para https://intrepidparallel.com/mbrothers/ (decisão do João, 06/11/2026). O GitHub
+O site da mBrothers mudou-se para https://intrepidparallel.com/mbrothers/ (decisão de 06/11/2026). O GitHub
 deixa de ter o site e fica só a reencaminhar quem chegar pelos endereços antigos
 (https://nunex-mbrothers.github.io/mBrothers/…), cada página para a sua equivalente no endereço novo: a portuguesa
 para a portuguesa, a alemã para a alemã, e não tudo para a entrada.

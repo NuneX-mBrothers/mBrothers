@@ -5,7 +5,7 @@ rem ====================================================================
 rem   mBrothers  --  Publish SITE
 rem ====================================================================
 rem   Desde 06/11/2026 o site vive no NOSSO servidor, em
-rem   https://intrepidparallel.com/mbrothers/ (decisao do Joao). O GitHub
+rem   https://intrepidparallel.com/mbrothers/ (decisao de 06/11/2026). O GitHub
 rem   fica so com as paginas que reencaminham para la (a pasta docs/, que o
 rem   GitHub Pages serve) e com o codigo.
 rem
@@ -21,7 +21,7 @@ rem     7. confere que o site responde.
 rem
 rem   Sem build e sem Release. A versao mostrada no site e escrita a mao.
 rem
-rem   A chave SSH de publicacao fica so no PC do Joao, em
+rem   A chave SSH de publicacao fica so no PC de quem publica, em
 rem   %USERPROFILE%\.ssh\sites-publicar-intrepidparallel. No servidor ela so
 rem   consegue publicar, voltar a versao anterior e listar as versoes:
 rem     ssh -i <chave> sites@136.144.201.147 voltar mbrothers
@@ -184,5 +184,5 @@ echo   O servidor guarda as tres ultimas versoes.
 echo ==========================================
 echo.
 rem No fim, a janela fica aberta ate se carregar numa tecla, para se ver
-rem se correu tudo bem (o Joao, 06/11/2026).
+rem se correu tudo bem (06/11/2026).
 pause
