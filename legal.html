@@ -100,7 +100,20 @@
   }
 
   /* ─────────────── CONTENT ─────────────── */
-  main { padding: 90px 0 20px; }
+  main { padding: 72px 0 20px; }
+
+  /* The Intrepid Parallel mark (the two bars, logo A, chosen on 03/11/2026), drawn inline. The dark bar follows the
+     ink, so it stays visible at night; the amber bar keeps the mark's own colour. */
+  .company { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 56px; }
+  .company svg { width: 44px; height: 48px; color: #1F2430; }
+  html.night .company svg { color: var(--ink); }
+  .company .name {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
   section + section { margin-top: 80px; }
 
   .section-head {
@@ -179,6 +192,14 @@
   </nav>
 
   <main>
+    <div class="company">
+      <svg viewBox="93 52 88 96" role="img" aria-label="Intrepid Parallel">
+        <polygon points="104,142 120,142 140,74 124,74" fill="currentColor" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+        <polygon points="132,130 148,130 170,58 154,58" fill="#E0A04A" stroke="#E0A04A" stroke-width="5" stroke-linejoin="round"/>
+      </svg>
+      <span class="name">Intrepid Parallel, Lda</span>
+    </div>
+
     <section>
       <div class="section-head">
         <div class="rule"></div>
