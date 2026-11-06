@@ -183,6 +183,6 @@ echo.
 echo   O servidor guarda as tres ultimas versoes.
 echo ==========================================
 echo.
-rem Os pause ficam so nos caminhos de erro. No fim, o timeout deixa ler o
-rem resultado e fecha sozinho ao fim de 12 s (ou logo, com uma tecla).
-timeout /t 12
+rem No fim, a janela fica aberta ate se carregar numa tecla, para se ver
+rem se correu tudo bem (o Joao, 06/11/2026).
+pause
