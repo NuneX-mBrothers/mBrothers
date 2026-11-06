@@ -95,11 +95,15 @@ self.addEventListener('activate', function (e) {
 """
 
 
+FEITOS = set()
+
+
 def escrever(rel, texto):
     f = os.path.join(DOCS, rel)
     os.makedirs(os.path.dirname(f), exist_ok=True)
     with open(f, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(texto)
+    FEITOS.add(os.path.normcase(os.path.abspath(f)))
 
 
 def pagina(url):
@@ -108,8 +112,9 @@ def pagina(url):
 
 
 def main():
-    if os.path.isdir(DOCS):
-        shutil.rmtree(DOCS)
+    # ⛔ Não se apaga a pasta docs/ para a refazer: o OneDrive segura as pastas e o rmtree falha a meio (06/11, na
+    #    primeira publicação: «Access is denied» em docs\ar). Escreve-se por cima, e no fim apagam-se só os FICHEIROS
+    #    que já não fazem parte (uma língua que saísse, por exemplo). As pastas vazias ficam: o git ignora-as.
     linguas = sorted(d for d in os.listdir(RAIZ)
                      if d not in NAO_SAO_LINGUAS and not d.startswith(".")
                      and os.path.isfile(os.path.join(RAIZ, d, "index.html")))
@@ -122,7 +127,18 @@ def main():
     escrever("sw.js", SW)
     escrever(".nojekyll", "")
     for g in glob.glob(os.path.join(RAIZ, "google*.html")):
-        shutil.copyfile(g, os.path.join(DOCS, os.path.basename(g)))
+        destino = os.path.join(DOCS, os.path.basename(g))
+        shutil.copyfile(g, destino)
+        FEITOS.add(os.path.normcase(os.path.abspath(destino)))
+    sobras = []
+    for pasta, _, ficheiros in os.walk(DOCS):
+        for nome in ficheiros:
+            f = os.path.join(pasta, nome)
+            if os.path.normcase(os.path.abspath(f)) not in FEITOS:
+                os.remove(f)
+                sobras.append(os.path.relpath(f, DOCS))
+    if sobras:
+        print("   apagados de docs/ (já não fazem parte):", " ".join(sobras))
     print("✅ docs/: entrada, %d línguas (%s), legal, 404, sw.js, verificação da Search Console"
           % (len(linguas), " ".join(linguas)))
 
