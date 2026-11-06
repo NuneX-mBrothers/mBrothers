@@ -27,16 +27,17 @@ rem   consegue publicar, voltar a versao anterior e listar as versoes:
 rem     ssh -i <chave> sites@136.144.201.147 voltar mbrothers
 rem     ssh -i <chave> sites@136.144.201.147 versoes mbrothers
 rem
-rem   tar e ssh pelo caminho inteiro: com as ferramentas do Git a frente no
-rem   PATH, o "tar" seria outro. E corre-se no cmd, nao no PowerShell antigo,
-rem   que estraga os bytes do pacote no "|".
+rem   O pacote faz-se com o tools\empacotar.py, e NAO com o tar do Windows:
+rem   esse marcava as pastas como so de leitura (o OneDrive poe-lhes esse
+rem   atributo) e o servidor nao conseguia escrever nelas (06/11/2026).
+rem   O ssh vai pelo caminho inteiro. E corre-se no cmd, nao no PowerShell
+rem   antigo, que estraga os bytes do pacote no "|".
 rem ====================================================================
 
 set "SITE_DIR=%~dp0"
 set "URL=https://intrepidparallel.com/mbrothers/"
 set "SERVIDOR=sites@136.144.201.147"
 set "CHAVE=%USERPROFILE%\.ssh\sites-publicar-intrepidparallel"
-set "TAR=%SystemRoot%\System32\tar.exe"
 set "SSH=%SystemRoot%\System32\OpenSSH\ssh.exe"
 set "CURL=%SystemRoot%\System32\curl.exe"
 
@@ -77,11 +78,6 @@ if not exist "%CHAVE%" (
     pause
     exit /b 1
 )
-if not exist "%TAR%" (
-    echo [ERRO] Nao encontro o tar do Windows em %TAR%.
-    pause
-    exit /b 1
-)
 if not exist "%SSH%" (
     echo [ERRO] Nao encontro o ssh do Windows em %SSH%.
     pause
@@ -116,11 +112,10 @@ echo       OK
 rem -- 4. O site no servidor ------------------------------------------
 rem   O pacote leva o site e mais nada: fora ficam o .git, as ferramentas,
 rem   as paginas do GitHub (docs/), os ficheiros da raiz (raiz/) e este
-rem   .cmd. O "%SITE_DIR%." acaba em ponto de proposito: uma barra antes das
-rem   aspas finais seria lida como aspas escapadas.
+rem   .cmd. As pastas vao com 755 e os ficheiros com 644.
 echo.
 echo [4/7] A publicar o site no servidor...
-"%TAR%" -czf - -C "%SITE_DIR%." --exclude=.git --exclude=.gitignore --exclude=.gitattributes --exclude=.claude --exclude=tools --exclude=docs --exclude=raiz --exclude=*.cmd . | "%SSH%" -i "%CHAVE%" -o IdentitiesOnly=yes -o BatchMode=yes %SERVIDOR% publicar mbrothers
+python "%SITE_DIR%tools\empacotar.py" site | "%SSH%" -i "%CHAVE%" -o IdentitiesOnly=yes -o BatchMode=yes %SERVIDOR% publicar mbrothers
 if errorlevel 1 (
     echo [ERRO] A publicacao no servidor falhou. Nada foi para o GitHub.
     pause
@@ -131,7 +126,7 @@ echo       OK
 rem -- 5. A raiz do dominio -------------------------------------------
 echo.
 echo [5/7] A publicar a raiz do dominio (robots.txt, favicon.ico, llms.txt)...
-"%TAR%" -czf - -C "%SITE_DIR%raiz" robots.txt favicon.ico llms.txt | "%SSH%" -i "%CHAVE%" -o IdentitiesOnly=yes -o BatchMode=yes %SERVIDOR% publicar raiz
+python "%SITE_DIR%tools\empacotar.py" raiz | "%SSH%" -i "%CHAVE%" -o IdentitiesOnly=yes -o BatchMode=yes %SERVIDOR% publicar raiz
 if errorlevel 1 (
     echo [ERRO] A publicacao da raiz falhou. O site ja esta no servidor; nada foi para o GitHub.
     pause
