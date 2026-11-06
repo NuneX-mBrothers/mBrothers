@@ -1,0 +1,6 @@
+# intrepidparallel.com
+# The search engines only read the robots.txt at the root of the domain: the sitemaps of the sites are listed here.
+User-agent: *
+Allow: /
+
+Sitemap: https://intrepidparallel.com/mbrothers/sitemap.xml

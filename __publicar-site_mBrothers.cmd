@@ -1,22 +1,44 @@
 @echo off
-setlocal
+setlocal enableextensions disabledelayedexpansion
 
 rem ====================================================================
 rem   mBrothers  --  Publish SITE
 rem ====================================================================
-rem   Publica o site principal (esta pasta E o repo publico) no GitHub
-rem   Pages.
+rem   Desde 06/11/2026 o site vive no NOSSO servidor, em
+rem   https://intrepidparallel.com/mbrothers/ (decisao do Joao). O GitHub
+rem   fica so com as paginas que reencaminham para la (a pasta docs/, que o
+rem   GitHub Pages serve) e com o codigo.
 rem
-rem   Ao contrario do ExplorerFocus e do LogViewer, aqui NAO ha build nem
-rem   injeccao de versao: o que esta escrito nos ficheiros e o que vai
-rem   para o ar. A versao mostrada no site (ex.: v10.12) e escrita a mao
-rem   no index.html - este script nao lhe toca.
+rem   Este script:
+rem     1. confere que esta no repositorio e no ramo certos;
+rem     2. gera as 15 paginas por idioma e o sitemap.xml;
+rem     3. gera as paginas de reencaminhar do GitHub (docs/);
+rem     4. publica o site no servidor (a porta de publicacao da Cobleza);
+rem     5. publica os ficheiros da raiz do dominio (robots.txt, favicon.ico,
+rem        llms.txt, na pasta raiz/);
+rem     6. faz o commit e o push para o GitHub;
+rem     7. confere que o site responde.
 rem
-rem   O GitHub Pages demora cerca de 1 minuto a propagar.
+rem   Sem build e sem Release. A versao mostrada no site e escrita a mao.
+rem
+rem   A chave SSH de publicacao fica so no PC do Joao, em
+rem   %USERPROFILE%\.ssh\sites-publicar-intrepidparallel. No servidor ela so
+rem   consegue publicar, voltar a versao anterior e listar as versoes:
+rem     ssh -i <chave> sites@136.144.201.147 voltar mbrothers
+rem     ssh -i <chave> sites@136.144.201.147 versoes mbrothers
+rem
+rem   tar e ssh pelo caminho inteiro: com as ferramentas do Git a frente no
+rem   PATH, o "tar" seria outro. E corre-se no cmd, nao no PowerShell antigo,
+rem   que estraga os bytes do pacote no "|".
 rem ====================================================================
 
 set "SITE_DIR=%~dp0"
-set "URL=https://nunex-mbrothers.github.io/mBrothers/"
+set "URL=https://intrepidparallel.com/mbrothers/"
+set "SERVIDOR=sites@136.144.201.147"
+set "CHAVE=%USERPROFILE%\.ssh\sites-publicar-intrepidparallel"
+set "TAR=%SystemRoot%\System32\tar.exe"
+set "SSH=%SystemRoot%\System32\OpenSSH\ssh.exe"
+set "CURL=%SystemRoot%\System32\curl.exe"
 
 echo.
 echo ==========================================
@@ -26,8 +48,8 @@ echo.
 
 cd /d "%SITE_DIR%"
 
-rem -- 1. Confirmar que estamos no repo certo --------------------------
-echo [1/5] A validar o repositorio...
+rem -- 1. Repositorio, ramo e ferramentas -----------------------------
+echo [1/7] A validar o repositorio...
 git rev-parse --is-inside-work-tree >nul 2>&1
 if errorlevel 1 (
     echo [ERRO] Esta pasta nao e um repositorio git.
@@ -43,106 +65,129 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
+set "RAMO="
+for /f "tokens=*" %%b in ('git branch --show-current 2^>nul') do set "RAMO=%%b"
+if /i not "%RAMO%"=="main" (
+    echo [ERRO] O ramo actual e "%RAMO%", e so se publica do main. Abortado.
+    pause
+    exit /b 1
+)
+if not exist "%CHAVE%" (
+    echo [ERRO] Nao encontro a chave de publicacao em %CHAVE%.
+    pause
+    exit /b 1
+)
+if not exist "%TAR%" (
+    echo [ERRO] Nao encontro o tar do Windows em %TAR%.
+    pause
+    exit /b 1
+)
+if not exist "%SSH%" (
+    echo [ERRO] Nao encontro o ssh do Windows em %SSH%.
+    pause
+    exit /b 1
+)
 echo       OK
 
-rem -- 2. Gerar a pagina por idioma --------------------------------
-rem   O site tem uma porta por lingua: a raiz em ingles e /pt/ com o texto
-rem   ja traduzido DENTRO do HTML (nao por JavaScript, que nao da exposicao
-rem   nenhuma nos motores de busca). A pasta /pt/ e o sitemap.xml sao
-rem   GERADOS -- nunca se editam a mao.
-rem
-rem   Corre ANTES do `git status` de proposito: assim o que aparece na lista
-rem   do que vai ser publicado ja inclui a pagina gerada. Se falhar, ABORTA:
-rem   mais vale nao publicar do que publicar a pagina portuguesa a dizer o
-rem   texto antigo.
-rem
-rem   Acrescentar uma lingua e escrever i18n\<codigo>.js e uma linha no
-rem   LINGUAS do gerador. Este ficheiro nao precisa de mudar.
+rem -- 2. As paginas por idioma ---------------------------------------
+rem   As 15 pastas de lingua e o sitemap.xml sao GERADOS: nunca se editam a
+rem   mao. Se o gerador falhar, nao se publica.
 echo.
-echo [2/5] A gerar a pagina por idioma...
+echo [2/7] A gerar as paginas por idioma...
 python "%SITE_DIR%tools\gerar-linguas.py"
 if errorlevel 1 (
-    echo [ERRO] O gerador das paginas por idioma falhou.
-    echo        Sem ele, as 15 paginas por idioma ficam desactualizadas. Abortado.
+    echo [ERRO] O gerador das paginas por idioma falhou. Abortado.
     pause
     exit /b 1
 )
 echo       OK
 
-rem -- 3. Mostrar o que vai ser publicado ------------------------------
+rem -- 3. As paginas de reencaminhar do GitHub (docs/) -----------------
 echo.
-echo [3/5] Alteracoes por publicar:
-git status --short
+echo [3/7] A gerar as paginas de reencaminhar do GitHub...
+python "%SITE_DIR%tools\gerar-reencaminhamentos.py"
+if errorlevel 1 (
+    echo [ERRO] O gerador dos reencaminhamentos falhou. Abortado.
+    pause
+    exit /b 1
+)
+echo       OK
+
+rem -- 4. O site no servidor ------------------------------------------
+rem   O pacote leva o site e mais nada: fora ficam o .git, as ferramentas,
+rem   as paginas do GitHub (docs/), os ficheiros da raiz (raiz/) e este
+rem   .cmd. O "%SITE_DIR%." acaba em ponto de proposito: uma barra antes das
+rem   aspas finais seria lida como aspas escapadas.
 echo.
+echo [4/7] A publicar o site no servidor...
+"%TAR%" -czf - -C "%SITE_DIR%." --exclude=.git --exclude=.gitignore --exclude=.gitattributes --exclude=.claude --exclude=tools --exclude=docs --exclude=raiz --exclude=*.cmd . | "%SSH%" -i "%CHAVE%" -o IdentitiesOnly=yes -o BatchMode=yes %SERVIDOR% publicar mbrothers
+if errorlevel 1 (
+    echo [ERRO] A publicacao no servidor falhou. Nada foi para o GitHub.
+    pause
+    exit /b 1
+)
+echo       OK
 
-set "NCH=0"
-for /f %%c in ('git status --porcelain ^| find /c /v ""') do set "NCH=%%c"
-if "%NCH%"=="0" goto :nada
+rem -- 5. A raiz do dominio -------------------------------------------
+echo.
+echo [5/7] A publicar a raiz do dominio (robots.txt, favicon.ico, llms.txt)...
+"%TAR%" -czf - -C "%SITE_DIR%raiz" robots.txt favicon.ico llms.txt | "%SSH%" -i "%CHAVE%" -o IdentitiesOnly=yes -o BatchMode=yes %SERVIDOR% publicar raiz
+if errorlevel 1 (
+    echo [ERRO] A publicacao da raiz falhou. O site ja esta no servidor; nada foi para o GitHub.
+    pause
+    exit /b 1
+)
+echo       OK
 
-rem A mensagem do commit NAO se pergunta: o `set /p` parava aqui a pedir
-rem uma resposta que era sempre a mesma. Usa-se a de omissao, e quem quiser
-rem outra passa-a como argumento:
-rem     __publicar-site_mBrothers.cmd "Os cartoes dos produtos"
-rem
-rem Os dois `set` ficam ao nivel de cima, FORA de qualquer bloco `if (...)`:
-rem este ficheiro nao tem delayed expansion, e dentro de um bloco o %MSG%
-rem seria expandido quando o bloco e LIDO e nao quando corre -- sairia
-rem vazio. O `if` de uma linha so, sem parenteses, nao tem esse problema.
+rem -- 6. Commit e push para o GitHub ---------------------------------
+rem   A mensagem do commit nao se pergunta. Quem quiser outra passa-a como
+rem   argumento:  __publicar-site_mBrothers.cmd "Os cartoes dos produtos"
+rem   Os dois "set" ficam fora de qualquer bloco (sem delayed expansion).
 set "MSG=Site: atualizacao"
 if not "%~1"=="" set "MSG=%~1"
-echo       Mensagem: %MSG%
-
-rem -- 4. Adicionar e commitar ----------------------------------------
 echo.
-echo [4/5] git add + commit...
+echo [6/7] GitHub: commit e push...
+git status --short
 git add -A
 if errorlevel 1 (
-    echo [ERRO] git add falhou.
+    echo [ERRO] git add falhou. O site ja esta no servidor.
     pause
     exit /b 1
 )
-echo.
-echo       --- staged ---
-git diff --cached --name-only
-echo       --------------
-echo.
 git commit -m "%MSG%"
-if errorlevel 1 echo       [AVISO] Nada para commit.
-goto :push
-
-:nada
-echo       Nada para publicar - o site ja esta sincronizado.
-echo       A tentar push na mesma, caso haja commits por enviar.
-echo.
-echo [4/5] ^(sem commit^)
-
-rem -- 5. Push --------------------------------------------------------
-:push
-echo.
-echo [5/5] git push...
+if errorlevel 1 echo       (nada para commit)
 git push origin main
 if errorlevel 1 (
-    echo [ERRO] git push falhou. Verifica 'git status' e 'gh auth status'.
+    echo [ERRO] git push falhou. O site ja esta no servidor. Verifica 'git status' e 'gh auth status'.
     pause
     exit /b 1
 )
 echo       OK
+
+rem -- 7. Conferir ----------------------------------------------------
+echo.
+echo [7/7] A conferir o site...
+rem   O curl vai sem aspas a volta do caminho: o caminho do System32 nao tem
+rem   espacos, e um "for /f" com varias aspas perde a primeira e a ultima.
+set "ESTADO="
+for /f %%s in ('%CURL% -s -o NUL -w "%%{http_code}" %URL%') do set "ESTADO=%%s"
+echo       %URL% respondeu %ESTADO%
+if not "%ESTADO%"=="200" (
+    echo [AVISO] Esperava 200. Para voltar a versao anterior:
+    echo         "%SSH%" -i "%CHAVE%" %SERVIDOR% voltar mbrothers
+    pause
+    exit /b 1
+)
 
 echo.
 echo ==========================================
 echo   Site publicado!
 echo.
-echo   Landing:  %URL%
-echo   (GitHub Pages pode demorar cerca de 1 min)
+echo   %URL%
 echo.
-echo   Sem build e sem Release. A versao continua escrita a mao;
-echo   as 15 paginas por idioma e o sitemap.xml foram gerados no passo [2/5].
+echo   O servidor guarda as tres ultimas versoes.
 echo ==========================================
 echo.
-rem O pause FINAL saiu: nao ter de carregar nada.
-rem Nao se apaga sem mais: se o script for corrido por duplo clique, a
-rem janela fechava-se antes de dar tempo de ler o resultado. O timeout
-rem mostra a contagem, fecha-se sozinho ao fim de 12s, e fecha logo se se
-rem carregar numa tecla -- as tres coisas ao mesmo tempo.
-rem Os outros cinco pause FICAM: sao caminhos de erro, e ai queremos parar.
+rem Os pause ficam so nos caminhos de erro. No fim, o timeout deixa ler o
+rem resultado e fecha sozinho ao fim de 12 s (ou logo, com uma tecla).
 timeout /t 12
