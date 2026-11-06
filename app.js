@@ -573,20 +573,6 @@
     });
   }
 
-  /* ── visit counter (GoatCounter public total; fails silently) ── */
-  function initVisitCounter() {
-    var el = $('viewCounter');
-    if (!el) return;
-    fetch('https://nunex.goatcounter.com/counter/TOTAL.json')
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) {
-        if (!d || d.count == null) return;
-        el.textContent = '👁 ' + d.count;
-        el.hidden = false;
-      })
-      .catch(function () { /* unavailable — counter stays hidden */ });
-  }
-
   /* ── service worker (offline support; network-first keeps versions honest) ── */
   /* ⛔ O caminho do sw.js NAO pode ser relativo a PAGINA. Um `register('sw.js')`
      resolve contra o endereco do documento, e na pagina /pt/ isso da
@@ -620,7 +606,6 @@
     initMotionToggle();
     initCards();
     initStarfield();
-    initVisitCounter();
     initTerminal();
     initStage();
   }
