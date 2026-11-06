@@ -1316,6 +1316,10 @@ try{
     color: var(--ink-mute);
   }
 
+  /* the link in the colophon is read as the colophon: same letter, size and colour, not the serif of the footer links */
+  .colophon a { display: inline; font: inherit; letter-spacing: inherit; color: var(--ink-mute); }
+  .colophon a:hover { color: var(--neon); }
+
   @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
   .meta-row { animation: fadein 1s ease .1s both; }
 
@@ -1827,8 +1831,7 @@ try{
 
     <div class="colophon">
       <span>© <span class="brand-mb">mBrothers</span> · MMXXVI</span>
-      <span data-i18n="foot.company">mBrothers は Intrepid Parallel, Lda（ポルトガル・リスボン）のブランドです。</span>
-      <span><a href="../legal.html" data-i18n="foot.legal">法的表示</a></span>
+      <span><span data-i18n="foot.company">mBrothers は Intrepid Parallel, Lda（ポルトガル・リスボン）のブランドです。</span><br><a href="../legal.html" data-i18n="foot.legal">法的表示</a></span>
       <span data-i18n="foot.set">書体は Cormorant · Italianno · JetBrains Mono</span>
       <span>practical solutions // small planetary systems</span>
       <span id="viewCounter" hidden title="ページ閲覧数" data-i18n-attr="title:foot.views"></span>
