@@ -4,3 +4,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://intrepidparallel.com/mbrothers/sitemap.xml
+Sitemap: https://intrepidparallel.com/logviewer/sitemap.xml
