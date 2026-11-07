@@ -2,6 +2,8 @@
 # The search engines only read the robots.txt at the root of the domain: the sitemaps of the sites are listed here.
 User-agent: *
 Allow: /
+Disallow: /explorerfocus/descarregar/
 
 Sitemap: https://intrepidparallel.com/mbrothers/sitemap.xml
 Sitemap: https://intrepidparallel.com/logviewer/sitemap.xml
+Sitemap: https://intrepidparallel.com/explorerfocus/sitemap.xml
