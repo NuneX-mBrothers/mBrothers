@@ -35,7 +35,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NOVO = "https://intrepidparallel.com/mbrothers/"
 DOCS = os.path.join(RAIZ, "docs")
-NAO_SAO_LINGUAS = {"docs", "tools", "fonts", "i18n"}
+NAO_SAO_LINGUAS = {"docs", "tools", "fonts", "i18n", "raiz"}   # raiz/: o site da Intrepid Parallel (15/11/2026)
 
 MODELO = """<!doctype html>
 <html lang="en">

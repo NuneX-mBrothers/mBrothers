@@ -1,68 +1,18 @@
-/* mBrothers service worker — offline support without staleness.
-   Strategy:
-   - HTML & same-origin JS  → network-first (always fresh when online; cache is
-     only a fallback). This keeps the BUILD version honest.
-   - Everything else (fonts, images) → cache-first (immutable enough). */
-/* ⚠ O nome muda quando a LISTA muda, nao so quando muda a versao do site: sem
-   isso o `install` nao volta a correr em quem ja tem o worker instalado, e a
-   pagina nova nunca entrava na cache. */
-const CACHE = 'mbrothers-v10.12-i18n15';
-const CORE = [
-  './', './index.html',
-  './pt/', './br/', './es/', './fr/', './it/', './de/', './pl/',
-  './ru/', './ar/', './hi/', './zh/', './zh-tw/', './ja/', './ko/',
-  './app.js', './favicon.svg',
-  './icon-192.png', './icon-512.png', './og.png'
-];
-
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting())
-  );
-});
-
-self.addEventListener('activate', (e) => {
+/* 15/11/2026: o site da mBrothers passou a ser o da Intrepid Parallel, na raiz de https://intrepidparallel.com/, e o
+   /mbrothers/ reencaminha para lá (301, para sempre). Este worker substitui o antigo nos navegadores que já tinham
+   visitado o /mbrothers/: apaga as caches da mBrothers (só as que começam por "mbrothers-": as do EF e do LogViewer
+   estão na mesma origem e não se tocam) e desregista-se.
+   ⛔ Ao contrário do docs/sw.js, NÃO recarrega as páginas abertas: enquanto o /mbrothers/ ainda servir a página antiga,
+      ela voltava a registar este worker, ele recarregava-a, e assim sem fim. Assim é seguro em qualquer ordem.
+   ⚠ O servidor serve o /mbrothers/sw.js sem o reencaminhar (o navegador não aceita um worker que reencaminha). */
+self.addEventListener('install', function () { self.skipWaiting(); });
+self.addEventListener('activate', function (e) {
   e.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch', (e) => {
-  const req = e.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-  // Never touch analytics — let the visit beacon and live count go to network.
-  if (url.hostname.endsWith('goatcounter.com') || url.hostname.endsWith('zgo.at')) return;
-  const freshFirst = url.origin === location.origin &&
-    (req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('.js'));
-
-  if (freshFirst) {
-    e.respondWith(
-      // {cache:'reload'} bypasses the browser HTTP cache so a new deploy is
-      // never masked by a stale app.js/index.html within its max-age window.
-      fetch(req, { cache: 'reload' })
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(req, copy));
-          return res;
-        })
-        /* Offline: a propria pagina primeiro; so depois a raiz da PASTA dela,
-           para que um visitante em /pt/ sem rede veja a pagina portuguesa e
-           nao a inglesa. A raiz do site e o ultimo recurso. */
-        .catch(() => caches.match(req)
-          .then((m) => m || caches.match(url.pathname.replace(/[^/]*$/, '')))
-          .then((m) => m || caches.match('./index.html')))
-    );
-    return;
-  }
-
-  e.respondWith(
-    caches.match(req).then((m) => m || fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((c) => c.put(req, copy));
-      return res;
-    }))
+      .then(function (keys) {
+        return Promise.all(keys.filter(function (k) { return k.indexOf('mbrothers-') === 0; })
+                               .map(function (k) { return caches.delete(k); }));
+      })
+      .then(function () { return self.registration.unregister(); })
   );
 });
