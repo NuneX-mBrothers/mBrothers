@@ -14,8 +14,9 @@ rem     1. confere que esta no repositorio e no ramo certos;
 rem     2. gera as 15 paginas por idioma e o sitemap.xml;
 rem     3. gera as paginas de reencaminhar do GitHub (docs/);
 rem     4. publica o site no servidor (a porta de publicacao da Cobleza);
-rem     5. publica os ficheiros da raiz do dominio (robots.txt, favicon.ico,
-rem        llms.txt, na pasta raiz/);
+rem     5. publica a raiz do dominio: desde 15/11/2026, o site da Intrepid
+rem        Parallel (a pasta raiz/, nas 16 linguas, com o robots.txt, o
+rem        favicon.ico e o llms.txt);
 rem     6. faz o commit e o push para o GitHub;
 rem     7. confere que o site responde.
 rem
@@ -98,6 +99,25 @@ if errorlevel 1 (
 )
 echo       OK
 
+rem -- 2b. O site da raiz (a Intrepid Parallel) ------------------------
+rem   Os dicionarios (raiz\i18n\) saem de tools\textos-raiz.py; as pastas
+rem   de lingua da raiz e o raiz\sitemap.xml saem de tools\gerar-raiz.py.
+echo.
+echo [2/7] A gerar o site da raiz, nas 16 linguas...
+python -X utf8 "%SITE_DIR%tools\textos-raiz.py"
+if errorlevel 1 (
+    echo [ERRO] Os textos do site da raiz falharam. Abortado.
+    pause
+    exit /b 1
+)
+python -X utf8 "%SITE_DIR%tools\gerar-raiz.py"
+if errorlevel 1 (
+    echo [ERRO] O gerador do site da raiz falhou. Abortado.
+    pause
+    exit /b 1
+)
+echo       OK
+
 rem -- 3. As paginas de reencaminhar do GitHub (docs/) -----------------
 echo.
 echo [3/7] A gerar as paginas de reencaminhar do GitHub...
@@ -125,7 +145,7 @@ echo       OK
 
 rem -- 5. A raiz do dominio -------------------------------------------
 echo.
-echo [5/7] A publicar a raiz do dominio (robots.txt, favicon.ico, llms.txt)...
+echo [5/7] A publicar a raiz do dominio (o site da Intrepid Parallel)...
 python "%SITE_DIR%tools\empacotar.py" raiz | "%SSH%" -i "%CHAVE%" -o IdentitiesOnly=yes -o BatchMode=yes %SERVIDOR% publicar raiz
 if errorlevel 1 (
     echo [ERRO] A publicacao da raiz falhou. O site ja esta no servidor; nada foi para o GitHub.

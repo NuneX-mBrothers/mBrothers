@@ -4,6 +4,7 @@ User-agent: *
 Allow: /
 Disallow: /explorerfocus/descarregar/
 
+Sitemap: https://intrepidparallel.com/sitemap.xml
 Sitemap: https://intrepidparallel.com/mbrothers/sitemap.xml
 Sitemap: https://intrepidparallel.com/logviewer/sitemap.xml
 Sitemap: https://intrepidparallel.com/explorerfocus/sitemap.xml

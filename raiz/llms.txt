@@ -11,6 +11,7 @@ mBrothers is a brand used by Intrepid Parallel, Lda.
 
 ## Links
 
-- [mBrothers](https://intrepidparallel.com/mbrothers/), with [its llms.txt](https://intrepidparallel.com/mbrothers/llms.txt)
+- [Intrepid Parallel](https://intrepidparallel.com/): the company's site, in 16 languages, with its philosophy: "Side by side, unafraid" — software built with rigour, shipped signed and tested, that works on the user's computer and says what it sends.
+- [Legal notice](https://intrepidparallel.com/legal.html)
 - [GitHub](https://github.com/NuneX-mBrothers)
 - Contact: info@intrepidparallel.com

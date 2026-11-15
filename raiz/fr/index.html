@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="fr" data-lang-fixa="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Intrepid Parallel — Côte à côte, sans crainte</title>
+<meta name="description" content="Intrepid Parallel, Lda fait des logiciels pour Windows à Lisbonne : ExplorerFocus et The Absolute LogViewer. Conçus avec rigueur, livrés avec soin, pour avancer aux côtés de ceux qui les utilisent.">
+<link rel="canonical" href="https://intrepidparallel.com/fr/" />
+<!-- Uma porta por lingua. Cada pagina tem canonical propria e hreflang
+     reciproco; o texto vai JA TRADUZIDO no HTML, sem JavaScript.
+     As pastas das linguas sao GERADAS por tools/gerar-raiz.py -- mexer no
+     texto do site obriga a correr o gerador outra vez, e o .cmd de publicar
+     ja o faz antes de publicar a raiz. -->
+<link rel="alternate" hreflang="x-default" href="https://intrepidparallel.com/" />
+<link rel="alternate" hreflang="pt" href="https://intrepidparallel.com/pt/" />
+<link rel="alternate" hreflang="pt-BR" href="https://intrepidparallel.com/br/" />
+<link rel="alternate" hreflang="en" href="https://intrepidparallel.com/" />
+<link rel="alternate" hreflang="es" href="https://intrepidparallel.com/es/" />
+<link rel="alternate" hreflang="fr" href="https://intrepidparallel.com/fr/" />
+<link rel="alternate" hreflang="it" href="https://intrepidparallel.com/it/" />
+<link rel="alternate" hreflang="de" href="https://intrepidparallel.com/de/" />
+<link rel="alternate" hreflang="pl" href="https://intrepidparallel.com/pl/" />
+<link rel="alternate" hreflang="ru" href="https://intrepidparallel.com/ru/" />
+<link rel="alternate" hreflang="ar" href="https://intrepidparallel.com/ar/" />
+<link rel="alternate" hreflang="hi" href="https://intrepidparallel.com/hi/" />
+<link rel="alternate" hreflang="zh-Hans" href="https://intrepidparallel.com/zh/" />
+<link rel="alternate" hreflang="zh-Hant" href="https://intrepidparallel.com/zh-tw/" />
+<link rel="alternate" hreflang="ja" href="https://intrepidparallel.com/ja/" />
+<link rel="alternate" hreflang="ko" href="https://intrepidparallel.com/ko/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Intrepid Parallel" />
+<meta property="og:url" content="https://intrepidparallel.com/fr/" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Intrepid Parallel — Côte à côte, sans crainte" />
+<meta property="og:description" content="Des logiciels pour Windows faits à Lisbonne, avec rigueur et avec soin : ExplorerFocus et The Absolute LogViewer." />
+<meta property="og:image" content="https://intrepidparallel.com/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Les deux barres parallèles d’Intrepid Parallel, et les mots « Côte à côte, sans crainte »." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Intrepid Parallel — Côte à côte, sans crainte" />
+<meta name="twitter:description" content="Des logiciels pour Windows faits à Lisbonne, avec rigueur et avec soin : ExplorerFocus et The Absolute LogViewer." />
+<meta name="theme-color" content="#121620" />
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=2026111501" />
+<link rel="icon" href="../favicon.ico?v=2026111501" sizes="32x32" />
+<link rel="apple-touch-icon" href="../assets/icon-180.png?v=2026111501" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Intrepid Parallel, Lda",
+  "url": "https://intrepidparallel.com/fr/",
+  "logo": "https://intrepidparallel.com/assets/icon-180.png",
+  "description": "Intrepid Parallel, Lda fait des logiciels pour Windows à Lisbonne : ExplorerFocus et The Absolute LogViewer. Conçus avec rigueur, livrés avec soin, pour avancer aux côtés de ceux qui les utilisent.",
+  "email": "info@intrepidparallel.com",
+  "taxID": "PT519724976",
+  "address": {"@type": "PostalAddress", "streetAddress": "Av. Afonso Costa, 20, Galeria Esq.", "postalCode": "1900-036", "addressLocality": "Lisboa", "addressCountry": "PT"},
+  "brand": {"@type": "Brand", "name": "mBrothers"}
+}
+</script>
+<!-- O site da Intrepid Parallel, na raiz do domínio (o João, 15/11/2026: «Sim à entrada na raiz, avança com as 16
+     línguas»). A base é a proposta de Marketing\Intrepid Parallel\site-proposta e a filosofia de 15/11.
+     ⛔ As pastas das línguas são GERADAS por tools\gerar-raiz.py a partir deste ficheiro e de raiz\i18n\.
+     Tudo é servido daqui: as letras, as imagens e o código. A página não pede nada a terceiros nem guarda nada no
+     navegador. Sem JS, o texto vê-se todo; as animações respeitam o «reduzir o movimento» do sistema.
+     ?v=AAAAMMDDNN: quando uma imagem, as letras ou o código mudarem, muda-se o número em todos de uma vez. -->
+<style>
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-normal-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-normal-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-normal-cyrillic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-normal-cyrillic-ext.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-italic-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-italic-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-italic-cyrillic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:300 600;font-display:swap;src:url(fonts/cormorant-garamond-italic-cyrillic-ext.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+
+:root{
+  --ink:#1F2430; --deep:#121620; --deep2:#181D28; --amber:#E0A04A; --amber2:#F0C27F;
+  --cream:#F6F3ED; --paper:#FBF9F5; --stone:#6B6357; --line:#E2DACB; --mist:#9AA3B5;
+  --sans:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --mono:"Cascadia Mono",Consolas,"SFMono-Regular",Menlo,monospace;
+  --wrap:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase}
+:lang(ar) .mono,:lang(hi) .mono,:lang(zh-Hans) .mono,:lang(zh-Hant) .mono,:lang(ja) .mono,:lang(ko) .mono{font-family:var(--sans);letter-spacing:.04em;font-size:.8rem}
+/* escondido sem sair do ecrã: com left:-999px, a página árabe (da direita para a esquerda) ficava mais larga */
+.skip{position:absolute;top:0;inset-inline-start:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{width:auto;height:auto;clip-path:none;top:16px;inset-inline-start:16px;z-index:99;background:var(--amber);color:var(--deep);padding:8px 12px}
+.fl-sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ── as duas paralelas que acompanham a página (a âmbar vai um passo à frente) ─────────────── */
+.rail{position:fixed;left:22px;top:0;bottom:0;width:14px;z-index:30;pointer-events:none;display:none;opacity:0;transition:opacity .6s}
+.rail.on{opacity:1}
+.rail i{position:absolute;top:0;bottom:0;width:2px;background:rgba(31,36,48,.10);transform:skewX(-16deg);transform-origin:top}
+.rail i::after{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--p,1)*100%);background:var(--ink)}
+.rail i.b{left:8px}.rail i.b::after{background:var(--amber);height:calc(min(1,var(--p,1)*1.06 + .02)*100%)}
+@media(min-width:1260px){.rail{display:block}}
+[dir="rtl"] .rail{left:auto;right:22px}
+
+/* ── o topo ────────────────────────────────────────────────────────────────────────────── */
+.hero{position:relative;background:radial-gradient(1200px 700px at 78% 30%,#1c2230 0%,var(--deep) 62%);color:var(--cream);isolation:isolate}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream);flex-shrink:0}
+.brand svg{width:30px;height:37px}
+.brand b{font-weight:600;font-size:1.06rem;letter-spacing:.01em}
+.nav-r{display:flex;align-items:center;gap:28px}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.nav a.l{text-decoration:none;color:var(--mist);font-size:.92rem}
+.nav a.l:hover{color:var(--cream)}
+
+/* o selector das línguas (gerado por tools\gerar-raiz.py) */
+.lang-picker{position:relative}
+.lang-cur{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid rgba(246,243,237,.18);border-radius:2px;color:var(--cream);font-size:.86rem;white-space:nowrap}
+.lang-cur::-webkit-details-marker{display:none}
+.lang-cur::after{content:"\25BE";color:var(--mist);font-size:.8em}
+.lang-cur:hover{border-color:rgba(246,243,237,.45)}
+.lang-fl{width:20px;height:14px;border-radius:2px;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+.lang-list{position:absolute;right:0;top:calc(100% + 8px);z-index:50;background:#1A1F2B;border:1px solid rgba(246,243,237,.14);box-shadow:0 22px 50px -20px rgba(0,0,0,.6);padding:8px;display:grid;grid-template-columns:repeat(2,minmax(150px,1fr));gap:2px;min-width:330px}
+[dir="rtl"] .lang-list{right:auto;left:0}
+.lang-btn{display:flex;align-items:center;gap:10px;padding:8px 10px;text-decoration:none;color:#C9CFDA;font-size:.88rem;border-radius:2px}
+.lang-btn:hover{background:rgba(246,243,237,.07);color:var(--cream)}
+.lang-btn[aria-current]{color:var(--amber)}
+
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;min-height:min(78vh,720px);padding:30px 0 70px}
+.eyebrow{color:var(--amber);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--amber)}
+h1{font-weight:600;font-size:clamp(2.7rem,6.4vw,5.6rem);line-height:.98;letter-spacing:-.035em;margin:0 0 26px}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--amber);font-size:1.12em}
+:lang(ar) h1,:lang(hi) h1,:lang(zh-Hans) h1,:lang(zh-Hant) h1,:lang(ja) h1,:lang(ko) h1{letter-spacing:0;line-height:1.15}
+:lang(ar) h1 em,:lang(hi) h1 em,:lang(zh-Hans) h1 em,:lang(zh-Hant) h1 em,:lang(ja) h1 em,:lang(ko) h1 em{font-family:var(--sans);font-style:normal;font-weight:600;font-size:1em}
+.lead{font-size:clamp(1.05rem,1.5vw,1.22rem);color:#C9CFDA;max-width:31em;margin:0 0 36px}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;transition:transform .2s,background .2s,border-color .2s}
+.btn.p{background:var(--amber);color:var(--deep)}
+.btn.p:hover{background:var(--amber2);transform:translateY(-2px)}
+.btn.g{border:1px solid rgba(246,243,237,.28);color:var(--cream)}
+.btn.g:hover{border-color:var(--cream);transform:translateY(-2px)}
+.mark{position:relative;justify-self:center;width:min(100%,380px)}
+.mark svg{width:100%;height:auto;overflow:visible}
+.mark .b2{animation:ahead 7s ease-in-out infinite}
+@keyframes ahead{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.mark::after{content:"";position:absolute;inset:18% 12%;background:radial-gradient(closest-side,rgba(224,160,74,.20),transparent);filter:blur(30px);z-index:-1}
+.status{border-top:1px solid rgba(246,243,237,.10);display:flex;flex-wrap:wrap;gap:10px 34px;padding:18px 0 22px;color:#8E97A8}
+.status span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#5FC28E;margin-inline-end:10px;vertical-align:1px;animation:ok 3.2s infinite}
+@keyframes ok{0%{box-shadow:0 0 0 0 rgba(95,194,142,.45)}70%{box-shadow:0 0 0 7px rgba(95,194,142,0)}100%{box-shadow:0 0 0 0 rgba(95,194,142,0)}}
+
+/* ── as secções ────────────────────────────────────────────────────────────────────────── */
+section{padding:120px 0}
+.kicker{color:var(--stone);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:34px;height:1px;background:var(--stone)}
+h2{font-weight:600;font-size:clamp(2rem,3.8vw,3.2rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 22px;max-width:16em}
+h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:#B9782A;letter-spacing:0}
+:lang(ar) h2,:lang(hi) h2,:lang(zh-Hans) h2,:lang(zh-Hant) h2,:lang(ja) h2,:lang(ko) h2{letter-spacing:0;line-height:1.25}
+:lang(ar) h2 em,:lang(hi) h2 em,:lang(zh-Hans) h2 em,:lang(zh-Hant) h2 em,:lang(ja) h2 em,:lang(ko) h2 em{font-family:var(--sans);font-style:normal;font-weight:600}
+.intro{font-size:1.12rem;color:#3C4250;max-width:38em;margin:0}
+
+/* o nome: duas colunas, lado a lado */
+.name{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.words{display:grid;grid-template-columns:1fr 1fr;margin-top:64px;border-top:1px solid var(--line)}
+.word{padding-block:46px 10px;padding-inline:0 48px}
+.word+.word{padding-inline-start:48px;border-inline-start:1px solid var(--line)}
+.word .w{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(3rem,6vw,5.2rem);line-height:1;margin:0 0 14px;letter-spacing:-.01em}
+.word .w.a{color:#B9782A}
+.word .ety{color:var(--stone);margin-bottom:18px}
+.word p{margin:0;max-width:26em;color:#3C4250}
+.together{margin-top:56px;padding-top:34px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:24px;flex-wrap:wrap}
+.together .mono{color:var(--stone)}
+.together .t{font-family:var(--serif);font-size:clamp(2rem,4vw,3.3rem);font-style:italic;line-height:1.15}
+.together .t b{font-style:normal;font-weight:500}
+
+/* a geometria */
+.geo{background:var(--deep);color:var(--cream)}
+.geo .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.geo h2{color:var(--cream)}.geo h2 em{color:var(--amber)}
+.geo .kicker{color:#8E97A8}.geo .kicker::before{background:#8E97A8}
+.geo p{color:#C9CFDA;margin:0 0 18px;max-width:34em}
+.geo p.k{color:var(--cream);font-size:1.15rem}
+.figure svg{width:100%;height:auto;direction:ltr}
+.figure .cap{display:flex;justify-content:space-between;gap:20px;color:#7C8597;margin-top:14px}
+.figure .draw{stroke-dasharray:900;stroke-dashoffset:900}
+.geo.in .figure .draw{animation:draw 2.6s cubic-bezier(.2,.7,.2,1) forwards}
+.geo.in .figure .draw.d2{animation-delay:.35s}
+.geo.in .figure .draw.d3{animation-delay:1.1s}
+@keyframes draw{to{stroke-dashoffset:0}}
+html:not(.js) .figure .draw{stroke-dashoffset:0}
+
+/* os quatro caminhos */
+.paths{display:grid;grid-template-columns:repeat(2,1fr);margin-top:64px;border-top:1px solid var(--line);border-inline-start:1px solid var(--line)}
+.path{padding:44px 44px 40px;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .35s}
+.path:hover{background:var(--paper)}
+.path .n{display:flex;align-items:center;gap:14px;color:var(--stone);margin-bottom:22px}
+.path .n svg{width:40px;height:22px;flex-shrink:0}
+.path h3{font-size:1.45rem;letter-spacing:-.02em;margin:0 0 12px;font-weight:600}
+.path p{margin:0 0 18px;color:#3C4250;max-width:30em}
+.proof{display:flex;flex-wrap:wrap;gap:8px}
+.proof span{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--ink);border:1px solid var(--line);background:var(--paper);padding:5px 9px;border-radius:2px}
+:lang(ar) .proof span,:lang(hi) .proof span,:lang(zh-Hans) .proof span,:lang(zh-Hant) .proof span,:lang(ja) .proof span,:lang(ko) .proof span{font-family:var(--sans);font-size:.78rem;letter-spacing:0}
+
+/* os programas */
+.progs{background:var(--paper);border-top:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:64px}
+.card{background:#fff;border:1px solid var(--line);padding:40px;display:flex;flex-direction:column;gap:18px;transition:transform .3s,box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(31,36,48,.35);border-color:#D2C7B4}
+.card .top{display:flex;align-items:center;gap:18px}
+.card img{width:58px;height:58px;border-radius:12px}
+.card h3{font-size:1.5rem;letter-spacing:-.02em;margin:0;font-weight:600}
+.card .tag{color:var(--stone)}
+.card p{margin:0;color:#3C4250}
+.card .note{font-size:.9rem;color:var(--stone)}
+.card .more{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:18px;border-top:1px solid var(--line)}
+.card .more .by{color:var(--stone)}
+.card .more a{font-weight:600;text-decoration:none;color:#9A6420}
+.card .more a:hover{text-decoration:underline}
+.brandline{margin-top:34px;color:var(--stone);font-size:.95rem}
+
+/* o fecho */
+.close{background:var(--deep);color:var(--cream);text-align:center;padding:130px 0 120px}
+.close svg{width:72px;height:88px;margin-bottom:34px}
+.close .big{font-family:var(--serif);font-style:italic;font-size:clamp(2.6rem,6vw,5rem);line-height:1.1;margin:0 0 10px}
+:lang(ar) .close .big,:lang(hi) .close .big,:lang(zh-Hans) .close .big,:lang(zh-Hant) .close .big,:lang(ja) .close .big,:lang(ko) .close .big{font-family:var(--sans);font-style:normal;font-weight:600;font-size:clamp(2.2rem,5vw,4rem)}
+.close .small{color:#8E97A8;font-family:var(--serif);font-style:italic;font-size:1.5rem;margin:0 0 40px}
+.close .contact{color:#C9CFDA;margin:0}
+.close .contact a{color:var(--amber);text-decoration:none;font-weight:600}
+
+footer{background:var(--deep2);color:#8E97A8;font-size:.86rem;padding:34px 0 40px;border-top:1px solid rgba(246,243,237,.08)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 40px}
+footer a{color:#C9CFDA}
+footer .legal{max-width:52em;line-height:1.6}
+
+/* a entrada suave: só com JS, e só sem «reduzir o movimento» */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .mark .b2,.status span::before{animation:none}
+  .figure .draw{stroke-dashoffset:0}.geo.in .figure .draw{animation:none}
+}
+
+/* ── ecrãs estreitos ───────────────────────────────────────────────────────────────────── */
+@media(max-width:1020px){.nav ul{display:none}}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;min-height:0;padding:20px 0 56px}
+  .mark{display:none}
+  .geo .wrap{grid-template-columns:1fr;gap:44px}
+  .cards{grid-template-columns:1fr}
+  section{padding:84px 0}
+}
+@media(max-width:720px){
+  .wrap{padding:0 20px}
+  .brand b{font-size:.98rem}
+  .lang-cur span{display:none}
+  .lang-list{min-width:0;width:min(330px,calc(100vw - 40px));grid-template-columns:1fr 1fr}
+  .words{grid-template-columns:1fr}
+  .word,.word+.word{padding:36px 0 8px;border-inline-start:0}
+  .word+.word{border-top:1px solid var(--line);margin-top:30px}
+  .paths{grid-template-columns:1fr}
+  .path{padding:34px 24px}
+  .card{padding:28px 22px}
+}
+</style>
+</head>
+<body>
+<svg class="fl-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="fl-pt" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FF0000"/><rect width="8" height="14" fill="#006600"/><circle cx="8" cy="7" r="2.9" fill="#FFCC00"/><circle cx="8" cy="7" r="1.9" fill="#FFFFFF"/><rect x="7.1" y="5.9" width="1.8" height="2.2" fill="#003399"/></symbol>
+<symbol id="fl-br" viewBox="0 0 20 14"><rect width="20" height="14" fill="#009C3B"/><polygon points="10,1.4 18.6,7 10,12.6 1.4,7" fill="#FFDF00"/><circle cx="10" cy="7" r="2.9" fill="#002776"/><path d="M7.2 6.1a3.4 3.4 0 0 1 5.7 1.1l-.9.3a2.5 2.5 0 0 0-4.2-.8z" fill="#FFFFFF"/></symbol>
+<symbol id="fl-gb" viewBox="0 0 20 14"><rect width="20" height="14" fill="#012169"/><path d="M0 0l20 14M20 0L0 14" stroke="#FFFFFF" stroke-width="2.8"/><path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" stroke-width="1.4"/><path d="M10 0v14M0 7h20" stroke="#FFFFFF" stroke-width="4.6"/><path d="M10 0v14M0 7h20" stroke="#C8102E" stroke-width="2.8"/></symbol>
+<symbol id="fl-us" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><g fill="#B22234"><rect width="20" height="1.08"/><rect y="2.15" width="20" height="1.08"/><rect y="4.31" width="20" height="1.08"/><rect y="6.46" width="20" height="1.08"/><rect y="8.62" width="20" height="1.08"/><rect y="10.77" width="20" height="1.08"/><rect y="12.92" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3C3B6E"/><g fill="#FFFFFF"><circle cx="1.6" cy="1.5" r=".36"/><circle cx="4" cy="1.5" r=".36"/><circle cx="6.4" cy="1.5" r=".36"/><circle cx="2.8" cy="3" r=".36"/><circle cx="5.2" cy="3" r=".36"/><circle cx="1.6" cy="4.5" r=".36"/><circle cx="4" cy="4.5" r=".36"/><circle cx="6.4" cy="4.5" r=".36"/><circle cx="2.8" cy="6" r=".36"/><circle cx="5.2" cy="6" r=".36"/></g></symbol>
+<symbol id="fl-es" viewBox="0 0 20 14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></symbol>
+<symbol id="fl-fr" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></symbol>
+<symbol id="fl-it" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><rect width="6.67" height="14" fill="#009246"/><rect x="13.33" width="6.67" height="14" fill="#CE2B37"/></symbol>
+<symbol id="fl-de" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#000000"/><rect y="4.67" width="20" height="4.66" fill="#DD0000"/><rect y="9.33" width="20" height="4.67" fill="#FFCE00"/></symbol>
+<symbol id="fl-pl" viewBox="0 0 20 14"><rect width="20" height="7" fill="#FFFFFF"/><rect y="7" width="20" height="7" fill="#DC143C"/></symbol>
+<symbol id="fl-ru" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#FFFFFF"/><rect y="4.67" width="20" height="4.66" fill="#0039A6"/><rect y="9.33" width="20" height="4.67" fill="#D52B1E"/></symbol>
+<symbol id="fl-sa" viewBox="0 0 20 14"><rect width="20" height="14" fill="#006C35"/><path d="M4.2 6.2q1.45-1.4 2.9 0t2.9 0t2.9 0t2.9 0" fill="none" stroke="#FFFFFF" stroke-width=".9" stroke-linecap="round"/><rect x="4.6" y="8.7" width="11" height=".8" rx=".4" fill="#FFFFFF"/><path d="M4.6 9.1l1.7-1.2v2.4z" fill="#FFFFFF"/></symbol>
+<symbol id="fl-in" viewBox="0 0 20 14"><rect width="20" height="4.67" fill="#FF9933"/><rect y="4.67" width="20" height="4.66" fill="#FFFFFF"/><rect y="9.33" width="20" height="4.67" fill="#138808"/><circle cx="10" cy="7" r="1.8" fill="none" stroke="#000080" stroke-width=".45"/><circle cx="10" cy="7" r=".45" fill="#000080"/></symbol>
+<symbol id="fl-cn" viewBox="0 0 20 14"><rect width="20" height="14" fill="#DE2910"/><g fill="#FFDE00"><polygon points="3.33,1.33 3.73,2.55 5,2.55 3.97,3.30 4.36,4.51 3.33,3.76 2.30,4.51 2.70,3.30 1.67,2.55 2.94,2.55"/><polygon points="6.67,0.83 6.82,1.32 7.33,1.32 6.92,1.61 7.08,2.10 6.67,1.80 6.26,2.10 6.41,1.61 6.00,1.32 6.51,1.32"/><polygon points="8.00,2.00 8.16,2.48 8.66,2.48 8.25,2.78 8.41,3.26 8.00,2.97 7.59,3.26 7.75,2.78 7.34,2.48 7.84,2.48"/><polygon points="8.00,3.67 8.16,4.15 8.66,4.15 8.25,4.45 8.41,4.93 8.00,4.63 7.59,4.93 7.75,4.45 7.34,4.15 7.84,4.15"/><polygon points="6.67,4.83 6.82,5.32 7.33,5.32 6.92,5.61 7.08,6.10 6.67,5.80 6.26,6.10 6.41,5.61 6.00,5.32 6.51,5.32"/></g></symbol>
+<symbol id="fl-tw" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FE0000"/><rect width="10" height="7" fill="#000095"/><circle cx="5" cy="3.5" r="2.1" fill="#FFFFFF"/><circle cx="5" cy="3.5" r="1.4" fill="#000095"/><circle cx="5" cy="3.5" r="1" fill="#FFFFFF"/></symbol>
+<symbol id="fl-jp" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><circle cx="10" cy="7" r="4.2" fill="#BC002D"/></symbol>
+<symbol id="fl-kr" viewBox="0 0 20 14"><rect width="20" height="14" fill="#FFFFFF"/><circle cx="10" cy="7" r="3" fill="#CD2E3A"/><path d="M7 7a1.5 1.5 0 0 1 3 0 1.5 1.5 0 0 0 3 0 3 3 0 0 1-6 0z" fill="#0047A0"/></symbol>
+</defs></svg>
+<a class="skip" href="#main" data-i18n="skip">Aller au contenu</a>
+<div class="rail" aria-hidden="true"><i class="a"></i><i class="b"></i></div>
+
+<header class="hero" id="top">
+  <canvas id="lines" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <nav class="nav" aria-label="Intrepid Parallel">
+      <a class="brand" href="#top" aria-label="Intrepid Parallel">
+        <svg viewBox="98 52 78 96" aria-hidden="true"><polygon points="104,142 120,142 140,74 124,74" fill="#F6F3ED" stroke="#F6F3ED" stroke-width="5" stroke-linejoin="round"/><polygon points="132,130 148,130 170,58 154,58" fill="#E0A04A" stroke="#E0A04A" stroke-width="5" stroke-linejoin="round"/></svg>
+        <b>Intrepid Parallel</b>
+      </a>
+      <div class="nav-r">
+        <ul>
+          <li><a class="l" href="#name" data-i18n="nav.name">Le nom</a></li>
+          <li><a class="l" href="#how" data-i18n="nav.how">Notre façon de travailler</a></li>
+          <li><a class="l" href="#programs" data-i18n="nav.programs">Programmes</a></li>
+          <li><a class="l" href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      <details class="lang-picker">
+        <summary class="lang-cur" title="Langue"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-fr"/></svg><span>Français</span></summary>
+        <div class="lang-list">
+          <a class="lang-btn" href="../pt/" lang="pt"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-pt"/></svg><span>Português</span></a>
+          <a class="lang-btn" href="../br/" lang="pt-BR"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-br"/></svg><span>Português (BR)</span></a>
+          <a class="lang-btn" href="../" lang="en"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-gb"/></svg><span>English (GB)</span></a>
+          <a class="lang-btn" href="../" lang="en"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-us"/></svg><span>English (US)</span></a>
+          <a class="lang-btn" href="../es/" lang="es"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-es"/></svg><span>Español</span></a>
+          <a class="lang-btn" href="../fr/" lang="fr" aria-current="true"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-fr"/></svg><span>Français</span></a>
+          <a class="lang-btn" href="../it/" lang="it"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-it"/></svg><span>Italiano</span></a>
+          <a class="lang-btn" href="../de/" lang="de"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-de"/></svg><span>Deutsch</span></a>
+          <a class="lang-btn" href="../pl/" lang="pl"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-pl"/></svg><span>Polski</span></a>
+          <a class="lang-btn" href="../ru/" lang="ru"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-ru"/></svg><span>Русский</span></a>
+          <a class="lang-btn" href="../ar/" lang="ar"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-sa"/></svg><span>العربية</span></a>
+          <a class="lang-btn" href="../hi/" lang="hi"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-in"/></svg><span>हिन्दी</span></a>
+          <a class="lang-btn" href="../zh/" lang="zh-Hans"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-cn"/></svg><span>中文 (简体)</span></a>
+          <a class="lang-btn" href="../zh-tw/" lang="zh-Hant"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-tw"/></svg><span>中文 (繁體)</span></a>
+          <a class="lang-btn" href="../ja/" lang="ja"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-jp"/></svg><span>日本語</span></a>
+          <a class="lang-btn" href="../ko/" lang="ko"><svg class="lang-fl" viewBox="0 0 20 14" aria-hidden="true"><use href="#fl-kr"/></svg><span>한국어</span></a>
+        </div>
+      </details>
+      </div>
+    </nav>
+
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow mono" data-i18n="hero.eyebrow">Logiciels pour Windows · Lisbonne</div>
+        <h1 data-i18n-html="hero.h1">Côte à côte,<br><em>sans crainte.</em></h1>
+        <p class="lead" data-i18n="hero.lead">Nous faisons des logiciels pour Windows avec rigueur, nous les livrons avec soin, et nous les faisons avancer aux côtés de ceux qui les utilisent : ils travaillent sur votre ordinateur, disent ce qu’ils font et ne se mettent pas en travers de votre chemin.</p>
+        <div class="cta">
+          <a class="btn p" href="#programs"><span data-i18n="hero.cta1">Nos programmes</span> <span aria-hidden="true">↓</span></a>
+          <a class="btn g" href="#name" data-i18n="hero.cta2">Pourquoi ce nom</a>
+        </div>
+      </div>
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="92 46 90 108">
+          <polygon points="104,142 120,142 140,74 124,74" fill="#F6F3ED" stroke="#F6F3ED" stroke-width="5" stroke-linejoin="round"/>
+          <polygon class="b2" points="132,130 148,130 170,58 154,58" fill="#E0A04A" stroke="#E0A04A" stroke-width="5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="status mono">
+      <span data-i18n="status.1">Versions signées</span><span data-i18n="status.2">SHA-256 publié</span><span data-i18n="status.3">Testé avant chaque version</span><span data-i18n="status.4">Aucun cookie sur ce site</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="name" id="name">
+    <div class="wrap">
+      <div class="kicker mono rv" data-i18n="name.kicker">Le nom, à la lettre</div>
+      <h2 class="rv" data-i18n-html="name.h2">Deux mots qui disent comment nous travaillons : <em>l’un à côté de l’autre, sans trembler.</em></h2>
+      <div class="words">
+        <div class="word rv">
+          <p class="w" lang="en">intrepid</p>
+          <div class="ety mono" data-i18n="name.ety1">Latin · intrepidus · in- « non » + trepidus « tremblant »</div>
+          <p data-i18n="name.p1">Ce n’est pas celui qui attaque. C’est celui qui ne tremble pas : calme sous la pression, parce que le travail a été bien fait.</p>
+        </div>
+        <div class="word rv">
+          <p class="w a" lang="en">parallel</p>
+          <div class="ety mono" data-i18n="name.ety2">Grec · parállēlos · pará « à côté » + allḗlōn « l’un de l’autre »</div>
+          <p data-i18n="name.p2">Des lignes qui gardent la même direction et la même distance, et ne se croisent jamais. Accompagner sans s’imposer.</p>
+        </div>
+      </div>
+      <div class="together rv">
+        <span class="mono" data-i18n="name.together">Ensemble</span>
+        <span class="t" data-i18n-html="name.t"><b>L’un à côté de l’autre,</b> sans trembler.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="geo" id="geometry">
+    <div class="wrap">
+      <div class="rv">
+        <div class="kicker mono" data-i18n="geo.kicker">Géométrie, années 1820</div>
+        <h2 data-i18n-html="geo.h2">L’idée la plus audacieuse des mathématiques portait <em>sur les parallèles.</em></h2>
+        <p data-i18n="geo.p1">Pendant plus de deux mille ans, le cinquième postulat d’Euclide — celui des parallèles — a été la partie de la géométrie que personne ne parvenait à démontrer.</p>
+        <p data-i18n="geo.p2">Dans les années 1820, János Bolyai en Hongrie et Nikolaï Lobatchevski en Russie, chacun de son côté, ont osé poser la question inverse : et si ce n’était pas vrai ? Une nouvelle géométrie est née de cette question. Bolyai écrivit à son père qu’il avait créé, à partir de rien, un monde nouveau.</p>
+        <p class="k" data-i18n="geo.p3">C’est ce courage-là que nous voulons dire : prudent, rigoureux, et sans peur de la question.</p>
+      </div>
+      <div class="figure rv" aria-hidden="true">
+        <svg viewBox="0 0 520 380">
+          <defs><linearGradient id="fade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="520" y2="0"><stop offset="0" stop-color="#F6F3ED" stop-opacity="0"/><stop offset=".15" stop-color="#F6F3ED"/><stop offset=".85" stop-color="#F6F3ED"/><stop offset="1" stop-color="#F6F3ED" stop-opacity="0"/></linearGradient>
+            <linearGradient id="fadeA" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="520" y2="0"><stop offset="0" stop-color="#E0A04A" stop-opacity="0"/><stop offset=".15" stop-color="#E0A04A"/><stop offset=".85" stop-color="#E0A04A"/><stop offset="1" stop-color="#E0A04A" stop-opacity="0"/></linearGradient></defs>
+          <line class="draw" x1="0" y1="140" x2="520" y2="140" stroke="url(#fade)" stroke-width="2"/>
+          <line class="draw d2" x1="0" y1="220" x2="520" y2="220" stroke="url(#fadeA)" stroke-width="2"/>
+          <path class="draw d3" d="M150 360 L370 20" stroke="#5C6577" stroke-width="1.2" fill="none"/>
+          <circle cx="240" cy="220" r="4" fill="#E0A04A"/><circle cx="292" cy="140" r="4" fill="#F6F3ED"/>
+          <text x="20" y="128" fill="#7C8597" font-family="Consolas,monospace" font-size="11" letter-spacing="1.5" data-i18n="geo.la">LIGNE A</text>
+          <text x="20" y="208" fill="#B9782A" font-family="Consolas,monospace" font-size="11" letter-spacing="1.5" data-i18n="geo.lb">LIGNE B</text>
+          <text x="352" y="26" text-anchor="end" fill="#7C8597" font-family="Consolas,monospace" font-size="11" letter-spacing="1.5" data-i18n="geo.lx">TOUTE LIGNE QUI LES COUPE</text>
+        </svg>
+        <div class="cap mono"><span data-i18n="geo.cap1">Même direction · même distance</span><span data-i18n="geo.cap2">Ne se rencontrent jamais</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="kicker mono rv" data-i18n="how.kicker">Notre façon de travailler</div>
+      <h2 class="rv" data-i18n-html="how.h2">Quatre chemins, <em>une direction.</em></h2>
+      <p class="intro rv" data-i18n="how.intro">Ce que le nom nous demande, chaque jour : de la rigueur et du calme, de l’intensité sans bruit, et du respect pour l’ordinateur qui n’est pas le nôtre.</p>
+      <div class="paths">
+        <article class="path rv">
+          <div class="n mono"><svg viewBox="0 0 40 22" aria-hidden="true"><line x1="2" y1="7" x2="38" y2="7" stroke="#1F2430" stroke-width="2"/><line x1="2" y1="15" x2="38" y2="15" stroke="#E0A04A" stroke-width="2"/></svg><span data-i18n="p1.n">01 · À côté, jamais dedans</span></div>
+          <h3 data-i18n="p1.h">Vos fichiers restent les vôtres.</h3>
+          <p data-i18n="p1.p">Nos programmes travaillent sur votre ordinateur. Vos fichiers et dossiers ne passent jamais par nous, et le peu que les programmes envoient est écrit, en entier, sur la page de chacun.</p>
+          <div class="proof"><span data-i18n="p1.t1">Fonctionne sur votre PC</span><span data-i18n="p1.t2">Chaque envoi expliqué</span><span data-i18n="p1.t3">Rien n’est vendu, jamais</span></div>
+        </article>
+        <article class="path rv">
+          <div class="n mono"><svg viewBox="0 0 40 22" aria-hidden="true"><line x1="2" y1="19" x2="24" y2="3" stroke="#1F2430" stroke-width="2"/><line x1="14" y1="19" x2="36" y2="3" stroke="#E0A04A" stroke-width="2"/></svg><span data-i18n="p2.n">02 · Notre propre route</span></div>
+          <h3 data-i18n="p2.h">La même direction, notre propre chemin.</h3>
+          <p data-i18n="p2.p">Nous ne copions pas les géants et ne faisons pas la course avec eux. Nous choisissons une tâche de tous les jours — retrouver vos fichiers, lire vos logs — et nous la faisons à fond, en seize langues, sur notre propre chemin.</p>
+          <div class="proof"><span data-i18n="p2.t1">Outils ciblés</span><span data-i18n="p2.t2">16 langues</span><span data-i18n="p2.t3">Fait à Lisbonne</span></div>
+        </article>
+        <article class="path rv">
+          <div class="n mono"><svg viewBox="0 0 40 22" aria-hidden="true"><rect x="3" y="3" width="34" height="16" rx="2" fill="none" stroke="#1F2430" stroke-width="2"/><polyline points="12,11 17,15 28,6" fill="none" stroke="#E0A04A" stroke-width="2"/></svg><span data-i18n="p3.n">03 · Intrépides, pas téméraires</span></div>
+          <h3 data-i18n="p3.h">Calmes, parce que c’est bien fait.</h3>
+          <p data-i18n="p3.p">Ne pas trembler, ce n’est pas prendre des risques à l’aveugle. Chaque version est testée avant de sortir et part signée, et l’empreinte de chaque téléchargement est publique. Nous sommes intrépides parce que nous sommes prudents.</p>
+          <div class="proof"><span data-i18n="p3.t1">Signature de code</span><span data-i18n="p3.t2">SHA-256 par version</span><span data-i18n="p3.t3">La sécurité d’abord</span></div>
+        </article>
+        <article class="path rv">
+          <div class="n mono"><svg viewBox="0 0 40 22" aria-hidden="true"><line x1="2" y1="7" x2="30" y2="7" stroke="#1F2430" stroke-width="2"/><line x1="10" y1="15" x2="38" y2="15" stroke="#E0A04A" stroke-width="2"/></svg><span data-i18n="p4.n">04 · L’intensité, avec calme</span></div>
+          <h3 data-i18n="p4.h">Toujours en mouvement, jamais ébranlés.</h3>
+          <p data-i18n="p4.p">Deux parallèles ne se croisent jamais, mais ne se lâchent jamais non plus : elles avancent ensemble, sans pause et sans à-coups. C’est ainsi que nous travaillons — avec intensité, sans relâche, et sans perdre notre calme.</p>
+          <div class="proof"><span data-i18n="p4.t1">Versions fréquentes</span><span data-i18n="p4.t2">Testé en entier</span><span data-i18n="p4.t3">Rythme régulier</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="progs" id="programs">
+    <div class="wrap">
+      <div class="kicker mono rv" data-i18n="progs.kicker">Programmes</div>
+      <h2 class="rv" data-i18n-html="progs.h2">Deux instruments, <em>faits pour durer.</em></h2>
+      <div class="cards">
+        <article class="card rv">
+          <div class="top"><img src="../assets/explorerfocus.png?v=2026111501" alt="" width="58" height="58"><div><h3>ExplorerFocus</h3><div class="tag mono" data-i18n="ef.tag">Explorateur de fichiers · Windows 11 et 10</div></div></div>
+          <p data-i18n="ef.p">Un explorateur de fichiers pour ceux qui travaillent toujours dans les mêmes dossiers : des profils, un aperçu qui ouvre presque tout, des coffres chiffrés compatibles avec Cryptomator, et des connexions distantes et cloud.</p>
+          <p class="note" data-i18n="ef.note">Gratuit, avec PREMIUM pour aller plus loin. Pour les entreprises : ExplorerFocus avec le logo de votre entreprise, pour 50 ordinateurs ou plus.</p>
+          <div class="more"><span class="by mono">by mBrothers</span><a href="https://intrepidparallel.com/explorerfocus/"><span data-i18n="ef.link">Découvrir ExplorerFocus</span> <span aria-hidden="true">→</span></a></div>
+        </article>
+        <article class="card rv">
+          <div class="top"><img src="../assets/logviewer.png?v=2026111501" alt="" width="58" height="58"><div><h3>The Absolute LogViewer</h3><div class="tag mono" data-i18n="lv.tag">Visionneuse de logs · Windows</div></div></div>
+          <p data-i18n="lv.p">Voyez vos logs à l’instant même où ils surviennent, et cherchez-y tout ce dont vous avez besoin : suivi en temps réel, deux logs côte à côte, règles de surlignage par expressions régulières et aperçu du contexte.</p>
+          <p class="note" data-i18n="lv.note">Gratuit, pour un usage personnel et commercial. Sombre, clair, ou comme Windows.</p>
+          <div class="more"><span class="by mono">by mBrothers</span><a href="https://intrepidparallel.com/logviewer/"><span data-i18n="lv.link">Découvrir LogViewer</span> <span aria-hidden="true">→</span></a></div>
+        </article>
+      </div>
+      <p class="brandline rv" data-i18n="progs.brand">Nos programmes portent le nom mBrothers. mBrothers est une marque utilisée par Intrepid Parallel, Lda.</p>
+    </div>
+  </section>
+
+  <section class="close" id="contact">
+    <div class="wrap rv">
+      <svg viewBox="98 52 78 96" aria-hidden="true"><polygon points="104,142 120,142 140,74 124,74" fill="#F6F3ED" stroke="#F6F3ED" stroke-width="5" stroke-linejoin="round"/><polygon points="132,130 148,130 170,58 154,58" fill="#E0A04A" stroke="#E0A04A" stroke-width="5" stroke-linejoin="round"/></svg>
+      <p class="big" data-i18n="close.big">Côte à côte, sans crainte.</p>
+      <p class="small" data-i18n="close.small">Side by side, unafraid.</p>
+      <p class="contact"><span data-i18n="close.write">Écrivez-nous :</span> <a href="mailto:info@intrepidparallel.com">info@intrepidparallel.com</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="legal">Intrepid Parallel, Lda · Av. Afonso Costa, 20, Galeria Esq., 1900-036 Lisboa, Portugal · NIPC 519724976 ·
+      <a href="../legal.html" data-i18n="foot.legal">Mentions légales</a></div>
+    <div data-i18n="foot.nocookies">Aucun cookie. Rien n’est chargé depuis des tiers.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document.documentElement; d.classList.add("js");
+  var calm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* a entrada suave das secções */
+  var els=[].slice.call(document.querySelectorAll(".rv"));
+  if("IntersectionObserver" in window && !calm){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{rootMargin:"0px 0px -8% 0px"});
+    els.forEach(function(e){io.observe(e);});
+  } else { els.forEach(function(e){e.classList.add("in");}); }
+  /* a figura da geometria desenha-se quando entra */
+  var geoS=document.querySelector(".geo"), geo=document.querySelector(".geo .figure");
+  if(geo && "IntersectionObserver" in window){
+    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){geoS.classList.add("in");o.disconnect();}});},{threshold:.35}).observe(geo);
+  } else if(geoS){ geoS.classList.add("in"); }
+
+  /* o selector das línguas fecha com um clique fora ou com o Esc */
+  var menu=document.querySelector("details.lang-picker");
+  if(menu){
+    document.addEventListener("click",function(e){if(menu.open&&!menu.contains(e.target))menu.open=false;});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape"&&menu.open){menu.open=false;menu.querySelector("summary").focus();}});
+  }
+
+  /* as duas paralelas da margem: enchem-se com a leitura, a âmbar um passo à frente */
+  var rail=document.querySelector(".rail");
+  function prog(){var h=d.scrollHeight-innerHeight; rail.style.setProperty("--p",h>0?Math.min(1,Math.max(0,scrollY/h)):1); rail.classList.toggle("on",scrollY>innerHeight*0.6);}
+  addEventListener("scroll",prog,{passive:true}); addEventListener("resize",prog); prog();
+
+  /* o topo: um campo de paralelas, com o ângulo do logótipo; de vez em quando passa um sinal âmbar, devagar */
+  var c=document.getElementById("lines"); if(!c||!c.getContext) return;
+  var x=c.getContext("2d"), W=0,H=0,R=1, dx=20/70.9, dy=-68/70.9, gap=34, pulses=[], last=0;
+  function size(){R=Math.min(2,devicePixelRatio||1);W=c.clientWidth;H=c.clientHeight;c.width=W*R;c.height=H*R;x.setTransform(R,0,0,R,0,0);}
+  function lineCount(){return Math.ceil((W+H*0.32)/gap)+2;}
+  function base(i){return i*gap-H*0.32;}
+  function drawField(){
+    x.clearRect(0,0,W,H);
+    var n=lineCount();
+    for(var i=0;i<n;i++){
+      var x0=base(i), x1=x0+H/(-dy)*dx;
+      x.strokeStyle="rgba(201,207,218,"+(i%5===0?0.075:0.035)+")"; x.lineWidth=1;
+      x.beginPath(); x.moveTo(x0,H); x.lineTo(x1,0); x.stroke();
+    }
+  }
+  function spawn(){pulses.push({i:Math.floor(Math.random()*lineCount()),t:-0.15,v:0.035+Math.random()*0.03,len:90+Math.random()*90});}
+  function frame(ts){
+    var dt=Math.min(0.05,(ts-(last||ts))/1000); last=ts;
+    drawField();
+    if(pulses.length<5 && Math.random()<0.02) spawn();
+    for(var k=pulses.length-1;k>=0;k--){
+      var p=pulses[k]; p.t+=p.v*dt;
+      var s=p.t*H/(-dy), x0=base(p.i)+dx*s, y0=H+dy*s, x1=x0+dx*p.len, y1=y0+dy*p.len;
+      var g=x.createLinearGradient(x0,y0,x1,y1); g.addColorStop(0,"rgba(224,160,74,0)"); g.addColorStop(1,"rgba(224,160,74,.55)");
+      x.strokeStyle=g; x.lineWidth=1.5; x.beginPath(); x.moveTo(x0,y0); x.lineTo(x1,y1); x.stroke();
+      if(p.t>1.2) pulses.splice(k,1);
+    }
+    if(!document.hidden) requestAnimationFrame(frame); else last=0;
+  }
+  size(); drawField();
+  addEventListener("resize",function(){size();drawField();});
+  if(!calm){ requestAnimationFrame(frame); document.addEventListener("visibilitychange",function(){if(!document.hidden){last=0;requestAnimationFrame(frame);}}); }
+})();
+</script>
+</body>
+</html>

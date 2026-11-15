@@ -2,7 +2,8 @@
 r"""Faz o pacote .tar.gz que a porta de publicação do servidor recebe, e escreve-o no stdout.
 
     python tools/empacotar.py site    o site, sem .git, ferramentas, docs/, raiz/ nem o .cmd
-    python tools/empacotar.py raiz    os três ficheiros da raiz do domínio (raiz/robots.txt, favicon.ico, llms.txt)
+    python tools/empacotar.py raiz    o site da Intrepid Parallel, na raiz do domínio: a pasta raiz/ inteira, menos
+                                      os dicionários (raiz/i18n/), que só servem ao gerador (15/11/2026)
 
 O .cmd de publicação liga-o ao ssh:  python tools\empacotar.py site | ssh … publicar mbrothers
 
@@ -20,7 +21,10 @@ import tarfile
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FORA_NO_TOPO = {".git", ".gitignore", ".gitattributes", ".claude", "tools", "docs", "raiz"}
-FICHEIROS_DA_RAIZ = ["robots.txt", "favicon.ico", "llms.txt"]
+# A raiz do domínio (desde 15/11/2026, o site da Intrepid Parallel). A porta do servidor recusa no primeiro nível
+# os nomes mbrothers, logviewer, explorerfocus, email, raiz e saude, e o que comece por um ponto (ENG_COB-000082).
+FORA_DA_RAIZ = {"i18n"}
+PROIBIDOS_NA_RAIZ = {"mbrothers", "logviewer", "explorerfocus", "email", "raiz", "saude"}
 
 
 def normal(ti):
@@ -61,8 +65,26 @@ def site(tar):
 
 
 def raiz(tar):
-    for f in FICHEIROS_DA_RAIZ:
-        juntar(tar, os.path.join(RAIZ, "raiz", f), f)
+    base = os.path.join(RAIZ, "raiz")
+    if not os.path.isfile(os.path.join(base, "index.html")):
+        sys.exit("[ERRO] falta o raiz/index.html")
+    juntar(tar, base, ".")
+    for pasta, pastas, ficheiros in os.walk(base):
+        rel = os.path.relpath(pasta, base)
+        if rel == ".":
+            for nome in pastas + ficheiros:
+                if nome.lower() in PROIBIDOS_NA_RAIZ or nome.startswith("."):
+                    sys.exit("[ERRO] a raiz não pode ter «%s» no primeiro nível" % nome)
+            pastas[:] = [d for d in pastas if d not in FORA_DA_RAIZ]
+        pastas.sort()
+        for d in pastas:
+            caminho = os.path.join(pasta, d)
+            if os.path.islink(caminho):
+                sys.exit("[ERRO] ligação: %s" % caminho)
+            juntar(tar, caminho, "./" + os.path.relpath(caminho, base).replace(os.sep, "/"))
+        for f in sorted(ficheiros):
+            caminho = os.path.join(pasta, f)
+            juntar(tar, caminho, "./" + os.path.relpath(caminho, base).replace(os.sep, "/"))
 
 
 def main():
